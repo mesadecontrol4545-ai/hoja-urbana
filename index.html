@@ -1,158 +1,868 @@
-
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<title>Hoja Urbana</title>
-<link href="style.css" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hoja Urbana — Calzado Femenino Premium</title>
+<meta name="description" content="Hoja Urbana: calzado urbano, femenino y premium para mujeres que se eligen primero. Aparta desde $100, atención por WhatsApp."/>
+<meta name="keywords" content="zapatos mujer, calzado femenino, botas, sandalias, tenis, Puebla, compra por WhatsApp"/>
+<meta property="og:title" content="Hoja Urbana — Calzado Femenino Premium"/>
+<meta property="og:description" content="Estilo urbano, femenino y premium. Aparta desde $100 directo por WhatsApp."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* =============================================
+   HOJA URBANA — DESIGN SYSTEM
+   Aesthetic: Luxury Editorial · Cream & Onyx
+   ============================================= */
+:root {
+  --cream:    #FAF8F5;
+  --cream-2:  #F2EDE6;
+  --onyx:     #0C0C0B;
+  --charcoal: #1E1E1C;
+  --muted:    #787672;
+  --border:   #E4DECE;
+  --gold:     #B8936A;
+  --gold-lt:  #D4AE8A;
+  --white:    #FFFFFF;
+  --wa-green: #25D366;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Jost', 'Helvetica Neue', sans-serif;
+
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--onyx);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a  { text-decoration: none; color: inherit; }
+
+/* ---- ANNOUNCEMENT BAR ---- */
+.announcement {
+  background: var(--onyx);
+  color: var(--cream);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 11px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.announcement span {
+  display: inline-block;
+  animation: ticker 22s linear infinite;
+  white-space: nowrap;
+}
+@keyframes ticker {
+  0%   { transform: translateX(30%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ---- STICKY NAV ---- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250,248,245,.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav__inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.nav__logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.nav__brand-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.nav__tagline {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 400;
+}
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: var(--onyx);
+  color: var(--cream);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background .2s var(--ease-smooth), transform .2s var(--ease-smooth);
+  flex-shrink: 0;
+}
+.nav__cta:hover { background: var(--charcoal); transform: translateY(-1px); }
+.nav__cta svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* ---- HERO ---- */
+.hero {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.hero__eyebrow {
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -.01em;
+}
+.hero__heading em {
+  font-style: italic;
+  color: var(--muted);
+}
+.hero__sub {
+  margin-top: 28px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 44ch;
+}
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 36px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--charcoal);
+  background: var(--white);
+}
+.badge svg { width: 14px; height: 14px; }
+.hero__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.hero__stat {
+  text-align: right;
+}
+.hero__stat-num {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.hero__stat-label {
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ---- SECTION HEADER ---- */
+.section-header {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 56px 32px 36px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  gap: 20px;
+}
+.section-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+}
+.section-header h2 em { font-style: italic; color: var(--gold); }
+.section-count {
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ---- PRODUCTS GRID ---- */
+.grid-wrapper {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+
+/* ---- PRODUCT CARD ---- */
+.card {
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card__media {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #F7F4F0;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 24px;
+  transition: transform .6s var(--ease-expo);
+  will-change: transform;
+}
+.card:hover .card__media img {
+  transform: scale(1.04);
+}
+
+/* card overlay on hover */
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12,12,11,.0);
+  transition: background .35s var(--ease-smooth);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+}
+.card:hover .card__overlay {
+  background: rgba(12,12,11,.18);
+}
+.card__overlay-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--white);
+  color: var(--onyx);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transform: translateY(16px);
+  opacity: 0;
+  transition: transform .32s var(--ease-expo), opacity .28s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,.22);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.card__overlay-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.card:hover .card__overlay-btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.card__id-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(250,248,245,.82);
+  backdrop-filter: blur(6px);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.card__info {
+  padding: 16px 20px 22px;
+  border-top: 1px solid var(--border);
+}
+.card__name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.card__desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+.card__price {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--onyx);
+  letter-spacing: .02em;
+}
+.card__price--query {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* mobile buy btn (shown only on touch) */
+.card__mobile-btn {
+  display: none;
+  width: calc(100% - 40px);
+  margin: 0 20px 18px;
+  padding: 13px;
+  background: var(--onyx);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+/* ---- WHY US SECTION ---- */
+.why-section {
+  background: var(--onyx);
+  color: var(--cream);
+  padding: 80px 32px;
+}
+.why-inner {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+.why-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+  margin-bottom: 56px;
+}
+.why-inner h2 em { font-style: italic; color: var(--gold-lt); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 32px;
+}
+.why-item__num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.why-item__title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--cream);
+}
+.why-item__text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(250,248,245,.6);
+}
+
+/* ---- CONTACT STRIP ---- */
+.contact-strip {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 64px 32px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.contact-strip h3 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: -.01em;
+}
+.contact-strip h3 em { font-style: italic; color: var(--gold); }
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  transition: color .2s;
+  font-weight: 400;
+  letter-spacing: .04em;
+}
+.contact-link:hover { color: var(--onyx); }
+.contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+.contact-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 14px 28px;
+  background: var(--wa-green);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: opacity .2s, transform .2s;
+}
+.contact-wa-btn:hover { opacity: .9; transform: translateY(-1px); }
+.contact-wa-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ---- FOOTER ---- */
+footer {
+  background: var(--charcoal);
+  color: rgba(250,248,245,.55);
+  text-align: center;
+  padding: 32px 20px;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+footer a { color: rgba(250,248,245,.55); transition: color .2s; }
+footer a:hover { color: var(--cream); }
+footer strong { color: var(--cream); font-weight: 500; }
+
+/* ---- FLOATING WA BTN ---- */
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  background: var(--wa-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(37,211,102,.42);
+  transition: transform .22s var(--ease-expo), box-shadow .22s;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 36px rgba(37,211,102,.52);
+}
+.wa-float svg { width: 28px; height: 28px; fill: var(--white); }
+
+/* ---- SCROLL REVEAL ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .7s var(--ease-expo), transform .7s var(--ease-expo);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1100px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 820px) {
+  .hero { grid-template-columns: 1fr; padding: 48px 20px 40px; }
+  .hero__right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 32px; }
+  .hero__stat { text-align: left; }
+  .nav__inner { padding: 0 20px; }
+  .nav__tagline { display: none; }
+  .section-header { padding: 40px 20px 24px; }
+  .grid-wrapper { padding: 0 0 60px; }
+  .contact-strip { grid-template-columns: 1fr; padding: 48px 20px; }
+  .contact-info { align-items: flex-start; }
+  .why-section { padding: 60px 20px; }
+}
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .card__overlay-btn { display: none !important; }
+  .card__mobile-btn { display: block; }
+  .why-grid { grid-template-columns: 1fr; gap: 32px; }
+  .announcement span { animation-duration: 14s; }
+}
+@media (max-width: 380px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- LOGO FALLBACK ---- */
+.logo-fallback {
+  width: 50px; height: 50px;
+  border-radius: 10px;
+  background: var(--onyx);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--cream);
+  font-weight: 600;
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+</style>
 </head>
 <body>
-<div class="bg-splash"></div>
 
-<!-- Sticky campaign bar (conversión en campañas) -->
-<div class="campaign-bar" aria-label="Barra de contacto">
-  <div class="campaign-bar__inner">
-    <span class="campaign-bar__pill">Aparta desde <strong>$100</strong> • Confirmo talla al momento</span>
-    <a class="campaign-bar__cta" href="#catalogo">Ver modelos y pedir por WhatsApp</a>
+<!-- ANNOUNCEMENT -->
+<div class="announcement" aria-label="Aviso">
+  <span>✦ Aparta desde $100 · Confirmo talla al momento · Envío disponible · Stock limitado en algunos modelos · Compra directa por WhatsApp ✦ Aparta desde $100 · Confirmo talla al momento · Envío disponible · Stock limitado en algunos modelos · Compra directa por WhatsApp ✦</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__logo" href="#">
+      <img src="logo.png" alt="Hoja Urbana" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="logo-fallback" style="display:none">HU</div>
+      <div>
+        <div class="nav__brand-name">Hoja Urbana</div>
+        <div class="nav__tagline">Femenina · Urbana · Premium</div>
+      </div>
+    </a>
+    <a class="nav__cta" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quisiera%20ver%20el%20cat%C3%A1logo%20y%20conocer%20disponibilidad." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+      Apartar ahora
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__left">
+    <p class="hero__eyebrow">Nueva Colección 2026</p>
+    <h1 class="hero__heading">Para mujeres<br/>que pisan<br/><em>fuerte.</em></h1>
+    <p class="hero__sub">Hoja Urbana nace para mujeres seguras, auténticas y con actitud. Estilo urbano, femenino y premium para brillar en la calle y en la vida.</p>
+    <div class="hero__badges">
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Aparta desde $100
+      </span>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Atención directa
+      </span>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        Stock limitado
+      </span>
+    </div>
+  </div>
+  <div class="hero__right">
+    <div class="hero__stat">
+      <div class="hero__stat-num">10</div>
+      <div class="hero__stat-label">Modelos exclusivos</div>
+    </div>
+    <div class="hero__stat">
+      <div class="hero__stat-num">$100</div>
+      <div class="hero__stat-label">Para apartar</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG HEADER -->
+<div class="section-header">
+  <h2>Colección <em>actual</em></h2>
+  <span class="section-count">10 modelos disponibles</span>
+</div>
+
+<!-- PRODUCTS GRID -->
+<div class="grid-wrapper">
+  <div class="products-grid" id="products-grid">
+    <!-- JS renders cards here -->
   </div>
 </div>
-<header class="site-header">
-<div class="brand">
-<img alt="Hoja Urbana" class="brand-logo" src="logo.png"/>
-<div class="brand-text">
-<h1>Hoja Urbana</h1>
-      <p class="tagline">Femenina · Urbana · Premium</p>
-      <p class="subtag">Aparta desde $100. Pide por WhatsApp y te confirmo talla y disponibilidad al momento.</p>
-      <p class="empower">Tu estilo. Tu ritmo. Tu poder.</p>
-      <p class="about">Hoja Urbana es estilo para mujeres que se eligen primero: caminas segura, te ves increíble y punto. Aquí apartas fácil y estrenas sin estrés.</p>
-</div>
-</div>
-</header>
-    <section style="max-width:900px;margin:20px auto;padding:20px;
-    background:#ffffff;border-radius:16px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);text-align:center;">
-        <h2 style="margin-bottom:10px;">Para mujeres que pisan fuerte.</h2>
-        <p style="font-size:16px;line-height:1.6;">
-        Hoja Urbana nace para mujeres seguras, auténticas y con actitud.
-        Estilo urbano, femenino y premium para brillar en la calle y en la vida.
-        </p>
-        <div style="margin-top:10px;font-size:14px;">
-            ✅ Aparta desde $100 &nbsp; | &nbsp;
-            ✅ Atención directa por WhatsApp &nbsp; | &nbsp;
-            ✅ Stock limitado en algunos modelos
-        </div>
-    </section>
-    
-<section class="grid" id="catalogo">
-<div class="card">
-<img alt="Bota todoterreno (Beige)" loading="lazy" src="producto_1.png"/>
-<h3>Bota todoterreno (Beige)</h3>
-<p class="price">Precio: $999</p>
-<a aria-label="Comprar por WhatsApp ID 1274111" class="btn buy-btn" data-id="1274111" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1274111</p><p class="desc">Para frío y calle. Suela chunky, look urbano y cómodo.</p></div>
-<div class="card">
-<img alt="Bota invernal ajustable (Negra)" loading="lazy" src="producto_2.png"/>
-<h3>Bota invernal ajustable (Negra)</h3>
-<p class="price">Precio: $335</p>
-<a aria-label="Comprar por WhatsApp ID 1149867" class="btn buy-btn" data-id="1149867" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1149867</p><p class="desc">Abriga rico sin perder estilo. Ajuste superior y plataforma ligera.</p></div>
-<div class="card">
-<img alt="Bota todoterreno (Gris)" loading="lazy" src="producto_3.png"/>
-<h3>Bota todoterreno (Gris)</h3>
-<p class="price">Precio: $999</p>
-<a aria-label="Comprar por WhatsApp ID 1274112" class="btn buy-btn" data-id="1274112" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1274112</p><p class="desc">Todoterreno real: resistente, combinable y lista para el diario.</p></div>
-<div class="card">
-<img alt="Tenis urbano cebra" loading="lazy" src="producto_4.png"/>
-<h3>Tenis urbano cebra</h3>
-<p class="price">Precio: $799</p>
-<a aria-label="Comprar por WhatsApp ID 1248742" class="btn buy-btn" data-id="1248742" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1248742</p><p class="desc">Atrevido y juvenil. Contraste blanco/negro con toque street.</p></div>
-<div class="card">
-<img alt="Sandalia tacón (Negra)" loading="lazy" src="producto_5.png"/>
-<h3>Sandalia tacón (Negra)</h3>
-<p class="price">Precio: $539</p>
-<a aria-label="Comprar por WhatsApp ID 1285542" class="btn buy-btn" data-id="1285542" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1285542</p><p class="desc">Elegante y versátil. Tacón fino para salir sin sufrir.</p></div>
-<div class="card">
-<img alt="Tenis urbano hearts" loading="lazy" src="producto_6.png"/>
-<h3>Tenis urbano hearts</h3>
-<p class="price">Precio: Pregunta por WhatsApp</p>
-<a aria-label="Comprar por WhatsApp ID 1298005" class="btn buy-btn" data-id="1298005" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1298005</p><p class="desc">Cómodo y llamativo. Detalle de corazones para un look cool.</p></div>
-<div class="card">
-<img alt="Kit sandalia tacón básicas" loading="lazy" src="producto_7.png"/>
-<h3>Kit sandalia tacón básicas</h3>
-<p class="price">Precio: $869</p>
-<a aria-label="Comprar por WhatsApp ID 1312332" class="btn buy-btn" data-id="1312332" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1312332</p><p class="desc">Dos pares, mil outfits. Perfectas para oficina, cita o evento.</p></div>
-<div class="card">
-<img alt="Sandalia plana piedras" loading="lazy" src="producto_8.png"/>
-<h3>Sandalia plana piedras</h3>
-<p class="price">Precio: $579</p>
-<a aria-label="Comprar por WhatsApp ID 1203193" class="btn buy-btn" data-id="1203193" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1203193</p><p class="desc">Brilla sin exagerar. Detalles con pedrería para elevar tu outfit.</p></div>
-<div class="card">
-<img alt="Zapatilla tacón asimétrico (Negra)" loading="lazy" src="producto_9.png"/>
-<h3>Zapatilla tacón asimétrico (Negra)</h3>
-<p class="price">Precio: $619</p>
-<a aria-label="Comprar por WhatsApp ID 1031556" class="btn buy-btn" data-id="1031556" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1031556</p><p class="desc">Premium y poderosa. Punta fina para verte de impacto.</p></div>
-<div class="card">
-<img alt="Zapatilla con estoperoles (Negra)" loading="lazy" src="producto_10.png"/>
-<h3>Zapatilla con estoperoles (Negra)</h3>
-<p class="price">Precio: $899</p>
-<a aria-label="Comprar por WhatsApp ID 1169147" class="btn buy-btn" data-id="1169147" href="https://wa.me/5212211893908?text=Hola%20me%20interesa%20este%20producto"
-target="_blank">Comprar por WhatsApp</a>
-<p class="meta">ID 1169147</p><p class="desc">Actitud total. Estoperoles sutiles para un look más fuerte.</p></div>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="why-inner">
+    <h2>¿Por qué elegir<br/><em>Hoja Urbana?</em></h2>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-item__num">01</div>
+        <div class="why-item__title">Modelos en tendencia</div>
+        <div class="why-item__text">Seleccionamos piezas urbanas, casuales y elegantes pensadas para mujeres de 15 a 45 años. Siempre al día con lo que se lleva.</div>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-item__num">02</div>
+        <div class="why-item__title">Atención personalizada</div>
+        <div class="why-item__text">Compra rápida y directa por WhatsApp. Te confirmo talla, disponibilidad y precio al momento. Cero filas, cero estrés.</div>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-item__num">03</div>
+        <div class="why-item__title">Aparta fácil</div>
+        <div class="why-item__text">Asegura tu modelo con solo $100 de anticipo. Pago seguro y flexible para que estrenes sin comprometer tu bolsillo.</div>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-item__num">04</div>
+        <div class="why-item__title">Calidad premium</div>
+        <div class="why-item__text">Cada par es seleccionado con criterio. Materiales, acabados y comodidad que se notan desde el primer paso.</div>
+      </div>
+    </div>
+  </div>
 </section>
-<footer class="site-footer">
-<div class="footer-inner">
-<img alt="Hoja Urbana" class="footer-logo" src="logo.png"/>
-<p>¿Lista para estrenar? Escríbeme por WhatsApp y lo apartamos hoy.</p>
-<div class="contact">
-  <p><strong>WhatsApp:</strong> <a href="https://wa.me/522211893908" target="_blank" rel="noopener">wa.me/522211893908</a></p>
-  <p><strong>Correo:</strong> <a href="mailto:somoshojaurbana@gmail.com">somoshojaurbana@gmail.com</a></p>
-  <p><strong>Instagram:</strong> <a href="https://www.instagram.com/somoshojaurbana" target="_blank" rel="noopener">@somoshojaurbana</a></p>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div>
+    <h3>¿Lista para<br/><em>estrenar?</em></h3>
+  </div>
+  <div class="contact-info">
+    <a class="contact-link" href="https://wa.me/522211893908" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+      +52 221 189 3908
+    </a>
+    <a class="contact-link" href="mailto:somoshojaurbana@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      somoshojaurbana@gmail.com
+    </a>
+    <a class="contact-link" href="https://www.instagram.com/somoshojaurbana" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      @somoshojaurbana
+    </a>
+    <a class="contact-wa-btn" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quiero%20apartar%20un%20modelo.%20%C2%BFMe%20ayudas%20con%20talla%20y%20precio%3F" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+      Escríbeme ahora
+    </a>
+  </div>
 </div>
-</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>© 2026 Hoja Urbana</strong> · Todos los derechos reservados · <a href="https://www.instagram.com/somoshojaurbana" target="_blank" rel="noopener">@somoshojaurbana</a></p>
 </footer>
-<script defer="True" src="app.js"></script>
-    <section style="max-width:900px;margin:40px auto;padding:25px;
-    background:#f9f9f9;border-radius:16px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.05);">
-        <h3 style="text-align:center;margin-bottom:15px;">¿Por qué comprar en Hoja Urbana?</h3>
-        <ul style="line-height:1.8;font-size:15px;">
-            <li>• Modelos en tendencia (15–45 años)</li>
-            <li>• Selección cuidada: urbano, casual y elegante</li>
-            <li>• Pagos Seguros y Confiables</li>
-            <li>• Compra rápida y directa por WhatsApp</li>
-            <li>• Apartado desde $100 para asegurar tu modelo</li>
-        </ul>
-    </section>
-    
 
-    <footer style="background:#000;color:#fff;padding:30px 20px;text-align:center;margin-top:40px;">
-        <h3 style="margin-bottom:15px;">Contacto Hoja Urbana</h3>
-        <p>📧 somoshojaurbana@gmail.com</p>
-        <p>📱 WhatsApp: +52 221 189 3908</p>
-        <p>📸 Instagram: <a href="https://www.instagram.com/somoshojaurbana" 
-        style="color:#fff;text-decoration:underline;" target="_blank">@somoshojaurbana</a></p>
-        <p style="margin-top:15px;font-size:13px;">© 2026 Hoja Urbana. Todos los derechos reservados.</p>
-    </footer>
+<!-- FLOATING WA -->
+<a class="wa-float" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quiero%20apartar%20un%20modelo.%20%C2%BFMe%20ayudas%20con%20talla%20y%20precio%3F" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+</a>
 
-    <!-- Floating WhatsApp CTA (mobile-friendly) -->
-    <a class="wa-float" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quiero%20apartar%20un%20modelo.%20%C2%BFMe%20ayudas%20con%20talla%20y%20precio%3F" target="_blank" rel="noopener">WhatsApp</a>
-    
+<script>
+// =============================================
+//  HOJA URBANA — CATÁLOGO + WHATSAPP LINKS
+// =============================================
+const WA_NUMBER = "522211893908";
+
+const PRODUCTS = [
+  {
+    id: "1274111",
+    name: "Bota todoterreno",
+    variant: "Beige",
+    price: "$999",
+    img: "producto_1.png",
+    desc: "Para frío y calle. Suela chunky, look urbano y cómodo."
+  },
+  {
+    id: "1149867",
+    name: "Bota invernal ajustable",
+    variant: "Negra",
+    price: "$335",
+    img: "producto_2.png",
+    desc: "Abriga rico sin perder estilo. Ajuste superior y plataforma ligera."
+  },
+  {
+    id: "1274112",
+    name: "Bota todoterreno",
+    variant: "Gris",
+    price: "$999",
+    img: "producto_3.png",
+    desc: "Todoterreno real: resistente, combinable y lista para el diario."
+  },
+  {
+    id: "1248742",
+    name: "Tenis urbano cebra",
+    variant: "",
+    price: "$799",
+    img: "producto_4.png",
+    desc: "Atrevido y juvenil. Contraste blanco/negro con toque street."
+  },
+  {
+    id: "1285542",
+    name: "Sandalia tacón",
+    variant: "Negra",
+    price: "$539",
+    img: "producto_5.png",
+    desc: "Elegante y versátil. Tacón fino para salir sin sufrir."
+  },
+  {
+    id: "1298005",
+    name: "Tenis urbano hearts",
+    variant: "",
+    price: null, // consult WA
+    img: "producto_6.png",
+    desc: "Cómodo y llamativo. Detalle de corazones para un look cool."
+  },
+  {
+    id: "1312332",
+    name: "Kit sandalia tacón básicas",
+    variant: "",
+    price: "$869",
+    img: "producto_7.png",
+    desc: "Dos pares, mil outfits. Perfectas para oficina, cita o evento."
+  },
+  {
+    id: "1203193",
+    name: "Sandalia plana piedras",
+    variant: "",
+    price: "$579",
+    img: "producto_8.png",
+    desc: "Brilla sin exagerar. Detalles con pedrería para elevar tu outfit."
+  },
+  {
+    id: "1031556",
+    name: "Zapatilla tacón asimétrico",
+    variant: "Negra",
+    price: "$619",
+    img: "producto_9.png",
+    desc: "Premium y poderosa. Punta fina para verte de impacto."
+  },
+  {
+    id: "1169147",
+    name: "Zapatilla con estoperoles",
+    variant: "Negra",
+    price: "$899",
+    img: "producto_10.png",
+    desc: "Actitud total. Estoperoles sutiles para un look más fuerte."
+  }
+];
+
+function buildWaLink(product) {
+  const fullName = product.variant
+    ? `${product.name} (${product.variant})`
+    : product.name;
+  const priceLine = product.price
+    ? `\n💰 Precio: ${product.price}`
+    : "\n💰 Precio: Consultar";
+  const msg =
+    `Hola Hoja Urbana 💚\n\n` +
+    `Me interesa este modelo:\n` +
+    `👟 *${fullName}*\n` +
+    `🔖 ID: ${product.id}` +
+    `${priceLine}\n\n` +
+    `¿Me confirmas disponibilidad y talla, por favor?`;
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
+function buildCard(p, index) {
+  const fullName = p.variant ? `${p.name} (${p.variant})` : p.name;
+  const waLink = buildWaLink(p);
+  const priceHtml = p.price
+    ? `<span class="card__price">${p.price}</span>`
+    : `<span class="card__price card__price--query">Consultar precio</span>`;
+
+  const card = document.createElement("div");
+  card.className = "card reveal";
+  card.style.animationDelay = `${index * 60}ms`;
+  card.innerHTML = `
+    <div class="card__media">
+      <img src="${p.img}" alt="${fullName}" loading="lazy"/>
+      <div class="card__overlay">
+        <a class="card__overlay-btn" href="${waLink}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+          Apartar por WhatsApp
+        </a>
+      </div>
+      <span class="card__id-badge">ID ${p.id}</span>
+    </div>
+    <div class="card__info">
+      <div class="card__name">${fullName}</div>
+      <div class="card__desc">${p.desc}</div>
+      ${priceHtml}
+    </div>
+    <a class="card__mobile-btn" href="${waLink}" target="_blank" rel="noopener">Apartar por WhatsApp</a>
+  `;
+  return card;
+}
+
+// Render products
+const grid = document.getElementById("products-grid");
+PRODUCTS.forEach((p, i) => grid.appendChild(buildCard(p, i)));
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add("visible");
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
 </body>
 </html>
