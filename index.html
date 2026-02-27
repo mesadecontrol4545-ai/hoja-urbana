@@ -89,7 +89,7 @@ a  { text-decoration: none; color: inherit; }
   max-width: 1360px;
   margin: 0 auto;
   padding: 0 32px;
-  height: 68px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -102,14 +102,15 @@ a  { text-decoration: none; color: inherit; }
   flex-shrink: 0;
 }
 .nav__logo img {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
   object-fit: cover;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,.22));
 }
 .nav__brand-name {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 600;
   letter-spacing: .04em;
 }
@@ -561,7 +562,26 @@ footer strong { color: var(--cream); font-weight: 500; }
   .products-grid { grid-template-columns: 1fr; }
 }
 
-/* ---- LOGO FALLBACK ---- */
+/* ---- WATERMARK ---- */
+.watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  width: min(700px, 90vw);
+  opacity: .045;
+  filter: blur(2px) grayscale(100%);
+  user-select: none;
+}
+
+/* ensure content stays above watermark */
+.nav, .announcement, .hero, .section-header,
+.grid-wrapper, .why-section, .contact-strip, footer, .wa-float {
+  position: relative;
+  z-index: 1;
+}
 .logo-fallback {
   width: 50px; height: 50px;
   border-radius: 10px;
@@ -577,6 +597,9 @@ footer strong { color: var(--cream); font-weight: 500; }
 </style>
 </head>
 <body>
+
+<!-- WATERMARK -->
+<img class="watermark" src="logo.png" alt="" aria-hidden="true"/>
 
 <!-- ANNOUNCEMENT -->
 <div class="announcement" aria-label="Aviso">
