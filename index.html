@@ -3,20 +3,11 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hoja Urbana — Calzado Femenino Premium</title>
-<meta name="description" content="Hoja Urbana: calzado urbano, femenino y premium para mujeres que se eligen primero. Aparta desde $100, atención por WhatsApp."/>
-<meta name="keywords" content="zapatos mujer, calzado femenino, botas, sandalias, tenis, Puebla, compra por WhatsApp"/>
-<meta property="og:title" content="Hoja Urbana — Calzado Femenino Premium"/>
-<meta property="og:description" content="Estilo urbano, femenino y premium. Aparta desde $100 directo por WhatsApp."/>
-<meta property="og:type" content="website"/>
+<title>Hoja Urbana — Multi-Categoría Preview</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-/* =============================================
-   HOJA URBANA — DESIGN SYSTEM
-   Aesthetic: Luxury Editorial · Cream & Onyx
-   ============================================= */
 :root {
   --cream:    #FAF8F5;
   --cream-2:  #F2EDE6;
@@ -28,864 +19,1026 @@
   --gold-lt:  #D4AE8A;
   --white:    #FFFFFF;
   --wa-green: #25D366;
-
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Jost', 'Helvetica Neue', sans-serif;
-
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--font-body);
-  background: var(--cream);
-  color: var(--onyx);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
+body { font-family: var(--font-body); background: var(--cream); color: var(--onyx); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 img { display: block; max-width: 100%; }
-a  { text-decoration: none; color: inherit; }
+a { text-decoration: none; color: inherit; }
 
-/* ---- ANNOUNCEMENT BAR ---- */
+/* ── ANNOUNCEMENT ── */
 .announcement {
-  background: var(--onyx);
-  color: var(--cream);
-  text-align: center;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  padding: 11px 20px;
-  position: relative;
-  overflow: hidden;
+  background: var(--onyx); color: var(--cream);
+  text-align: center; font-size: 12px; font-weight: 400;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 11px 20px; overflow: hidden;
 }
-.announcement span {
-  display: inline-block;
-  animation: ticker 22s linear infinite;
-  white-space: nowrap;
-}
-@keyframes ticker {
-  0%   { transform: translateX(30%); }
-  100% { transform: translateX(-100%); }
-}
+.announcement span { display: inline-block; animation: ticker 26s linear infinite; white-space: nowrap; }
+@keyframes ticker { 0% { transform: translateX(40%); } 100% { transform: translateX(-100%); } }
 
-/* ---- STICKY NAV ---- */
+/* ── MAIN NAV ── */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(250,248,245,.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,248,245,.96);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-.nav__inner {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 32px;
-  height: 88px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+.nav__top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 72px; max-width: 1400px; margin: 0 auto;
 }
-.nav__logo {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-}
-.nav__logo img {
-  width: 72px;
-  height: 72px;
-  border-radius: 14px;
-  object-fit: cover;
-  filter: drop-shadow(0 4px 18px rgba(0,0,0,.22));
-}
-.nav__brand-name {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: .04em;
-}
-.nav__tagline {
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 400;
-}
+.nav__logo { display: flex; align-items: center; gap: 14px; }
+.nav__logo img { width: 52px; height: 52px; object-fit: cover; border-radius: 10px; }
+.nav__logo-text { display: flex; flex-direction: column; }
+.nav__brand { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: .04em; line-height: 1; }
+.nav__tagline { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
 .nav__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 11px 22px;
-  background: var(--onyx);
-  color: var(--cream);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  transition: background .2s var(--ease-smooth), transform .2s var(--ease-smooth);
-  flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px; background: var(--onyx); color: var(--cream);
+  font-size: 11px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; border-radius: 2px;
+  transition: background .2s, transform .2s;
 }
 .nav__cta:hover { background: var(--charcoal); transform: translateY(-1px); }
-.nav__cta svg { width: 16px; height: 16px; fill: currentColor; }
+.nav__cta svg { width: 15px; height: 15px; fill: currentColor; }
 
-/* ---- HERO ---- */
-.hero {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 80px 32px 64px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
-  gap: 40px;
-  border-bottom: 1px solid var(--border);
-}
-.hero__eyebrow {
-  font-size: 11px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
-  margin-bottom: 18px;
-}
-.hero__heading {
-  font-family: var(--font-display);
-  font-size: clamp(52px, 7vw, 96px);
-  font-weight: 300;
-  line-height: 1.0;
-  letter-spacing: -.01em;
-}
-.hero__heading em {
-  font-style: italic;
-  color: var(--muted);
-}
-.hero__sub {
-  margin-top: 28px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-  max-width: 44ch;
-}
-.hero__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 36px;
-}
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--charcoal);
-  background: var(--white);
-}
-.badge svg { width: 14px; height: 14px; }
-.hero__right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-.hero__stat {
-  text-align: right;
-}
-.hero__stat-num {
-  font-family: var(--font-display);
-  font-size: 52px;
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -.02em;
-}
-.hero__stat-label {
-  font-size: 11px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-/* ---- SECTION HEADER ---- */
-.section-header {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 56px 32px 36px;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-  gap: 20px;
-}
-.section-header h2 {
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 300;
-  letter-spacing: -.01em;
-}
-.section-header h2 em { font-style: italic; color: var(--gold); }
-.section-count {
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-/* ---- PRODUCTS GRID ---- */
-.grid-wrapper {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 0 24px 80px;
-}
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  margin-top: 2px;
-}
-
-/* ---- PRODUCT CARD ---- */
-.card {
-  background: var(--white);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.card__media {
-  position: relative;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  background: #F7F4F0;
-}
-.card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 24px;
-  transition: transform .6s var(--ease-expo);
-  will-change: transform;
-}
-.card:hover .card__media img {
-  transform: scale(1.04);
-}
-
-/* card overlay on hover */
-.card__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(12,12,11,.0);
-  transition: background .35s var(--ease-smooth);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 24px;
-}
-.card:hover .card__overlay {
-  background: rgba(12,12,11,.18);
-}
-.card__overlay-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 28px;
-  background: var(--white);
-  color: var(--onyx);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  transform: translateY(16px);
-  opacity: 0;
-  transition: transform .32s var(--ease-expo), opacity .28s ease;
-  box-shadow: 0 8px 32px rgba(0,0,0,.22);
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-}
-.card__overlay-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-.card:hover .card__overlay-btn {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.card__id-badge {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  background: rgba(250,248,245,.82);
-  backdrop-filter: blur(6px);
-  font-size: 10px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 5px 10px;
-  border-radius: 999px;
-  font-weight: 500;
-}
-
-.card__info {
-  padding: 16px 20px 22px;
+/* ── CATEGORY TABS ── */
+.cat-tabs {
   border-top: 1px solid var(--border);
+  background: var(--cream);
 }
-.card__name {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: .01em;
-  line-height: 1.2;
-  margin-bottom: 4px;
+.cat-tabs__inner {
+  display: flex; align-items: stretch;
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 48px; gap: 0; overflow-x: auto;
+  scrollbar-width: none;
 }
-.card__desc {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.45;
-  margin-bottom: 10px;
+.cat-tabs__inner::-webkit-scrollbar { display: none; }
+
+.cat-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 28px; height: 48px;
+  font-size: 11px; font-weight: 500; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  border-bottom: 2px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: color .2s, border-color .2s;
+  position: relative; flex-shrink: 0;
 }
-.card__price {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--onyx);
-  letter-spacing: .02em;
+.cat-tab:hover { color: var(--onyx); }
+.cat-tab.active { color: var(--onyx); border-bottom-color: var(--onyx); }
+.cat-tab.active-gold { color: var(--gold); border-bottom-color: var(--gold); }
+.cat-tab__icon { font-size: 14px; }
+.cat-tab__badge {
+  font-size: 8px; font-weight: 700; letter-spacing: .06em;
+  background: var(--gold); color: var(--white);
+  padding: 2px 6px; border-radius: 999px; text-transform: uppercase;
 }
-.card__price--query {
-  font-size: 12px;
-  color: var(--gold);
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+.cat-tab__new {
+  font-size: 8px; font-weight: 700;
+  background: #25D366; color: var(--white);
+  padding: 2px 6px; border-radius: 999px;
+}
+.cat-tab__soon {
+  font-size: 8px; font-weight: 700;
+  background: var(--muted); color: var(--white);
+  padding: 2px 6px; border-radius: 999px; opacity: .7;
 }
 
-/* mobile buy btn (shown only on touch) */
-.card__mobile-btn {
-  display: none;
-  width: calc(100% - 40px);
-  margin: 0 20px 18px;
-  padding: 13px;
-  background: var(--onyx);
-  color: var(--cream);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  text-align: center;
-  border-radius: 2px;
-  text-decoration: none;
+/* ── SECTIONS ── */
+.cat-section { display: none; }
+.cat-section.active { display: block; }
+
+/* ── HERO (Hoja Urbana) ── */
+.hero {
+  max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 480px; padding: 0 48px; gap: 48px;
+  align-items: center; padding-top: 56px; padding-bottom: 56px;
+}
+.hero__eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.hero__title { font-family: var(--font-display); font-size: clamp(42px, 5vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 20px; }
+.hero__title em { font-style: italic; color: var(--gold); }
+.hero__sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 400px; margin-bottom: 32px; }
+.hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; background: var(--onyx); color: var(--cream);
+  font-size: 12px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; border-radius: 2px; transition: background .2s, transform .2s;
+}
+.btn-primary:hover { background: var(--charcoal); transform: translateY(-1px); }
+.btn-primary svg { width: 16px; height: 16px; fill: currentColor; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; border: 1px solid var(--border); color: var(--onyx);
+  font-size: 12px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; border-radius: 2px; transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover { border-color: var(--onyx); background: rgba(12,12,11,.04); }
+.hero__img {
+  aspect-ratio: 4/5; background: var(--cream-2);
+  border-radius: 4px; overflow: hidden; position: relative;
+}
+.hero__img img { width: 100%; height: 100%; object-fit: cover; }
+.hero__img-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  font-family: var(--font-display); font-size: 80px; color: var(--border);
 }
 
-/* ---- WHY US SECTION ---- */
-.why-section {
-  background: var(--onyx);
-  color: var(--cream);
-  padding: 80px 32px;
-}
-.why-inner {
-  max-width: 1360px;
-  margin: 0 auto;
-}
-.why-inner h2 {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 300;
-  letter-spacing: -.01em;
-  margin-bottom: 56px;
-}
-.why-inner h2 em { font-style: italic; color: var(--gold-lt); }
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px 32px;
-}
-.why-item__num {
-  font-family: var(--font-display);
-  font-size: 48px;
-  font-weight: 300;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 16px;
-}
-.why-item__title {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  color: var(--cream);
-}
-.why-item__text {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: rgba(250,248,245,.6);
-}
+/* ── PRODUCT GRID ── */
+.section-header { padding: 48px 48px 28px; max-width: 1400px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; }
+.section-header h2 { font-family: var(--font-display); font-size: 36px; font-weight: 300; }
+.section-header h2 em { font-style: italic; color: var(--gold); }
+.section-count { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 
-/* ---- CONTACT STRIP ---- */
-.contact-strip {
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 64px 32px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 32px;
-  border-bottom: 1px solid var(--border);
-}
-.contact-strip h3 {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 4vw, 52px);
-  font-weight: 300;
-  letter-spacing: -.01em;
-}
-.contact-strip h3 em { font-style: italic; color: var(--gold); }
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-end;
-}
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--muted);
-  transition: color .2s;
-  font-weight: 400;
-  letter-spacing: .04em;
-}
-.contact-link:hover { color: var(--onyx); }
-.contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
-.contact-wa-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 6px;
-  padding: 14px 28px;
-  background: var(--wa-green);
-  color: var(--white);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  transition: opacity .2s, transform .2s;
-}
-.contact-wa-btn:hover { opacity: .9; transform: translateY(-1px); }
-.contact-wa-btn svg { width: 18px; height: 18px; fill: currentColor; }
+.grid-wrapper { max-width: 1400px; margin: 0 auto; padding: 0 48px 80px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 2px; }
 
-/* ---- FOOTER ---- */
-footer {
+.card { position: relative; cursor: pointer; overflow: hidden; background: var(--cream-2); }
+.card__img { aspect-ratio: 3/4; overflow: hidden; position: relative; background: #EDEAE4; }
+.card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-expo); }
+.card:hover .card__img img { transform: scale(1.05); }
+.card__id { position: absolute; top: 14px; left: 14px; background: rgba(250,248,245,.9); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; }
+.card__overlay {
+  position: absolute; inset: 0; background: rgba(12,12,11,.75);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .3s var(--ease-smooth);
+}
+.card:hover .card__overlay { opacity: 1; }
+.card__wa {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 22px; background: var(--wa-green); color: var(--white);
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 2px; transition: opacity .2s;
+}
+.card__wa svg { width: 15px; height: 15px; fill: currentColor; }
+.card__info { padding: 14px 16px 18px; }
+.card__name { font-family: var(--font-display); font-size: 18px; font-weight: 400; margin-bottom: 4px; }
+.card__desc { font-size: 11px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+.card__price { font-size: 14px; font-weight: 600; color: var(--onyx); letter-spacing: .04em; }
+.card__placeholder { aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; background: #EDEAE4; font-family: var(--font-display); font-size: 48px; color: var(--border); }
+
+/* ── PRICE SHOES SECTION ── */
+.price-hero {
+  background: var(--onyx); padding: 72px 48px 56px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.price-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(184,147,106,.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(184,147,106,.05) 0%, transparent 60%);
+}
+.price-hero__inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+.price-hero__eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.price-hero__title { font-family: var(--font-display); font-size: clamp(40px, 6vw, 72px); font-weight: 300; color: var(--cream); line-height: 1.05; margin-bottom: 20px; }
+.price-hero__title em { font-style: italic; color: var(--gold); }
+.price-hero__sub { font-size: 14px; color: rgba(250,248,245,.5); line-height: 1.7; margin-bottom: 32px; }
+.price-hero__badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.badge-gold { background: var(--gold); color: var(--white); }
+.badge-outline { border: 1px solid rgba(250,248,245,.2); color: rgba(250,248,245,.6); }
+
+/* How it works */
+.how-works {
   background: var(--charcoal);
-  color: rgba(250,248,245,.55);
-  text-align: center;
-  padding: 32px 20px;
-  font-size: 12px;
-  letter-spacing: .06em;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
 }
-footer a { color: rgba(250,248,245,.55); transition: color .2s; }
-footer a:hover { color: var(--cream); }
-footer strong { color: var(--cream); font-weight: 500; }
+.how-step {
+  padding: 40px 32px; text-align: center;
+  background: var(--onyx); transition: background .2s;
+}
+.how-step:hover { background: #151513; }
+.how-step__num { font-family: var(--font-display); font-size: 48px; font-weight: 300; color: var(--gold); opacity: .35; line-height: 1; margin-bottom: 14px; }
+.how-step__title { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: 10px; }
+.how-step__desc { font-size: 12px; color: rgba(250,248,245,.4); line-height: 1.6; }
 
-/* ---- FLOATING WA BTN ---- */
-.wa-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 200;
-  width: 56px;
-  height: 56px;
-  background: var(--wa-green);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 28px rgba(37,211,102,.42);
-  transition: transform .22s var(--ease-expo), box-shadow .22s;
-}
-.wa-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 36px rgba(37,211,102,.52);
-}
-.wa-float svg { width: 28px; height: 28px; fill: var(--white); }
+/* Price grid */
+.price-grid-section { background: var(--onyx); padding: 0 48px 80px; }
+.price-section-hdr { max-width: 1400px; margin: 0 auto; padding: 40px 0 28px; display: flex; align-items: baseline; justify-content: space-between; }
+.price-section-hdr h3 { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--cream); }
+.price-section-hdr h3 em { font-style: italic; color: var(--gold); }
+.price-section-hdr span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,248,245,.3); }
+.price-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
 
-/* ---- SCROLL REVEAL ---- */
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
+.price-card { background: #141412; position: relative; overflow: hidden; cursor: pointer; transition: transform .3s var(--ease-expo); }
+.price-card:hover { transform: scale(1.02); z-index: 2; }
+.price-card__img { aspect-ratio: 3/4; background: #1C1C1A; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.price-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease-expo); }
+.price-card:hover .price-card__img img { transform: scale(1.06); }
+.price-coming {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; color: rgba(250,248,245,.15); font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; text-align: center; padding: 20px;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity .7s var(--ease-expo), transform .7s var(--ease-expo);
+.price-coming-icon { font-size: 36px; opacity: .3; margin-bottom: 4px; }
+.price-card__info { padding: 14px 16px 18px; }
+.price-card__id { font-size: 9px; letter-spacing: .18em; color: rgba(250,248,245,.25); text-transform: uppercase; margin-bottom: 4px; }
+.price-card__name { font-family: var(--font-display); font-size: 17px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+.price-card__desc { font-size: 11px; color: rgba(250,248,245,.35); margin-bottom: 10px; line-height: 1.4; }
+.price-card__price { font-size: 14px; font-weight: 600; color: var(--gold); }
+.price-card__overlay {
+  position: absolute; inset: 0; background: rgba(12,12,11,.85);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .3s;
 }
+.price-card:hover .price-card__overlay { opacity: 1; }
+.price-card__btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 22px; background: var(--wa-green); color: var(--white);
+  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 2px;
+}
+.price-card__btn svg { width: 15px; height: 15px; fill: currentColor; }
 
-/* ---- RESPONSIVE ---- */
-@media (max-width: 1100px) {
-  .products-grid { grid-template-columns: repeat(3, 1fr); }
-  .why-grid { grid-template-columns: repeat(2, 1fr); }
+/* ── COMING SOON SECTIONS ── */
+.coming-section {
+  min-height: 60vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 80px 48px;
+  text-align: center; position: relative; overflow: hidden;
 }
-@media (max-width: 820px) {
-  .hero { grid-template-columns: 1fr; padding: 48px 20px 40px; }
-  .hero__right { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 32px; }
-  .hero__stat { text-align: left; }
-  .nav__inner { padding: 0 20px; }
-  .nav__tagline { display: none; }
-  .section-header { padding: 40px 20px 24px; }
-  .grid-wrapper { padding: 0 0 60px; }
-  .contact-strip { grid-template-columns: 1fr; padding: 48px 20px; }
-  .contact-info { align-items: flex-start; }
-  .why-section { padding: 60px 20px; }
-}
-@media (max-width: 640px) {
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .card__overlay-btn { display: none !important; }
-  .card__mobile-btn { display: block; }
-  .why-grid { grid-template-columns: 1fr; gap: 32px; }
-  .announcement span { animation-duration: 14s; }
-}
-@media (max-width: 380px) {
-  .products-grid { grid-template-columns: 1fr; }
-}
-
-/* ---- WATERMARK ---- */
-.watermark {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  pointer-events: none;
-  width: min(700px, 90vw);
-  opacity: .045;
-  filter: blur(2px) grayscale(100%);
+.coming-section.dark { background: var(--onyx); }
+.coming-section.light { background: var(--cream); }
+.coming-bg {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: clamp(120px, 20vw, 240px); opacity: .04; pointer-events: none;
+  font-family: var(--font-display); font-weight: 600; letter-spacing: -.02em;
   user-select: none;
 }
-
-/* ensure content stays above watermark */
-.nav, .announcement, .hero, .section-header,
-.grid-wrapper, .why-section, .contact-strip, footer, .wa-float {
-  position: relative;
-  z-index: 1;
+.coming-section__eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; position: relative; }
+.coming-section__title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 16px; position: relative; }
+.coming-section.dark .coming-section__title { color: var(--cream); }
+.coming-section__title em { font-style: italic; color: var(--gold); }
+.coming-section__sub { font-size: 14px; line-height: 1.7; max-width: 440px; margin: 0 auto 32px; position: relative; }
+.coming-section.dark .coming-section__sub { color: rgba(250,248,245,.4); }
+.coming-section.light .coming-section__sub { color: var(--muted); }
+.coming-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px; border-radius: 999px; font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; position: relative;
 }
-.logo-fallback {
-  width: 50px; height: 50px;
-  border-radius: 10px;
-  background: var(--onyx);
+.coming-pill.dark-pill { background: rgba(250,248,245,.08); color: rgba(250,248,245,.5); border: 1px solid rgba(250,248,245,.1); }
+.coming-pill.light-pill { background: var(--cream-2); color: var(--muted); border: 1px solid var(--border); }
+.coming-notify {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; background: var(--wa-green); color: var(--white);
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  border-radius: 2px; position: relative; transition: opacity .2s;
+}
+.coming-notify svg { width: 16px; height: 16px; fill: currentColor; }
+.coming-notify:hover { opacity: .88; }
+
+/* Maquillaje preview cards */
+.preview-grid {
+  display: flex; gap: 12px; margin: 32px 0; position: relative; flex-wrap: wrap; justify-content: center;
+}
+.preview-card {
+  width: 120px; height: 160px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display);
-  font-size: 18px;
-  color: var(--cream);
-  font-weight: 600;
-  letter-spacing: .04em;
-  flex-shrink: 0;
+  font-size: 36px; position: relative; overflow: hidden;
+  transform: rotate(var(--r, 0deg));
+  transition: transform .3s var(--ease-expo);
+}
+.preview-card:hover { transform: rotate(0deg) scale(1.06); z-index: 2; }
+.preview-card:nth-child(1) { --r: -4deg; background: #2D1B1B; }
+.preview-card:nth-child(2) { --r: 2deg; background: #1A1A2E; margin-top: 20px; }
+.preview-card:nth-child(3) { --r: -2deg; background: #1E1E1C; }
+.preview-card:nth-child(4) { --r: 3deg; background: #2A1728; margin-top: 10px; }
+
+/* WA float */
+.wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  width: 58px; height: 58px; border-radius: 50%; background: var(--wa-green);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(37,211,102,.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-float:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(37,211,102,.45); }
+.wa-float svg { width: 28px; height: 28px; fill: var(--white); }
+
+/* ── CATALOG SUB-TABS ── */
+.cat-subtabs { background: #0C0C0B; border-bottom: 1px solid rgba(250,248,245,.08); }
+.cat-subtabs__inner { display: flex; gap: 2px; max-width: 1400px; margin: 0 auto; padding: 0 48px; overflow-x: auto; scrollbar-width: none; }
+.cat-subtabs__inner::-webkit-scrollbar { display: none; }
+.csb {
+  flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+  padding: 16px 24px; border: none; border-bottom: 3px solid transparent;
+  background: transparent; color: rgba(250,248,245,.35);
+  font-family: var(--font-body); font-size: 12px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+  transition: all .2s; white-space: nowrap;
+}
+.csb:hover { color: rgba(250,248,245,.7); }
+.csb.active { color: var(--gold); border-bottom-color: var(--gold); }
+.csb__icon { font-size: 16px; }
+.csb__count { font-size: 9px; background: var(--gold); color: var(--white); padding: 2px 7px; border-radius: 999px; font-weight: 700; }
+.csb__soon { font-size: 8px; background: rgba(250,248,245,.1); color: rgba(250,248,245,.3); padding: 2px 7px; border-radius: 999px; font-weight: 600; }
+@media (max-width: 900px) { .cat-subtabs__inner { padding: 0 12px; } .csb { padding: 14px 14px; font-size: 10px; } }
+
+/* ── PRICE FILTERS ── */
+.price-filters { background: #111110; border-bottom: 1px solid rgba(250,248,245,.06); position: sticky; top: 120px; z-index: 50; }
+.price-filters__inner { display: flex; gap: 4px; max-width: 1400px; margin: 0 auto; padding: 12px 48px; overflow-x: auto; scrollbar-width: none; }
+.price-filters__inner::-webkit-scrollbar { display: none; }
+.pf-btn { flex-shrink: 0; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(250,248,245,.12); background: transparent; color: rgba(250,248,245,.4); font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+.pf-btn:hover { border-color: var(--gold); color: var(--gold); }
+.pf-btn.active { background: var(--gold); border-color: var(--gold); color: var(--white); }
+@media (max-width: 900px) { .price-filters__inner { padding: 10px 16px; } }
+
+@media (max-width: 900px) {
+  .nav__top { padding: 0 20px; }
+  .cat-tabs__inner { padding: 0 12px; }
+  .cat-tab { padding: 0 16px; font-size: 10px; }
+  .hero { grid-template-columns: 1fr; padding: 40px 20px; gap: 32px; }
+  .hero__img { display: none; }
+  .section-header, .grid-wrapper { padding-left: 20px; padding-right: 20px; }
+  .price-hero { padding: 56px 20px 48px; }
+  .how-works { grid-template-columns: repeat(2, 1fr); }
+  .price-grid-section { padding: 0 20px 60px; }
+  .price-grid { grid-template-columns: repeat(2, 1fr); }
+  .coming-section { padding: 60px 20px; }
 }
 </style>
 </head>
 <body>
 
-<!-- WATERMARK -->
-<img class="watermark" src="logo.png" alt="" aria-hidden="true"/>
-
 <!-- ANNOUNCEMENT -->
-<div class="announcement" aria-label="Aviso">
-  <span>✦ Aparta desde $100 · Confirmo talla al momento · Envío disponible · Stock limitado en algunos modelos · Compra directa por WhatsApp ✦ Aparta desde $100 · Confirmo talla al momento · Envío disponible · Stock limitado en algunos modelos · Compra directa por WhatsApp ✦</span>
+<div class="announcement">
+  <span>✦ Hoja Urbana · Calzado femenino premium · Aparta con 10% y liquida en 30 días · Catálogo Price Shoes disponible · Nuevas colecciones ✦ Hoja Urbana · Calzado femenino premium · Aparta con 10% y liquida en 30 días · Catálogo Price Shoes disponible · Nuevas colecciones ✦</span>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav__inner">
+  <div class="nav__top">
     <a class="nav__logo" href="#">
-      <img src="logo.png" alt="Hoja Urbana" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <div class="logo-fallback" style="display:none">HU</div>
-      <div>
-        <div class="nav__brand-name">Hoja Urbana</div>
+      <img src="logo.png" alt="Hoja Urbana" onerror="this.style.display='none'"/>
+      <div class="nav__logo-text">
+        <div class="nav__brand">Hoja Urbana</div>
         <div class="nav__tagline">Femenina · Urbana · Premium</div>
       </div>
     </a>
-    <a class="nav__cta" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quisiera%20ver%20el%20cat%C3%A1logo%20y%20conocer%20disponibilidad." target="_blank" rel="noopener">
+    <a class="nav__cta" href="https://wa.me/522211893908" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
       Apartar ahora
     </a>
   </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="cat-tabs">
+    <div class="cat-tabs__inner">
+      <div class="cat-tab active" data-tab="hoja">
+        <span class="cat-tab__icon">👠</span> Hoja Urbana
+      </div>
+      <div class="cat-tab" data-tab="price">
+        <span class="cat-tab__icon">📦</span> Price Shoes
+        <span class="cat-tab__badge">Catálogo</span>
+      </div>
+      <div class="cat-tab" data-tab="accesorios">
+        <span class="cat-tab__icon">🪴</span> Accesorios
+        <span class="cat-tab__new">Nuevo</span>
+      </div>
+      <div class="cat-tab" data-tab="maquillaje">
+        <span class="cat-tab__icon">💄</span> Maquillaje
+        <span class="cat-tab__soon">Pronto</span>
+      </div>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero__left">
-    <p class="hero__eyebrow">Nueva Colección 2026</p>
-    <h1 class="hero__heading">Para mujeres<br/>que pisan<br/><em>fuerte.</em></h1>
-    <p class="hero__sub">Hoja Urbana nace para mujeres seguras, auténticas y con actitud. Estilo urbano, femenino y premium para brillar en la calle y en la vida.</p>
-    <div class="hero__badges">
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Aparta desde $100
-      </span>
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        Atención directa
-      </span>
-      <span class="badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        Stock limitado
-      </span>
+<!-- ═══════════════════════════════════
+     TAB 1: HOJA URBANA
+     ═══════════════════════════════════ -->
+<div class="cat-section active" id="tab-hoja">
+
+  <div class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Nueva Colección 2026</p>
+      <h1 class="hero__title">Calzado para<br/>mujeres que se<br/><em>eligen primero</em></h1>
+      <p class="hero__sub">Diseños únicos, materiales premium y entrega directa a tu puerta. Todas nuestras piezas son seleccionadas para la mujer urbana y moderna.</p>
+      <div class="hero__actions">
+        <a class="btn-primary" href="https://wa.me/522211893908?text=Hola!%20Quiero%20ver%20el%20catálogo%20de%20Hoja%20Urbana%20🌿" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+          Ver catálogo
+        </a>
+        <a class="btn-ghost" href="#coleccion">Explorar colección</a>
+      </div>
+    </div>
+    <div class="hero__img">
+      <img src="producto_1.png" alt="Hoja Urbana" onerror="this.parentElement.innerHTML='<div class=hero__img-placeholder>👠</div>'"/>
     </div>
   </div>
-  <div class="hero__right">
-    <div class="hero__stat">
-      <div class="hero__stat-num">10</div>
-      <div class="hero__stat-label">Modelos exclusivos</div>
-    </div>
-    <div class="hero__stat">
-      <div class="hero__stat-num">$100</div>
-      <div class="hero__stat-label">Para apartar</div>
-    </div>
+
+  <div class="section-header" id="coleccion">
+    <h2>Nuestra <em>colección</em></h2>
+    <span class="section-count">10 modelos disponibles</span>
   </div>
-</section>
 
-<!-- CATALOG HEADER -->
-<div class="section-header">
-  <h2>Colección <em>actual</em></h2>
-  <span class="section-count">10 modelos disponibles</span>
-</div>
-
-<!-- PRODUCTS GRID -->
-<div class="grid-wrapper">
-  <div class="products-grid" id="products-grid">
-    <!-- JS renders cards here -->
+  <div class="grid-wrapper">
+    <div class="grid" id="hoja-grid"></div>
   </div>
 </div>
 
-<!-- WHY US -->
-<section class="why-section">
-  <div class="why-inner">
-    <h2>¿Por qué elegir<br/><em>Hoja Urbana?</em></h2>
-    <div class="why-grid">
-      <div class="why-item reveal">
-        <div class="why-item__num">01</div>
-        <div class="why-item__title">Modelos en tendencia</div>
-        <div class="why-item__text">Seleccionamos piezas urbanas, casuales y elegantes pensadas para mujeres de 15 a 45 años. Siempre al día con lo que se lleva.</div>
-      </div>
-      <div class="why-item reveal">
-        <div class="why-item__num">02</div>
-        <div class="why-item__title">Atención personalizada</div>
-        <div class="why-item__text">Compra rápida y directa por WhatsApp. Te confirmo talla, disponibilidad y precio al momento. Cero filas, cero estrés.</div>
-      </div>
-      <div class="why-item reveal">
-        <div class="why-item__num">03</div>
-        <div class="why-item__title">Aparta fácil</div>
-        <div class="why-item__text">Asegura tu modelo con solo $100 de anticipo. Pago seguro y flexible para que estrenes sin comprometer tu bolsillo.</div>
-      </div>
-      <div class="why-item reveal">
-        <div class="why-item__num">04</div>
-        <div class="why-item__title">Calidad premium</div>
-        <div class="why-item__text">Cada par es seleccionado con criterio. Materiales, acabados y comodidad que se notan desde el primer paso.</div>
+<!-- ═══════════════════════════════════
+     TAB 2: PRICE SHOES
+     ═══════════════════════════════════ -->
+<div class="cat-section" id="tab-price">
+
+  <div class="price-hero">
+    <div class="price-hero__inner">
+      <p class="price-hero__eyebrow">Venta por Catálogo · Colección Thalia Sodi 2025</p>
+      <h2 class="price-hero__title">Catálogo <em>Price Shoes</em></h2>
+      <p class="price-hero__sub">Elige tu modelo favorito de la Colección Thalia Sodi y nosotros lo pedimos por ti. Atención personalizada desde Puebla.</p>
+      <div class="price-hero__badges">
+        <span class="badge badge-gold">🏷️ Aparta con 10% · 30 días</span>
+        <span class="badge badge-outline">📦 Pedido por WhatsApp</span>
+        <span class="badge badge-outline">✨ Colección Thalia 2025</span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- CONTACT STRIP -->
-<div class="contact-strip">
-  <div>
-    <h3>¿Lista para<br/><em>estrenar?</em></h3>
+  <div class="how-works">
+    <div class="how-step">
+      <div class="how-step__num">01</div>
+      <div class="how-step__title">Elige tu modelo</div>
+      <div class="how-step__desc">Explora el catálogo y elige estilo, color y talla.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step__num">02</div>
+      <div class="how-step__title">Escríbenos</div>
+      <div class="how-step__desc">Mándanos el modelo por WhatsApp, verificamos disponibilidad.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step__num">03</div>
+      <div class="how-step__title">Aparta con 10%</div>
+      <div class="how-step__desc">Separa tu pedido con solo el 10% del total y liquida en 30 días.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step__num">04</div>
+      <div class="how-step__title">¡Lo recibes!</div>
+      <div class="how-step__desc">Coordinamos entrega rápida y segura a donde estés.</div>
+    </div>
   </div>
-  <div class="contact-info">
-    <a class="contact-link" href="https://wa.me/522211893908" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-      +52 221 189 3908
-    </a>
-    <a class="contact-link" href="mailto:somoshojaurbana@gmail.com">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      somoshojaurbana@gmail.com
-    </a>
-    <a class="contact-link" href="https://www.instagram.com/somoshojaurbana" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      @somoshojaurbana
-    </a>
-    <a class="contact-wa-btn" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quiero%20apartar%20un%20modelo.%20%C2%BFMe%20ayudas%20con%20talla%20y%20precio%3F" target="_blank" rel="noopener">
+
+  <!-- CATALOG SUB-TABS -->
+  <div class="cat-subtabs" id="cat-subtabs">
+    <div class="cat-subtabs__inner">
+      <button class="csb active" data-catalog="thalia" data-pdf="">
+        <span class="csb__icon">✨</span>
+        <span class="csb__name">Thalia Sodi</span>
+        <span class="csb__count" id="csb-count-thalia"></span>
+      </button>
+      <button class="csb" data-catalog="cat2" data-pdf="catalogos/sandalias26.pdf">
+        <span class="csb__icon">👠</span>
+        <span class="csb__name">Sandalias 26</span>
+        <span class="csb__soon">PDF</span>
+      </button>
+      <button class="csb" data-catalog="cat3" data-pdf="catalogos/spring26.pdf">
+        <span class="csb__icon">👟</span>
+        <span class="csb__name">Spring 26</span>
+        <span class="csb__soon">PDF</span>
+      </button>
+      <button class="csb" data-catalog="cat4" data-pdf="catalogos/caballeros25.pdf">
+        <span class="csb__icon">👞</span>
+        <span class="csb__name">Caballeros 25</span>
+        <span class="csb__soon">PDF</span>
+      </button>
+      <button class="csb" data-catalog="cat5" data-pdf="catalogos/urbano_pv2026.pdf">
+        <span class="csb__icon">🌸</span>
+        <span class="csb__name">Urbano PV2026</span>
+        <span class="csb__soon">PDF</span>
+      </button>
+      <button class="csb" data-catalog="cat6" data-pdf="catalogos/botas_newcollection.pdf">
+        <span class="csb__icon">🥾</span>
+        <span class="csb__name">Botas New Collection</span>
+        <span class="csb__soon">PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- PRODUCT TYPE FILTERS (within catalog) -->
+  <div class="price-filters" id="price-filters">
+    <div class="price-filters__inner" id="type-filters">
+      <button class="pf-btn active" data-cat="all">Todos</button>
+      <button class="pf-btn" data-cat="flat">Flats 👟</button>
+      <button class="pf-btn" data-cat="tacon">Tacones 👠</button>
+      <button class="pf-btn" data-cat="sandalia">Sandalias ✨</button>
+      <button class="pf-btn" data-cat="bota">Botas 🥾</button>
+      <button class="pf-btn" data-cat="tenis">Tenis 👟</button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="price-grid-section" id="price-grid-section">
+    <div class="price-section-hdr">
+      <h3 id="catalog-title">Colección <em>Thalia Sodi 2025</em></h3>
+      <span id="price-count-label">Cargando...</span>
+    </div>
+    <div class="price-grid" id="price-grid"></div>
+  </div>
+
+  <!-- PDF VIEWER for catalogs without extracted products yet -->
+  <div id="catalog-coming" style="display:none">
+    <div style="background:var(--onyx); padding: 32px 48px;">
+      <!-- PDF embed viewer -->
+      <div id="pdf-viewer-wrap" style="display:none; max-width:1000px; margin:0 auto;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <h3 id="coming-cat-name" style="color:var(--cream); font-family:var(--font-display); font-size:28px; font-weight:300;"></h3>
+          <a id="pdf-download-link" href="#" target="_blank"
+            style="display:flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold);color:#fff;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">
+            ⬇️ Descargar PDF
+          </a>
+        </div>
+        <iframe id="pdf-iframe"
+          src=""
+          style="width:100%; height:80vh; border:none; border-radius:12px; background:#1a1a18;"
+          allowfullscreen>
+        </iframe>
+        <p style="color:rgba(250,248,245,.4); font-size:12px; text-align:center; margin-top:12px;">
+          ¿Ves algo que te gusta? Escríbenos por WhatsApp y lo apartamos con el 10% 👇
+        </p>
+        <div style="text-align:center; margin-top:12px;">
+          <a id="pdf-wa-link" href="https://wa.me/522211893908?text=Hola!%20Vi%20el%20catálogo%20Price%20Shoes%20y%20me%20interesa%20un%20modelo%20🛍️"
+            target="_blank"
+            style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:#25D366;color:#fff;border-radius:999px;font-size:12px;font-weight:600;text-decoration:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+            Apartar por WhatsApp · 10% de anticipo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     TAB 3: ACCESORIOS
+     ═══════════════════════════════════ -->
+<div class="cat-section" id="tab-accesorios">
+  <div class="coming-section dark">
+    <div class="coming-bg">Pronto</div>
+    <p class="coming-section__eyebrow">Próximamente</p>
+    <h2 class="coming-section__title">Accesorios &<br/><em>Lifestyle</em></h2>
+    <p class="coming-section__sub">Pipas artesanales de cristal y cerámica, diseñadas para la mujer moderna. Una colección exclusiva que llega muy pronto.</p>
+    <div class="preview-grid">
+      <div class="preview-card">🪴</div>
+      <div class="preview-card">💎</div>
+      <div class="preview-card">✨</div>
+      <div class="preview-card">🌿</div>
+    </div>
+    <div class="coming-pill dark-pill">🔔 Sé la primera en enterarte</div>
+    <br/>
+    <a class="coming-notify" href="https://wa.me/522211893908?text=Hola!%20Quiero%20que%20me%20avisen%20cuando%20lleguen%20los%20accesorios%20de%20Hoja%20Urbana%20🌿" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-      Escríbeme ahora
+      Avísame cuando llegue
     </a>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <p><strong>© 2026 Hoja Urbana</strong> · Todos los derechos reservados · <a href="https://www.instagram.com/somoshojaurbana" target="_blank" rel="noopener">@somoshojaurbana</a></p>
-</footer>
+<!-- ═══════════════════════════════════
+     TAB 4: MAQUILLAJE
+     ═══════════════════════════════════ -->
+<div class="cat-section" id="tab-maquillaje">
+  <div class="coming-section light">
+    <div class="coming-bg" style="color:var(--onyx)">Beauty</div>
+    <p class="coming-section__eyebrow">Próximamente</p>
+    <h2 class="coming-section__title">Maquillaje &<br/><em>Belleza</em></h2>
+    <p class="coming-section__sub">Una nueva línea de belleza llega a Hoja Urbana. Productos seleccionados para la mujer que cuida cada detalle de su look.</p>
+    <div class="preview-grid">
+      <div class="preview-card" style="background:#3D1C2E">💄</div>
+      <div class="preview-card" style="background:#1C2E3D;margin-top:20px">🪞</div>
+      <div class="preview-card" style="background:#2E1C3D">✨</div>
+      <div class="preview-card" style="background:#3D2E1C;margin-top:10px">💅</div>
+    </div>
+    <div class="coming-pill light-pill">💄 Sección gestionada próximamente</div>
+    <br/>
+    <a class="coming-notify" href="https://wa.me/522211893908?text=Hola!%20Me%20interesa%20la%20sección%20de%20maquillaje%20de%20Hoja%20Urbana%20💄" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+      Quiero ser la primera
+    </a>
+  </div>
+</div>
 
-<!-- FLOATING WA -->
-<a class="wa-float" href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20%F0%9F%92%9A%20Quiero%20apartar%20un%20modelo.%20%C2%BFMe%20ayudas%20con%20talla%20y%20precio%3F" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/522211893908" target="_blank">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
 </a>
 
 <script>
-// =============================================
-//  HOJA URBANA — CATÁLOGO + WHATSAPP LINKS
-// =============================================
-const WA_NUMBER = "522211893908";
+// ── TAB SWITCHING ──
+const tabs = document.querySelectorAll('.cat-tab');
+const sections = document.querySelectorAll('.cat-section');
 
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.tab;
+    tabs.forEach(t => t.classList.remove('active', 'active-gold'));
+    sections.forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+    window.scrollTo({ top: 72, behavior: 'smooth' });
+  });
+});
+
+// ── HOJA URBANA PRODUCTS ──
+const WA = '522211893908';
 const PRODUCTS = [
-  {
-    id: "1274111",
-    name: "Bota todoterreno",
-    variant: "Beige",
-    price: "$999",
-    img: "producto_1.png",
-    desc: "Para frío y calle. Suela chunky, look urbano y cómodo."
-  },
-  {
-    id: "1149867",
-    name: "Bota invernal ajustable",
-    variant: "Negra",
-    price: "$419",
-    img: "producto_2.png",
-    desc: "Abriga rico sin perder estilo. Ajuste superior y plataforma ligera."
-  },
-  {
-    id: "1274112",
-    name: "Bota todoterreno",
-    variant: "Gris",
-    price: "$999",
-    img: "producto_3.png",
-    desc: "Todoterreno real: resistente, combinable y lista para el diario."
-  },
-  {
-    id: "1248742",
-    name: "Tenis urbano cebra",
-    variant: "",
-    price: "$799",
-    img: "producto_4.png",
-    desc: "Atrevido y juvenil. Contraste blanco/negro con toque street."
-  },
-  {
-    id: "1285542",
-    name: "Sandalia tacón",
-    variant: "Negra",
-    price: "$539",
-    img: "producto_5.png",
-    desc: "Elegante y versátil. Tacón fino para salir sin sufrir."
-  },
-  {
-    id: "1298005",
-    name: "Tenis urbano hearts",
-    variant: "",
-    price: "$549", 
-    img: "producto_6.png",
-    desc: "Cómodo y llamativo. Detalle de corazones para un look cool."
-  },
-  {
-    id: "1312332",
-    name: "Kit sandalia tacón básicas",
-    variant: "",
-    price: "$869",
-    img: "producto_7.png",
-    desc: "Dos pares, mil outfits. Perfectas para oficina, cita o evento."
-  },
-  {
-    id: "1203193",
-    name: "Sandalia plana piedras",
-    variant: "",
-    price: "$579",
-    img: "producto_8.png",
-    desc: "Brilla sin exagerar. Detalles con pedrería para elevar tu outfit."
-  },
-  {
-    id: "1031556",
-    name: "Zapatilla tacón asimétrico",
-    variant: "Negra",
-    price: "$619",
-    img: "producto_9.png",
-    desc: "Premium y poderosa. Punta fina para verte de impacto."
-  },
-  {
-    id: "1169147",
-    name: "Zapatilla con estoperoles",
-    variant: "Negra",
-    price: "$899",
-    img: "producto_10.png",
-    desc: "Actitud total. Estoperoles sutiles para un look más fuerte."
-  }
+  { id:'1274111', name:'Bota todoterreno', color:'Beige', desc:'Versátil y cómoda para cualquier aventura.', price:'$999', img:'producto_1.png' },
+  { id:'1149867', name:'Bota invernal ajustable', color:'Negra', desc:'Calidez y estilo en temporada fría.', price:'$335', img:'producto_2.png' },
+  { id:'1274112', name:'Bota todoterreno', color:'Gris', desc:'El mismo poder, otro tono.', price:'$999', img:'producto_3.png' },
+  { id:'1248742', name:'Tenis urbano cebra', color:'', desc:'Estampado único para looks atrevidos.', price:'$799', img:'producto_4.png' },
+  { id:'1285542', name:'Sandalia tacón', color:'Negra', desc:'Elegancia que no cansa.', price:'$539', img:'producto_5.png' },
+  { id:'1298005', name:'Tenis urbano hearts', color:'', desc:'Cómodo y llamativo. Detalle de corazones.', price:'Consultar', img:'producto_6.png' },
+  { id:'1312332', name:'Kit sandalia tacón básicas', color:'', desc:'Dos pares, mil outfits.', price:'$869', img:'producto_7.png' },
+  { id:'1203193', name:'Sandalia plana piedras', color:'', desc:'Brillo natural en cada paso.', price:'$579', img:'producto_8.png' },
+  { id:'1031556', name:'Zapatilla tacón asimétrico', color:'Negra', desc:'Diseño arquitectónico para destacar.', price:'$619', img:'producto_9.png' },
+  { id:'1169147', name:'Zapatilla con estoperoles', color:'Negra', desc:'Actitud urbana en su máxima expresión.', price:'$899', img:'producto_10.png' },
 ];
 
-function buildWaLink(product) {
-  const fullName = product.variant
-    ? `${product.name} (${product.variant})`
-    : product.name;
-  const priceLine = product.price
-    ? `\n💰 Precio: ${product.price}`
-    : "\n💰 Precio: Consultar";
-  const msg =
-    `Hola Hoja Urbana 💚\n\n` +
-    `Me interesa este modelo:\n` +
-    `👟 *${fullName}*\n` +
-    `🔖 ID: ${product.id}` +
-    `${priceLine}\n\n` +
-    `¿Me confirmas disponibilidad y talla, por favor?`;
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-}
+const WA_SVG = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>`;
 
-function buildCard(p, index) {
-  const fullName = p.variant ? `${p.name} (${p.variant})` : p.name;
-  const waLink = buildWaLink(p);
-  const priceHtml = p.price
-    ? `<span class="card__price">${p.price}</span>`
-    : `<span class="card__price card__price--query">Consultar precio</span>`;
-
-  const card = document.createElement("div");
-  card.className = "card reveal";
-  card.style.animationDelay = `${index * 60}ms`;
+const grid = document.getElementById('hoja-grid');
+PRODUCTS.forEach(p => {
+  const waMsg = encodeURIComponent(`Hola Hoja Urbana 👠 Me interesa el modelo *${p.name} ${p.color}* (ID: ${p.id}) — Precio: ${p.price}. ¿Está disponible?`);
+  const card = document.createElement('div');
+  card.className = 'card';
   card.innerHTML = `
-    <div class="card__media">
-      <img src="${p.img}" alt="${fullName}" loading="lazy"/>
+    <div class="card__img">
+      <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card__placeholder>👠</div>'"/>
+      <div class="card__id">ID ${p.id}</div>
       <div class="card__overlay">
-        <a class="card__overlay-btn" href="${waLink}" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-          Apartar por WhatsApp
-        </a>
+        <a class="card__wa" href="https://wa.me/${WA}?text=${waMsg}" target="_blank">${WA_SVG} Apartar por WhatsApp</a>
       </div>
-      <span class="card__id-badge">ID ${p.id}</span>
     </div>
     <div class="card__info">
-      <div class="card__name">${fullName}</div>
+      <div class="card__name">${p.name} ${p.color}</div>
       <div class="card__desc">${p.desc}</div>
-      ${priceHtml}
-    </div>
-    <a class="card__mobile-btn" href="${waLink}" target="_blank" rel="noopener">Apartar por WhatsApp</a>
-  `;
-  return card;
+      <div class="card__price">${p.price}</div>
+    </div>`;
+  grid.appendChild(card);
+});
+
+// ── PRICE SHOES MULTI-CATALOG SYSTEM ──
+const WA_PS = '522211893908';
+const PS_IMG = id => `https://imagenesdigitales.priceshoes.com.mx/catalogimages/${id}_1.jpg`;
+const WA_SVG2 = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>`;
+
+// ── CATALOGS DATABASE ──
+// Each catalog = { name, emoji, products: [...] }
+const CATALOGS = {
+  thalia: {
+    name: 'Colección Thalia Sodi 2025',
+    emoji: '✨',
+    products: [
+      // FLATS
+      { id:'1255985', name:'Flat Diamonds', color:'Nude', cat:'flat', precio:'$675', eng:'$75', desc:'Textil malla c/pedrería · Tallas 22-27', badge:'' },
+      // TACONES
+      { id:'1257432', name:'Stiletto Pedrería', color:'Plateado', cat:'tacon', precio:'$885', eng:'$98', desc:'Sint. mica c/pedrería · 7cm · Tallas 22-27', badge:'✨ New Collection' },
+      { id:'1255908', name:'Stiletto Napa Metálica', color:'Plateado', cat:'tacon', precio:'$729', eng:'$81', desc:'Napa metálica · 9.5cm · Tallas 23-27', badge:'' },
+      { id:'1255877', name:'Slingback Glitter', color:'Plateado', cat:'tacon', precio:'$675', eng:'$75', desc:'Metálico/glitter · 9.5cm · Tallas 22-27', badge:'' },
+      { id:'1255986', name:'Slingback Charol Corrugado', color:'Negro', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol corrugado · 7.5cm · Tallas 22-27', badge:'' },
+      { id:'1255909', name:'Stiletto Lazo Clásico', color:'Negro', cat:'tacon', precio:'$729', eng:'$81', desc:'Tipo charol · 9cm · Tallas 23-27', badge:'Be Sexy' },
+      { id:'1255887', name:'Stiletto Animal Print', color:'Café/Negro', cat:'tacon', precio:'$699', eng:'$77', desc:'Tipo satín · 9cm · Tallas 23-27', badge:'Animal Print' },
+      { id:'1031556', name:'Stiletto Clásico', color:'Negro', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol · Tallas 22-27', badge:'Love Heels' },
+      { id:'1031555', name:'Stiletto Clásico', color:'Rojo', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol · 10.5cm · Tallas 22-27', badge:'Love Heels' },
+      { id:'1257263', name:'Stiletto Lycra', color:'Negro', cat:'tacon', precio:'$675', eng:'$75', desc:'Textil licra · 8.5cm · Tallas 23-27', badge:'' },
+      { id:'1257264', name:'Mule Charol', color:'Nude', cat:'tacon', precio:'$675', eng:'$75', desc:'Tipo charol · 9cm · Tallas 22-26', badge:'' },
+      // SANDALIAS
+      { id:'1203196', name:'Mule Pedrería', color:'Gris', cat:'sandalia', precio:'$559', eng:'$62', desc:'Textil satín c/pedrería · 8.5cm · Tallas 23-27', badge:'' },
+      { id:'1189893', name:'Slingback Moño Pedrería', color:'Nude', cat:'sandalia', precio:'$589', eng:'$65', desc:'Sint. mica c/pedrería · 8.5cm · Tallas 22-27', badge:'Detalles con pedrería' },
+      { id:'1191711', name:'Slingback Pedrería', color:'Nude', cat:'sandalia', precio:'$575', eng:'$64', desc:'Sint. mica c/pedrería · 9cm · Tallas 22-27', badge:'' },
+      { id:'1191780', name:'Sandalia Bloque Pedrería', color:'Negro', cat:'sandalia', precio:'$405', eng:'$45', desc:'Tipo napa c/pedrería · 9cm · Tallas 23-27', badge:'Trendy Heels' },
+      { id:'1191781', name:'Sandalia Bloque Pedrería', color:'Plateado', cat:'sandalia', precio:'$629', eng:'$70', desc:'Tipo napa metalica c/pedrería · 10cm · Tallas 23-27', badge:'Trendy Heels' },
+      { id:'1187967', name:'Sandalia Moño Espejo', color:'Plateado', cat:'sandalia', precio:'$589', eng:'$65', desc:'Sint. espejo/mica · 6cm · Tallas 22-27', badge:'Be Sexy' },
+      { id:'1114988', name:'Sandalia Cuadrada Stone', color:'Nude', cat:'sandalia', precio:'$625', eng:'$69', desc:'Tipo charol/mica · 6cm · Tallas 22-26', badge:'Stone Collection' },
+      { id:'1188782', name:'Sandalia Piedras Stone', color:'Rosa palo', cat:'sandalia', precio:'$629', eng:'$70', desc:'Tipo charol c/pedrería · 6cm · Tallas 22-26', badge:'Stone Collection' },
+      { id:'1189845', name:'Mule Metálica Dorada', color:'Dorado', cat:'sandalia', precio:'$559', eng:'$62', desc:'Tipo napa metálica · 7cm · Tallas 23-27', badge:'' },
+      // BOTAS
+      { id:'1188778', name:'Bota Cadenas Actitud', color:'Rojo', cat:'bota', precio:'$839', eng:'$93', desc:'Tipo charol · 11cm · Tallas 22-27', badge:'Moda con Actitud' },
+      { id:'1189891', name:'Bota Studs Transparente', color:'Negro/Humo', cat:'bota', precio:'$535', eng:'$59', desc:'Sint. mica · 9.5cm · Tallas 22-27', badge:'Moda con Actitud' },
+      { id:'1139477', name:'Bota Cristales STONES', color:'Rosa', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · 11cm · Tallas 23-27', badge:'40% Desc 🔥' },
+      { id:'1132894', name:'Bota Cristales STONES', color:'Negro', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · Tallas 22-27', badge:'40% Desc 🔥' },
+      { id:'1132895', name:'Bota Cristales STONES', color:'Plateado', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · Tallas 22-27', badge:'40% Desc 🔥' },
+      { id:'1141856', name:'Botín Estoperoles', color:'Negro', cat:'bota', precio:'$1,065', eng:'$118', desc:'Tipo ante c/estoperoles · 11cm · Tallas 22-26', badge:'30% Desc 🔥' },
+      { id:'1090105', name:'Botín Cristales Nude', color:'Nude', cat:'bota', precio:'$839', eng:'$93', desc:'Sint. mica c/pedrería · 11cm', badge:'40% Desc 🔥' },
+      { id:'1141456', name:'Botín Cristales', color:'Negro', cat:'bota', precio:'$839', eng:'$93', desc:'Sint. mica c/pedrería · 11cm · Tallas 22-27', badge:'40% Desc 🔥' },
+      { id:'1141457', name:'Botín Largo Cristales', color:'Nude', cat:'bota', precio:'$1,175', eng:'$130', desc:'Sint. mica c/pedrería · 9.5cm · Tallas 22-26', badge:'40% Desc 🔥' },
+      { id:'1224192', name:'Bota Clásica Napa', color:'Café', cat:'bota', precio:'$1,149', eng:'$127', desc:'Tipo napa · 9.5cm · Tallas 23-27', badge:'Trendy Booties' },
+      { id:'1224193', name:'Bota Clásica Napa', color:'Negro', cat:'bota', precio:'$1,149', eng:'$127', desc:'Tipo napa · 9.5cm · Tallas 23-27', badge:'Trendy Booties' },
+      { id:'1224191', name:'Bota Larga Napa', color:'Negro', cat:'bota', precio:'$1,165', eng:'$129', desc:'Tipo napa · 9cm · Tallas 23-27', badge:'Large Boots' },
+      { id:'1141789', name:'Bota Larga con Hebillas', color:'Negro', cat:'bota', precio:'$1,025', eng:'$113', desc:'Tipo napa · 11.5cm · Tallas 23-27', badge:'Large Boots' },
+      // TENIS
+      { id:'1116427', name:'Tenis Clásico Thalia', color:'Blanco', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1184894', name:'Tenis Clásico Thalia', color:'Beige', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1116426', name:'Tenis Clásico Thalia', color:'Beige/Café', cat:'tenis', precio:'$839', eng:'$93', desc:'Girly Style · Tallas 22-27', badge:'Girly Style' },
+      { id:'1248758', name:'Tenis Street Glam', color:'Beige/Rosa', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Street Glam' },
+      { id:'1248251', name:'Tenis Street Glam', color:'Gris', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 23-27', badge:'Street Glam' },
+      { id:'1248250', name:'Tenis Animal Print', color:'Leopardo', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 23-27', badge:'⭐ ME' },
+      { id:'1248759', name:'Tenis Urban Style', color:'Verde', cat:'tenis', precio:'$629', eng:'$70', desc:'Urban Style · Tallas 22-27', badge:'Urban Style' },
+      { id:'1248761', name:'Tenis Urban Style', color:'Rosa Neón', cat:'tenis', precio:'$839', eng:'$93', desc:'Urban Style · Tallas 22-27', badge:'Urban Style' },
+      { id:'1248249', name:'Tenis Lifestyle', color:'Menta', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
+      { id:'1248248', name:'Tenis Lifestyle', color:'Cielo', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
+      { id:'1092389', name:'Tenis Street Glam', color:'Blanco/Rosa', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Street Glam' },
+      { id:'1248756', name:'Tenis Platform Dorado', color:'Blanco', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1248387', name:'Tenis Animal Chunky', color:'Blanco/Animal', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
+      { id:'1150355', name:'Tenis Chunky', color:'Negro/Blanco', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
+      { id:'1116431', name:'Tenis Mezclilla', color:'Blanco/Mezclilla', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-28', badge:'⭐ ME' },
+      { id:'1116912', name:'Tenis THALIA Bold', color:'Blanco/Negro', cat:'tenis', precio:'$839', eng:'$93', desc:'The New Urban · Tallas 22-27', badge:'New Urban' },
+      { id:'1150354', name:'Tenis Listón Satín', color:'Blanco/Azul', cat:'tenis', precio:'$629', eng:'$70', desc:'Sneakers Cool · Tallas 22-27', badge:'Sneakers Cool' },
+      { id:'1248388', name:'Tenis Listón Satín', color:'Negro', cat:'tenis', precio:'$769', eng:'$85', desc:'Sneakers Cool · Tallas 22-27', badge:'Sneakers Cool' },
+      { id:'1184880', name:'Tenis Shinne Shoes', color:'Blanco/Rosa', cat:'tenis', precio:'$699', eng:'$77', desc:'Shinne Shoes · Tallas 22-27', badge:'Shinne ✨' },
+      { id:'1184881', name:'Tenis Shinne Shoes', color:'Blanco/Gris', cat:'tenis', precio:'$629', eng:'$70', desc:'Shinne Shoes · Tallas 22-27', badge:'Shinne ✨' },
+      { id:'1116428', name:'Slip-On Brillos', color:'Beige', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1116429', name:'Slip-On Brillos', color:'Negro', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1116423', name:'Tenis Chunky Brillos', color:'Negro', cat:'tenis', precio:'$699', eng:'$77', desc:'Suela ligera · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1184892', name:'Tenis Chunky', color:'Gris', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1248753', name:'Tenis Chunky Sport', color:'Azul', cat:'tenis', precio:'$465', eng:'$52', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1117209', name:'Tenis New Urban', color:'Blanco', cat:'tenis', precio:'$839', eng:'$93', desc:'The New Urban · Tallas 22-27', badge:'New Urban' },
+      { id:'1248332', name:'Tenis New Urban', color:'Negro', cat:'tenis', precio:'$629', eng:'$70', desc:'The New Urban · Tallas 22-27', badge:'New Urban' },
+      { id:'1184574', name:'Tenis Louis Platform', color:'Negro', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1116390', name:'Tenis Louis Platform', color:'Blanco', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1184575', name:'Tenis Louis Multicolor', color:'Blanco/Multicolor', cat:'tenis', precio:'$489', eng:'$54', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1065034', name:'Tenis Air Sport', color:'Negro', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'⭐ ME' },
+      { id:'1116931', name:'Tenis High Top', color:'Blanco', cat:'tenis', precio:'$629', eng:'$70', desc:'Ultraligero · Tallas 22-27', badge:'⭐ ME' },
+      { id:'872135',  name:'Tenis Chunky New Trend', color:'Blanco', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'New Trend' },
+      { id:'1184879', name:'Tenis Chunky New Trend', color:'Rosa', cat:'tenis', precio:'$699', eng:'$77', desc:'Suela ligera · Tallas 22-27', badge:'New Trend' },
+      { id:'1184886', name:'Tenis Runner Plata/Verde', color:'Plata/Verde', cat:'tenis', precio:'$1,049', eng:'$116', desc:'Antiderrapante · Tallas 22-27', badge:'Cool Sneakers' },
+      { id:'1248381', name:'Tenis Runner Premium', color:'Beige', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'Cool Sneakers' },
+    ]
+  },
+  // ── Aquí van los demás catálogos cuando los subas ──
+  cat2: null,
+  cat3: null,
+  cat4: null,
+  cat5: null,
+  cat6: null,
+};
+
+let currentCatalog = 'thalia';
+let currentType = 'all';
+
+// Update sub-tab counts
+Object.keys(CATALOGS).forEach(key => {
+  const el = document.getElementById('csb-count-' + key);
+  if (el && CATALOGS[key]) el.textContent = CATALOGS[key].products.length;
+});
+
+function renderPriceGrid(catalogKey, type, pdfPath) {
+  const catalog = CATALOGS[catalogKey];
+  const grid = document.getElementById('price-grid');
+  const label = document.getElementById('price-count-label');
+  const title = document.getElementById('catalog-title');
+  const section = document.getElementById('price-grid-section');
+  const coming = document.getElementById('catalog-coming');
+  const comingName = document.getElementById('coming-cat-name');
+  const filters = document.getElementById('price-filters');
+  const pdfWrap = document.getElementById('pdf-viewer-wrap');
+  const pdfIframe = document.getElementById('pdf-iframe');
+  const pdfDownload = document.getElementById('pdf-download-link');
+
+  if (!catalog) {
+    section.style.display = 'none';
+    filters.style.display = 'none';
+    coming.style.display = 'block';
+    const catNames = {
+      cat2: 'Sandalias 26', cat3: 'Spring 26 — Adidas · Puma · Reebok',
+      cat4: 'Caballeros 25 — Hush Puppies', cat5: 'Urbano Primavera-Verano 2026',
+      cat6: 'Botas New Collection'
+    };
+    const catLabel = catNames[catalogKey] || 'Catálogo';
+    comingName.textContent = catLabel;
+    if (pdfPath && pdfWrap) {
+      pdfWrap.style.display = 'block';
+      pdfIframe.src = pdfPath;
+      pdfDownload.href = pdfPath;
+      const waText = encodeURIComponent(`Hola Hoja Urbana 👠 Estoy viendo el catálogo *${catLabel}* y me interesa un modelo. ¿Me puedes ayudar? Quiero apartarlo con el 10% de anticipo 🙌`);
+      const waBtn = document.getElementById('pdf-wa-link');
+      if (waBtn) waBtn.href = `https://wa.me/522211893908?text=${waText}`;
+    } else if (pdfWrap) {
+      pdfWrap.style.display = 'none';
+    }
+    return;
+  }
+
+  section.style.display = 'block';
+  filters.style.display = 'block';
+  coming.style.display = 'none';
+  title.innerHTML = catalog.name.replace('Colección ', 'Colección <em>').replace(/(\d{4})/, '$1</em>');
+
+  const filtered = type === 'all' ? catalog.products : catalog.products.filter(p => p.cat === type);
+  label.textContent = filtered.length + ' modelos disponibles';
+  grid.innerHTML = '';
+
+  filtered.forEach((p, i) => {
+    const waMsg = encodeURIComponent(`Hola Hoja Urbana 👠 Vi el catálogo Price Shoes (${catalog.name}) y me interesa el modelo *${p.name} ${p.color}* (ID: ${p.id}) — Precio: ${p.precio}. ¿Está disponible? Me gustaría apartarlo con el 10% de anticipo 🙌`);
+    const card = document.createElement('div');
+    card.className = 'price-card';
+    card.style.cssText = 'opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:' + Math.min(i,8)*0.04 + 's';
+    const hasBadge = p.badge ? `<div class="pc-badge">${p.badge}</div>` : '';
+    card.innerHTML = `
+      <div class="price-card__img">
+        <img src="https://imagenesdigitales.priceshoes.com.mx/catalogimages/${p.id}_1.jpg" alt="${p.name}" loading="lazy"
+          onerror="this.parentElement.innerHTML='<div class=price-coming><div class=price-coming-icon>${p.cat==='tenis'?'👟':'👠'}</div>${p.color}</div>'" />
+        ${hasBadge}
+      </div>
+      <div class="price-card__info">
+        <div class="price-card__id">ID ${p.id} · Thalia Sodi</div>
+        <div class="price-card__name">${p.name}</div>
+        <div class="price-card__desc">${p.color} · ${p.desc}</div>
+        <div class="price-card__price">${p.precio} <span style="font-size:10px;font-weight:400;color:rgba(250,248,245,.35);margin-left:6px">enganche ${p.eng}</span></div>
+      </div>
+      <div class="price-card__overlay">
+        <a class="price-card__btn" href="https://wa.me/${WA_PS}?text=${waMsg}" target="_blank">${WA_SVG2} Apartar ahora</a>
+      </div>`;
+    grid.appendChild(card);
+    setTimeout(() => { card.style.opacity='1'; card.style.transform='translateY(0)'; }, i * 30);
+  });
 }
 
-// Render products
-const grid = document.getElementById("products-grid");
-PRODUCTS.forEach((p, i) => grid.appendChild(buildCard(p, i)));
-
-// Scroll reveal
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add("visible");
-      io.unobserve(e.target);
-    }
+// Catalog sub-tab switching
+document.querySelectorAll('.csb').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.csb').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCatalog = btn.dataset.catalog;
+    currentType = 'all';
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    const allBtn = document.querySelector('.pf-btn[data-cat="all"]');
+    if (allBtn) allBtn.classList.add('active');
+    
+    const pdfPath = btn.dataset.pdf || '';
+    renderPriceGrid(currentCatalog, 'all', pdfPath);
+    document.getElementById('cat-subtabs').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
-}, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+});
 
-document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+// Type filter buttons
+document.querySelectorAll('.pf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentType = btn.dataset.cat;
+    renderPriceGrid(currentCatalog, currentType);
+  });
+});
+
+// Badge styles
+const badgeStyle = document.createElement('style');
+badgeStyle.textContent = `.pc-badge{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--white);font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;z-index:2;max-width:100px;text-align:center;line-height:1.3}`;
+document.head.appendChild(badgeStyle);
+
+// Initial render
+renderPriceGrid('thalia', 'all');
+
+const WA_PS = '522211893908';
+const PS_IMG = id => `https://imagenesdigitales.priceshoes.com.mx/catalogimages/${id}_1.jpg`;
+const WA_SVG2 = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>`;
+
+const THALIA = [
+  // FLATS
+  { id:'1255985', name:'Flat Diamonds', color:'Nude', cat:'flat', precio:'$675', eng:'$75', desc:'Textil malla c/pedrería · Tallas 22-27', badge:'' },
+  // TACONES STILETTO
+  { id:'1257432', name:'Stiletto Pedrería', color:'Plateado', cat:'tacon', precio:'$885', eng:'$98', desc:'Sint. mica c/pedrería · 7cm · Tallas 22-27', badge:'✨ New Collection' },
+  { id:'1255908', name:'Stiletto Napa Metálica', color:'Plateado', cat:'tacon', precio:'$729', eng:'$81', desc:'Napa metálica · 9.5cm · Tallas 23-27', badge:'' },
+  { id:'1255877', name:'Slingback Glitter', color:'Plateado', cat:'tacon', precio:'$675', eng:'$75', desc:'Metálico/glitter · 9.5cm · Tallas 22-27', badge:'' },
+  { id:'1255986', name:'Slingback Charol Corrugado', color:'Negro', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol corrugado · 7.5cm · Tallas 22-27', badge:'' },
+  { id:'1255909', name:'Stiletto Lazo Clásico', color:'Negro', cat:'tacon', precio:'$729', eng:'$81', desc:'Tipo charol · 9cm · Tallas 23-27', badge:'Be Sexy' },
+  { id:'1255887', name:'Stiletto Animal Print', color:'Café/Negro', cat:'tacon', precio:'$699', eng:'$77', desc:'Tipo satín · 9cm · Tallas 23-27', badge:'Animal Print' },
+  { id:'1031556', name:'Stiletto Clásico', color:'Negro', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol · Tallas 22-27', badge:'Love Heels' },
+  { id:'1031555', name:'Stiletto Clásico', color:'Rojo', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol · 10.5cm · Tallas 22-27', badge:'Love Heels' },
+  { id:'1257263', name:'Stiletto Lycra', color:'Negro', cat:'tacon', precio:'$675', eng:'$75', desc:'Textil licra · 8.5cm · Tallas 23-27', badge:'' },
+  { id:'1257264', name:'Mule Charol', color:'Nude', cat:'tacon', precio:'$675', eng:'$75', desc:'Tipo charol · 9cm · Tallas 22-26', badge:'' },
+  // SANDALIAS
+  { id:'1203196', name:'Mule Pedrería', color:'Gris', cat:'sandalia', precio:'$559', eng:'$62', desc:'Textil satín c/pedrería · 8.5cm · Tallas 23-27', badge:'' },
+  { id:'1189893', name:'Slingback Moño Pedrería', color:'Nude', cat:'sandalia', precio:'$589', eng:'$65', desc:'Sint. mica c/pedrería · 8.5cm · Tallas 22-27', badge:'Detalles con pedrería' },
+  { id:'1191711', name:'Slingback Pedrería', color:'Nude', cat:'sandalia', precio:'$575', eng:'$64', desc:'Sint. mica c/pedrería · 9cm · Tallas 22-27', badge:'' },
+  { id:'1191780', name:'Sandalia Bloque Pedrería', color:'Negro', cat:'sandalia', precio:'$405', eng:'$45', desc:'Tipo napa c/pedrería · 9cm · Tallas 23-27', badge:'Trendy Heels' },
+  { id:'1191781', name:'Sandalia Bloque Pedrería', color:'Plateado', cat:'sandalia', precio:'$629', eng:'$70', desc:'Tipo napa metalica c/pedrería · 10cm · Tallas 23-27', badge:'Trendy Heels' },
+  { id:'1187967', name:'Sandalia Moño Espejo', color:'Plateado', cat:'sandalia', precio:'$589', eng:'$65', desc:'Sint. espejo/mica · 6cm · Tallas 22-27', badge:'Be Sexy' },
+  { id:'1114988', name:'Sandalia Cuadrada Stone', color:'Nude', cat:'sandalia', precio:'$625', eng:'$69', desc:'Tipo charol/mica · 6cm · Tallas 22-26', badge:'Stone Collection' },
+  { id:'1188782', name:'Sandalia Piedras Stone', color:'Rosa palo', cat:'sandalia', precio:'$629', eng:'$70', desc:'Tipo charol c/pedrería · 6cm · Tallas 22-26', badge:'Stone Collection' },
+  { id:'1189845', name:'Mule Metálica Dorada', color:'Dorado', cat:'sandalia', precio:'$559', eng:'$62', desc:'Tipo napa metálica · 7cm · Tallas 23-27', badge:'' },
+  // BOTAS
+  { id:'1188778', name:'Bota Cadenas Actitud', color:'Rojo', cat:'bota', precio:'$839', eng:'$93', desc:'Tipo charol · 11cm · Tallas 22-27', badge:'Moda con Actitud' },
+  { id:'1189891', name:'Bota Studs Transparente', color:'Negro/Humo', cat:'bota', precio:'$535', eng:'$59', desc:'Sint. mica · 9.5cm · Tallas 22-27', badge:'Moda con Actitud' },
+  { id:'1139477', name:'Bota Cristales STONES', color:'Rosa', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · 11cm · Tallas 23-27', badge:'40% Descuento 🔥' },
+  { id:'1132894', name:'Bota Cristales STONES', color:'Negro', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · 11cm · Tallas 22-27', badge:'40% Descuento 🔥' },
+  { id:'1132895', name:'Bota Cristales STONES', color:'Plateado', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · Tallas 22-27', badge:'40% Descuento 🔥' },
+  { id:'1141856', name:'Botín Estoperoles', color:'Negro', cat:'bota', precio:'$1,065', eng:'$118', desc:'Tipo ante c/estoperoles · 11cm · Tallas 22-26', badge:'30% Descuento 🔥' },
+  { id:'1090105', name:'Botín Cristales Nude', color:'Nude', cat:'bota', precio:'$839', eng:'$93', desc:'Sint. mica c/pedrería · 11cm', badge:'40% Descuento 🔥' },
+  { id:'1141456', name:'Botín Cristales', color:'Negro', cat:'bota', precio:'$839', eng:'$93', desc:'Sint. mica c/pedrería · 11cm · Tallas 22-27', badge:'40% Descuento 🔥' },
+  { id:'1141457', name:'Botín Largo Cristales', color:'Nude', cat:'bota', precio:'$1,175', eng:'$130', desc:'Sint. mica c/pedrería · 9.5cm · Tallas 22-26', badge:'40% Descuento 🔥' },
+  { id:'1224192', name:'Bota Clásica Napa', color:'Café', cat:'bota', precio:'$1,149', eng:'$127', desc:'Tipo napa antiderrapante · 9.5cm · Tallas 23-27', badge:'Trendy Booties' },
+  { id:'1224193', name:'Bota Clásica Napa', color:'Negro', cat:'bota', precio:'$1,149', eng:'$127', desc:'Tipo napa antiderrapante · 9.5cm · Tallas 23-27', badge:'Trendy Booties' },
+  { id:'1224191', name:'Bota Larga Napa', color:'Negro', cat:'bota', precio:'$1,165', eng:'$129', desc:'Tipo napa · 9cm · Tallas 23-27', badge:'Large Boots' },
+  { id:'1141789', name:'Bota Larga con Hebillas', color:'Negro', cat:'bota', precio:'$1,025', eng:'$113', desc:'Tipo napa · 11.5cm · Tallas 23-27', badge:'Large Boots' },
+  // TENIS
+  { id:'1116427', name:'Tenis Clásico Thalia', color:'Blanco', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1184894', name:'Tenis Clásico Thalia', color:'Beige', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116426', name:'Tenis Clásico Thalia', color:'Beige/Café', cat:'tenis', precio:'$839', eng:'$93', desc:'Girly Style · Tallas 22-27', badge:'Girly Style' },
+  { id:'1248758', name:'Tenis Street Glam', color:'Beige/Rosa', cat:'tenis', precio:'$559', eng:'$62', desc:'Street Glam · Modelo Exclusivo · Tallas 22-27', badge:'Street Glam' },
+  { id:'1248251', name:'Tenis Street Glam', color:'Gris', cat:'tenis', precio:'$559', eng:'$62', desc:'Street Glam · Tallas 23-27', badge:'Street Glam' },
+  { id:'1248250', name:'Tenis Animal Print', color:'Leopardo', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 23-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1248759', name:'Tenis Urban Style', color:'Verde', cat:'tenis', precio:'$629', eng:'$70', desc:'Urban Style · Modelo Exclusivo · Tallas 22-27', badge:'Urban Style' },
+  { id:'1248761', name:'Tenis Urban Style', color:'Rosa Neón', cat:'tenis', precio:'$839', eng:'$93', desc:'Urban Style · Modelo Exclusivo · Tallas 22-27', badge:'Urban Style' },
+  { id:'1248249', name:'Tenis Lifestyle', color:'Menta', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ Modelo Exclusivo' },
+  { id:'1248248', name:'Tenis Lifestyle', color:'Cielo', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ Modelo Exclusivo' },
+  { id:'1092389', name:'Tenis Street Glam', color:'Blanco/Rosa', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Street Glam' },
+  { id:'1248756', name:'Tenis Platform Dorado', color:'Blanco', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1248387', name:'Tenis Animal Chunky', color:'Blanco/Animal', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ Modelo Exclusivo' },
+  { id:'1150355', name:'Tenis Chunky', color:'Negro/Blanco', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116431', name:'Tenis Mezclilla', color:'Blanco/Mezclilla', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-28', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116912', name:'Tenis THALIA Bold', color:'Blanco/Negro', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'The New Urban' },
+  { id:'1150354', name:'Tenis Listón Satín', color:'Blanco/Azul', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Sneakers Cool' },
+  { id:'1248388', name:'Tenis Listón Satín', color:'Negro', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Sneakers Cool' },
+  { id:'1184880', name:'Tenis Shinne Shoes', color:'Blanco/Rosa', cat:'tenis', precio:'$699', eng:'$77', desc:'Brillos c/pedrería · Modelo Exclusivo · Tallas 22-27', badge:'Shinne Shoes ✨' },
+  { id:'1184881', name:'Tenis Shinne Shoes', color:'Blanco/Gris', cat:'tenis', precio:'$629', eng:'$70', desc:'Brillos c/pedrería · Modelo Exclusivo · Tallas 22-27', badge:'Shinne Shoes ✨' },
+  { id:'1116428', name:'Slip-On Brillos', color:'Beige', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116429', name:'Slip-On Brillos', color:'Negro', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116423', name:'Tenis Chunky Brillos', color:'Negro', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1184892', name:'Tenis Chunky', color:'Gris', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1248753', name:'Tenis Chunky Sport', color:'Azul', cat:'tenis', precio:'$465', eng:'$52', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1117209', name:'Tenis New Urban', color:'Blanco', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'The New Urban' },
+  { id:'1248332', name:'Tenis New Urban', color:'Negro', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-27', badge:'The New Urban' },
+  { id:'1184574', name:'Tenis Louis Platform', color:'Negro', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116390', name:'Tenis Louis Platform', color:'Blanco', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Ultraligero · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1184575', name:'Tenis Louis Multicolor', color:'Blanco/Multicolor', cat:'tenis', precio:'$489', eng:'$54', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1065034', name:'Tenis Air Sport', color:'Negro', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Memory Foam · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'1116931', name:'Tenis High Top', color:'Blanco', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Ultraligero · Tallas 22-27', badge:'⭐ Modelo Exclusivo' },
+  { id:'872135',  name:'Tenis Chunky New Trend', color:'Blanco', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Memory Foam · Tallas 22-27', badge:'New Trend' },
+  { id:'1184879', name:'Tenis Chunky New Trend', color:'Rosa', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'New Trend' },
+  { id:'1184886', name:'Tenis Runner Plata/Verde', color:'Plata/Verde', cat:'tenis', precio:'$1,049', eng:'$116', desc:'Modelo Exclusivo · Antiderrapante · Tallas 22-27', badge:'Cool Sneakers' },
+  { id:'1248381', name:'Tenis Runner Premium', color:'Beige', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Memory Foam · Tallas 22-27', badge:'Cool Sneakers' },
+];
+
+let currentCat = 'all';
+
+function renderPriceGrid(cat) {
+  const grid = document.getElementById('price-grid');
+  const label = document.getElementById('price-count-label');
+  const filtered = cat === 'all' ? THALIA : THALIA.filter(p => p.cat === cat);
+  label.textContent = filtered.length + ' modelos disponibles';
+  grid.innerHTML = '';
+
+  filtered.forEach((p, i) => {
+    const waMsg = encodeURIComponent(`Hola Hoja Urbana 👠 Vi el catálogo Price Shoes en su página y me interesa el modelo *${p.name} ${p.color}* (ID: ${p.id}) — Precio: ${p.precio}. ¿Está disponible? Me gustaría apartarlo con el 10% de anticipo 🙌`);
+    const card = document.createElement('div');
+    card.className = 'price-card';
+    card.style.cssText = 'opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:' + Math.min(i,8)*0.04 + 's';
+    const hasBadge = p.badge ? `<div class="pc-badge">${p.badge}</div>` : '';
+    card.innerHTML = `
+      <div class="price-card__img">
+        <img src="${PS_IMG(p.id)}" alt="${p.name}" loading="lazy"
+          onerror="this.parentElement.innerHTML='<div class=price-coming><div class=price-coming-icon>👠</div>${p.cat==='tenis'?'👟':'👠'}<br/>${p.color}</div>'" />
+        ${hasBadge}
+      </div>
+      <div class="price-card__info">
+        <div class="price-card__id">ID ${p.id} · Thalia Sodi</div>
+        <div class="price-card__name">${p.name}</div>
+        <div class="price-card__desc">${p.color} · ${p.desc}</div>
+        <div class="price-card__price">${p.precio} <span style="font-size:10px;font-weight:400;color:rgba(250,248,245,.35);margin-left:6px">/ $${p.eng} enganche</span></div>
+      </div>
+      <div class="price-card__overlay">
+        <a class="price-card__btn" href="https://wa.me/${WA_PS}?text=${waMsg}" target="_blank">${WA_SVG2} Apartar ahora</a>
+      </div>`;
+    grid.appendChild(card);
+    requestAnimationFrame(() => { card.style.opacity='1'; card.style.transform='translateY(0)'; });
+  });
+}
+
+// Filter buttons
+document.querySelectorAll('.pf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    renderPriceGrid(currentCat);
+    document.getElementById('price-filters').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+});
+
+// Badge styles injected
+const badgeStyle = document.createElement('style');
+badgeStyle.textContent = `.pc-badge { position:absolute; top:12px; right:12px; background:var(--gold); color:var(--white); font-size:8px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:3px; z-index:2; }`;
+document.head.appendChild(badgeStyle);
+
+renderPriceGrid('all');
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.card, .price-card').forEach((el,i) => {
+  el.style.cssText += 'opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;transition-delay:' + (i%4)*0.07 + 's';
+  io.observe(el);
+});
 </script>
 </body>
 </html>
