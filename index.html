@@ -8,6 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<!-- Firebase CDN compat (no requiere type=module) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <style>
 :root {
   --cream:    #FAF8F5;
@@ -68,18 +71,13 @@ a { text-decoration: none; color: inherit; }
 .nav__cta svg { width: 15px; height: 15px; fill: currentColor; }
 
 /* ── CATEGORY TABS ── */
-.cat-tabs {
-  border-top: 1px solid var(--border);
-  background: var(--cream);
-}
+.cat-tabs { border-top: 1px solid var(--border); background: var(--cream); }
 .cat-tabs__inner {
   display: flex; align-items: stretch;
   max-width: 1400px; margin: 0 auto;
-  padding: 0 48px; gap: 0; overflow-x: auto;
-  scrollbar-width: none;
+  padding: 0 48px; gap: 0; overflow-x: auto; scrollbar-width: none;
 }
 .cat-tabs__inner::-webkit-scrollbar { display: none; }
-
 .cat-tab {
   display: flex; align-items: center; gap: 8px;
   padding: 0 28px; height: 48px;
@@ -92,31 +90,16 @@ a { text-decoration: none; color: inherit; }
 }
 .cat-tab:hover { color: var(--onyx); }
 .cat-tab.active { color: var(--onyx); border-bottom-color: var(--onyx); }
-.cat-tab.active-gold { color: var(--gold); border-bottom-color: var(--gold); }
 .cat-tab__icon { font-size: 14px; }
-.cat-tab__badge {
-  font-size: 8px; font-weight: 700; letter-spacing: .06em;
-  background: var(--gold); color: var(--white);
-  padding: 2px 6px; border-radius: 999px; text-transform: uppercase;
-}
-.cat-tab__new {
-  font-size: 8px; font-weight: 700;
-  background: #25D366; color: var(--white);
-  padding: 2px 6px; border-radius: 999px;
-}
-.cat-tab__soon {
-  font-size: 8px; font-weight: 700;
-  background: var(--muted); color: var(--white);
-  padding: 2px 6px; border-radius: 999px; opacity: .7;
-}
+.cat-tab__badge { font-size: 8px; font-weight: 700; letter-spacing: .06em; background: var(--gold); color: var(--white); padding: 2px 6px; border-radius: 999px; text-transform: uppercase; }
+.cat-tab__new { font-size: 8px; font-weight: 700; background: #25D366; color: var(--white); padding: 2px 6px; border-radius: 999px; }
+.cat-tab__soon { font-size: 8px; font-weight: 700; background: var(--muted); color: var(--white); padding: 2px 6px; border-radius: 999px; opacity: .7; }
 
 /* ── CATALOG COVER CARDS ── */
 .cat-cover-card {
   background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   border: 1px solid rgba(250,248,245,0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
+  border-radius: 16px; overflow: hidden; cursor: pointer;
   transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s;
   position: relative;
 }
@@ -125,14 +108,8 @@ a { text-decoration: none; color: inherit; }
   border-color: rgba(184,147,106,0.5);
   box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(184,147,106,0.2);
 }
-.cat-cover-card__imgs {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 2px; aspect-ratio: 1; background: #080807; overflow: hidden;
-}
-.cat-cover-card__imgs img {
-  width:100%; height:100%; object-fit:cover; aspect-ratio:1;
-  transition: transform .5s ease;
-}
+.cat-cover-card__imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; aspect-ratio: 1; background: #080807; overflow: hidden; }
+.cat-cover-card__imgs img { width:100%; height:100%; object-fit:cover; aspect-ratio:1; transition: transform .5s ease; }
 .cat-cover-card:hover .cat-cover-card__imgs img { transform: scale(1.06); }
 .cat-cover-card__body { padding: 18px 20px 20px; }
 .cat-cover-card__tags { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
@@ -148,28 +125,22 @@ a { text-decoration: none; color: inherit; }
 
 /* ── WATERMARK ── */
 .watermark {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+  position: fixed; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 0;
-  pointer-events: none;
-  width: min(340px, 60vw);
-  opacity: .12;
-  filter: grayscale(100%) brightness(2);
-  user-select: none;
+  z-index: 0; pointer-events: none;
+  width: min(340px, 60vw); opacity: .12;
+  filter: grayscale(100%) brightness(2); user-select: none;
 }
 
 /* ── SECTIONS ── */
 .cat-section { display: none; }
 .cat-section.active { display: block; }
 
-/* ── HERO (Hoja Urbana) ── */
+/* ── HERO ── */
 .hero {
   max-width: 1400px; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 480px; padding: 0 48px; gap: 48px;
-  align-items: center; padding-top: 56px; padding-bottom: 56px;
+  min-height: 480px; padding: 56px 48px; gap: 48px; align-items: center;
 }
 .hero__eyebrow { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
 .hero__title { font-family: var(--font-display); font-size: clamp(42px, 5vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 20px; }
@@ -191,43 +162,25 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase; border-radius: 2px; transition: border-color .2s, background .2s;
 }
 .btn-ghost:hover { border-color: var(--onyx); background: rgba(12,12,11,.04); }
-.hero__img {
-  aspect-ratio: 4/5; background: var(--cream-2);
-  border-radius: 4px; overflow: hidden; position: relative;
-}
+.hero__img { aspect-ratio: 4/5; background: var(--cream-2); border-radius: 4px; overflow: hidden; }
 .hero__img img { width: 100%; height: 100%; object-fit: cover; }
-.hero__img-placeholder {
-  width: 100%; height: 100%; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 12px;
-  font-family: var(--font-display); font-size: 80px; color: var(--border);
-}
+.hero__img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 80px; color: var(--border); }
 
 /* ── PRODUCT GRID ── */
 .section-header { padding: 48px 48px 28px; max-width: 1400px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; }
 .section-header h2 { font-family: var(--font-display); font-size: 36px; font-weight: 300; }
 .section-header h2 em { font-style: italic; color: var(--gold); }
 .section-count { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-
 .grid-wrapper { max-width: 1400px; margin: 0 auto; padding: 0 48px 80px; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 2px; }
-
 .card { position: relative; cursor: pointer; overflow: hidden; background: var(--cream-2); }
 .card__img { aspect-ratio: 3/4; overflow: hidden; position: relative; background: #EDEAE4; }
 .card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-expo); }
 .card:hover .card__img img { transform: scale(1.05); }
 .card__id { position: absolute; top: 14px; left: 14px; background: rgba(250,248,245,.9); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 10px; }
-.card__overlay {
-  position: absolute; inset: 0; background: rgba(12,12,11,.75);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity .3s var(--ease-smooth);
-}
+.card__overlay { position: absolute; inset: 0; background: rgba(12,12,11,.75); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s var(--ease-smooth); }
 .card:hover .card__overlay { opacity: 1; }
-.card__wa {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 22px; background: var(--wa-green); color: var(--white);
-  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  border-radius: 2px; transition: opacity .2s;
-}
+.card__wa { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; background: var(--wa-green); color: var(--white); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; }
 .card__wa svg { width: 15px; height: 15px; fill: currentColor; }
 .card__info { padding: 14px 16px 18px; }
 .card__name { font-family: var(--font-display); font-size: 18px; font-weight: 400; margin-bottom: 4px; }
@@ -235,98 +188,53 @@ a { text-decoration: none; color: inherit; }
 .card__price { font-size: 14px; font-weight: 600; color: var(--onyx); letter-spacing: .04em; }
 .card__placeholder { aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center; background: #EDEAE4; font-family: var(--font-display); font-size: 48px; color: var(--border); }
 
-/* ── PRICE SHOES SECTION ── */
-.price-hero {
-  background: var(--onyx); padding: 72px 48px 56px;
-  text-align: center; position: relative; overflow: hidden;
-}
-.price-hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(184,147,106,.08) 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 50%, rgba(184,147,106,.05) 0%, transparent 60%);
-}
+/* ── PRICE SHOES ── */
+.price-hero { background: var(--onyx); padding: 72px 48px 56px; text-align: center; position: relative; overflow: hidden; }
+.price-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(184,147,106,.08) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(184,147,106,.05) 0%, transparent 60%); }
 .price-hero__inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
 .price-hero__eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
 .price-hero__title { font-family: var(--font-display); font-size: clamp(40px, 6vw, 72px); font-weight: 300; color: var(--cream); line-height: 1.05; margin-bottom: 20px; }
 .price-hero__title em { font-style: italic; color: var(--gold); }
 .price-hero__sub { font-size: 14px; color: rgba(250,248,245,.5); line-height: 1.7; margin-bottom: 32px; }
 .price-hero__badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase;
-}
+.badge { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 .badge-gold { background: var(--gold); color: var(--white); }
 .badge-outline { border: 1px solid rgba(250,248,245,.2); color: rgba(250,248,245,.6); }
-
-/* How it works */
-.how-works {
-  background: var(--charcoal);
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-}
-.how-step {
-  padding: 40px 32px; text-align: center;
-  background: var(--onyx); transition: background .2s;
-}
+.how-works { background: var(--charcoal); display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+.how-step { padding: 40px 32px; text-align: center; background: var(--onyx); transition: background .2s; }
 .how-step:hover { background: #151513; }
 .how-step__num { font-family: var(--font-display); font-size: 48px; font-weight: 300; color: var(--gold); opacity: .35; line-height: 1; margin-bottom: 14px; }
 .how-step__title { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: 10px; }
 .how-step__desc { font-size: 12px; color: rgba(250,248,245,.4); line-height: 1.6; }
-
-/* Price grid */
-.price-grid-section { background: var(--onyx); padding: 0 48px 80px; }
-.price-section-hdr { max-width: 1400px; margin: 0 auto; padding: 40px 0 28px; display: flex; align-items: baseline; justify-content: space-between; }
-.price-section-hdr h3 { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--cream); }
-.price-section-hdr h3 em { font-style: italic; color: var(--gold); }
-.price-section-hdr span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,248,245,.3); }
 .price-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 2px; max-width: 1400px; margin: 0 auto; }
-
 .price-card { background: #141412; position: relative; overflow: hidden; cursor: pointer; transition: transform .3s var(--ease-expo); }
 .price-card:hover { transform: scale(1.02); z-index: 2; }
 .price-card__img { aspect-ratio: 3/4; background: #1C1C1A; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .price-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease-expo); }
 .price-card:hover .price-card__img img { transform: scale(1.06); }
-.price-coming {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 10px; color: rgba(250,248,245,.15); font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; text-align: center; padding: 20px;
-}
+.price-coming { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(250,248,245,.15); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; text-align: center; padding: 20px; }
 .price-coming-icon { font-size: 36px; opacity: .3; margin-bottom: 4px; }
 .price-card__info { padding: 14px 16px 18px; }
 .price-card__id { font-size: 9px; letter-spacing: .18em; color: rgba(250,248,245,.25); text-transform: uppercase; margin-bottom: 4px; }
 .price-card__name { font-family: var(--font-display); font-size: 17px; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
 .price-card__desc { font-size: 11px; color: rgba(250,248,245,.35); margin-bottom: 10px; line-height: 1.4; }
 .price-card__price { font-size: 14px; font-weight: 600; color: var(--gold); }
-.price-card__overlay {
-  position: absolute; inset: 0; background: rgba(12,12,11,.85);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity .3s;
-}
+.price-card__overlay { position: absolute; inset: 0; background: rgba(12,12,11,.85); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s; }
 .price-card:hover .price-card__overlay { opacity: 1; }
-.price-card__btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 22px; background: var(--wa-green); color: var(--white);
-  font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  border-radius: 2px;
-}
+.price-card__btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; background: var(--wa-green); color: var(--white); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; }
 .price-card__btn svg { width: 15px; height: 15px; fill: currentColor; }
+.price-filters { background: #111110; border-bottom: 1px solid rgba(250,248,245,.06); position: sticky; top: 120px; z-index: 50; }
+.price-filters__inner { display: flex; gap: 4px; max-width: 1400px; margin: 0 auto; padding: 12px 48px; overflow-x: auto; scrollbar-width: none; }
+.price-filters__inner::-webkit-scrollbar { display: none; }
+.pf-btn { flex-shrink: 0; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(250,248,245,.12); background: transparent; color: rgba(250,248,245,.4); font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+.pf-btn:hover { border-color: var(--gold); color: var(--gold); }
+.pf-btn.active { background: var(--gold); border-color: var(--gold); color: var(--white); }
 
-/* ── COMING SOON SECTIONS ── */
-.coming-section {
-  min-height: 60vh; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; padding: 80px 48px;
-  text-align: center; position: relative; overflow: hidden;
-}
+/* ── COMING SOON ── */
+.coming-section { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 48px; text-align: center; position: relative; overflow: hidden; }
 .coming-section.dark { background: var(--onyx); }
 .coming-section.light { background: var(--cream); }
-.coming-bg {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-size: clamp(120px, 20vw, 240px); opacity: .04; pointer-events: none;
-  font-family: var(--font-display); font-weight: 600; letter-spacing: -.02em;
-  user-select: none;
-}
+.coming-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(120px, 20vw, 240px); opacity: .04; pointer-events: none; font-family: var(--font-display); font-weight: 600; user-select: none; }
 .coming-section__eyebrow { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; position: relative; }
 .coming-section__title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 16px; position: relative; }
 .coming-section.dark .coming-section__title { color: var(--cream); }
@@ -334,77 +242,27 @@ a { text-decoration: none; color: inherit; }
 .coming-section__sub { font-size: 14px; line-height: 1.7; max-width: 440px; margin: 0 auto 32px; position: relative; }
 .coming-section.dark .coming-section__sub { color: rgba(250,248,245,.4); }
 .coming-section.light .coming-section__sub { color: var(--muted); }
-.coming-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 24px; border-radius: 999px; font-size: 11px; font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; position: relative;
-}
+.coming-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; position: relative; }
 .coming-pill.dark-pill { background: rgba(250,248,245,.08); color: rgba(250,248,245,.5); border: 1px solid rgba(250,248,245,.1); }
 .coming-pill.light-pill { background: var(--cream-2); color: var(--muted); border: 1px solid var(--border); }
-.coming-notify {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 24px; background: var(--wa-green); color: var(--white);
-  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  border-radius: 2px; position: relative; transition: opacity .2s;
-}
+.coming-notify { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; background: var(--wa-green); color: var(--white); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; border-radius: 2px; position: relative; transition: opacity .2s; }
 .coming-notify svg { width: 16px; height: 16px; fill: currentColor; }
 .coming-notify:hover { opacity: .88; }
-
-/* Maquillaje preview cards */
-.preview-grid {
-  display: flex; gap: 12px; margin: 32px 0; position: relative; flex-wrap: wrap; justify-content: center;
-}
-.preview-card {
-  width: 120px; height: 160px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 36px; position: relative; overflow: hidden;
-  transform: rotate(var(--r, 0deg));
-  transition: transform .3s var(--ease-expo);
-}
+.preview-grid { display: flex; gap: 12px; margin: 32px 0; position: relative; flex-wrap: wrap; justify-content: center; }
+.preview-card { width: 120px; height: 160px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; overflow: hidden; transform: rotate(var(--r, 0deg)); transition: transform .3s var(--ease-expo); }
 .preview-card:hover { transform: rotate(0deg) scale(1.06); z-index: 2; }
 .preview-card:nth-child(1) { --r: -4deg; background: #2D1B1B; }
 .preview-card:nth-child(2) { --r: 2deg; background: #1A1A2E; margin-top: 20px; }
 .preview-card:nth-child(3) { --r: -2deg; background: #1E1E1C; }
 .preview-card:nth-child(4) { --r: 3deg; background: #2A1728; margin-top: 10px; }
 
-/* WA float */
-.wa-float {
-  position: fixed; bottom: 28px; right: 28px; z-index: 999;
-  width: 58px; height: 58px; border-radius: 50%; background: var(--wa-green);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 32px rgba(37,211,102,.35);
-  transition: transform .2s, box-shadow .2s;
-}
+/* ── WA FLOAT ── */
+.wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 58px; height: 58px; border-radius: 50%; background: var(--wa-green); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(37,211,102,.35); transition: transform .2s, box-shadow .2s; }
 .wa-float:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(37,211,102,.45); }
 .wa-float svg { width: 28px; height: 28px; fill: var(--white); }
 
-/* ── CATALOG SUB-TABS ── */
-.cat-subtabs { background: #0C0C0B; border-bottom: 1px solid rgba(250,248,245,.08); }
-.cat-subtabs__inner { display: flex; gap: 2px; max-width: 1400px; margin: 0 auto; padding: 0 48px; overflow-x: auto; scrollbar-width: none; }
-.cat-subtabs__inner::-webkit-scrollbar { display: none; }
-.csb {
-  flex-shrink: 0; display: flex; align-items: center; gap: 8px;
-  padding: 16px 24px; border: none; border-bottom: 3px solid transparent;
-  background: transparent; color: rgba(250,248,245,.35);
-  font-family: var(--font-body); font-size: 12px; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
-  transition: all .2s; white-space: nowrap;
-}
-.csb:hover { color: rgba(250,248,245,.7); }
-.csb.active { color: var(--gold); border-bottom-color: var(--gold); }
-.csb__icon { font-size: 16px; }
-.csb__count { font-size: 9px; background: var(--gold); color: var(--white); padding: 2px 7px; border-radius: 999px; font-weight: 700; }
-.csb__soon { font-size: 8px; background: rgba(250,248,245,.1); color: rgba(250,248,245,.3); padding: 2px 7px; border-radius: 999px; font-weight: 600; }
-@media (max-width: 900px) { .cat-subtabs__inner { padding: 0 12px; } .csb { padding: 14px 14px; font-size: 10px; } }
-
-/* ── PRICE FILTERS ── */
-.price-filters { background: #111110; border-bottom: 1px solid rgba(250,248,245,.06); position: sticky; top: 120px; z-index: 50; }
-.price-filters__inner { display: flex; gap: 4px; max-width: 1400px; margin: 0 auto; padding: 12px 48px; overflow-x: auto; scrollbar-width: none; }
-.price-filters__inner::-webkit-scrollbar { display: none; }
-.pf-btn { flex-shrink: 0; padding: 7px 18px; border-radius: 999px; border: 1px solid rgba(250,248,245,.12); background: transparent; color: rgba(250,248,245,.4); font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
-.pf-btn:hover { border-color: var(--gold); color: var(--gold); }
-.pf-btn.active { background: var(--gold); border-color: var(--gold); color: var(--white); }
-@media (max-width: 900px) { .price-filters__inner { padding: 10px 16px; } }
+/* Badge tarjeta precio */
+.pc-badge { position:absolute; top:10px; right:10px; background:var(--gold); color:#fff; font-size:8px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:2px 7px; border-radius:3px; z-index:2; max-width:90px; text-align:center; line-height:1.3; }
 
 @media (max-width: 900px) {
   .nav__top { padding: 0 20px; }
@@ -415,8 +273,7 @@ a { text-decoration: none; color: inherit; }
   .section-header, .grid-wrapper { padding-left: 20px; padding-right: 20px; }
   .price-hero { padding: 56px 20px 48px; }
   .how-works { grid-template-columns: repeat(2, 1fr); }
-  .price-grid-section { padding: 0 20px 60px; }
-  .price-grid { grid-template-columns: repeat(2, 1fr); }
+  .price-filters__inner { padding: 10px 16px; }
   .coming-section { padding: 60px 20px; }
 }
 </style>
@@ -446,32 +303,19 @@ a { text-decoration: none; color: inherit; }
       Apartar ahora
     </a>
   </div>
-
-  <!-- CATEGORY TABS -->
   <div class="cat-tabs">
     <div class="cat-tabs__inner">
-      <div class="cat-tab active" data-tab="hoja">
-        <span class="cat-tab__icon">👠</span> Hoja Urbana
-      </div>
-      <div class="cat-tab" data-tab="price">
-        <span class="cat-tab__icon">📦</span> Price Shoes
-        <span class="cat-tab__badge">Catálogo</span>
-      </div>
-      <div class="cat-tab" data-tab="accesorios">
-        <span class="cat-tab__icon">🪴</span> Accesorios
-        <span class="cat-tab__new">Nuevo</span>
-      </div>
-      <div class="cat-tab" data-tab="maquillaje">
-        <span class="cat-tab__icon">💄</span> Maquillaje
-        <span class="cat-tab__soon">Pronto</span>
-      </div>
+      <div class="cat-tab active" data-tab="hoja"><span class="cat-tab__icon">👠</span> Hoja Urbana</div>
+      <div class="cat-tab" data-tab="price"><span class="cat-tab__icon">📦</span> Price Shoes <span class="cat-tab__badge">Catálogo</span></div>
+      <div class="cat-tab" data-tab="accesorios"><span class="cat-tab__icon">🪴</span> Accesorios <span class="cat-tab__new">Nuevo</span></div>
+      <div class="cat-tab" data-tab="maquillaje"><span class="cat-tab__icon">💄</span> Maquillaje <span class="cat-tab__soon">Pronto</span></div>
     </div>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════════
      TAB 1: HOJA URBANA
-     ═══════════════════════════════════ -->
+     ══════════════════════════════════════ -->
 <div class="cat-section active" id="tab-hoja">
 
   <div class="hero">
@@ -496,83 +340,46 @@ a { text-decoration: none; color: inherit; }
     <h2>Nuestra <em>colección</em></h2>
     <span class="section-count">10 modelos disponibles</span>
   </div>
+  <div class="grid-wrapper"><div class="grid" id="hoja-grid"></div></div>
 
-  <div class="grid-wrapper">
-    <div class="grid" id="hoja-grid"></div>
-  </div>
-
-  <!-- ¿POR QUÉ HOJA URBANA? -->
+  <!-- ¿POR QUÉ? -->
   <section style="background:var(--onyx);color:var(--cream);padding:80px 32px;">
     <div style="max-width:1360px;margin:0 auto;">
-      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:300;margin-bottom:56px;">
-        ¿Por qué elegir<br/><em style="font-style:italic;color:#D4AE8A;">Hoja Urbana?</em>
-      </h2>
+      <h2 style="font-family:var(--font-display);font-size:clamp(36px,5vw,64px);font-weight:300;margin-bottom:56px;">¿Por qué elegir<br/><em style="font-style:italic;color:#D4AE8A;">Hoja Urbana?</em></h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px 32px;">
-        <div>
-          <div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">01</div>
-          <div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Modelos en tendencia</div>
-          <div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Seleccionamos piezas urbanas, casuales y elegantes pensadas para mujeres de 15 a 45 años. Siempre al día con lo que se lleva.</div>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">02</div>
-          <div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Atención personalizada</div>
-          <div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Compra rápida y directa por WhatsApp. Te confirmamos talla, disponibilidad y precio al momento. Cero filas, cero estrés.</div>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">03</div>
-          <div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Aparta fácil</div>
-          <div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Asegura tu modelo con solo el 10% del total y liquida en 30 días, sin presión y con total flexibilidad.</div>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">04</div>
-          <div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Calidad premium</div>
-          <div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Cada par es seleccionado con criterio. Materiales, acabados y comodidad que se notan desde el primer paso.</div>
-        </div>
+        <div><div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">01</div><div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Modelos en tendencia</div><div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Seleccionamos piezas urbanas, casuales y elegantes pensadas para mujeres de 15 a 45 años. Siempre al día con lo que se lleva.</div></div>
+        <div><div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">02</div><div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Atención personalizada</div><div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Compra rápida y directa por WhatsApp. Te confirmamos talla, disponibilidad y precio al momento. Cero filas, cero estrés.</div></div>
+        <div><div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">03</div><div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Aparta fácil</div><div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Asegura tu modelo con solo el 10% del total y liquida en 30 días, sin presión y con total flexibilidad.</div></div>
+        <div><div style="font-family:var(--font-display);font-size:48px;font-weight:300;color:#B8936A;line-height:1;margin-bottom:16px;">04</div><div style="font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">Calidad premium</div><div style="font-size:13.5px;line-height:1.6;color:rgba(250,248,245,.6);">Cada par es seleccionado con criterio. Materiales, acabados y comodidad que se notan desde el primer paso.</div></div>
       </div>
     </div>
   </section>
 
   <!-- CONTACTO -->
   <div style="max-width:1360px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;border-bottom:1px solid var(--border);">
-    <div>
-      <h3 style="font-family:var(--font-display);font-size:clamp(28px,4vw,52px);font-weight:300;">
-        ¿Lista para<br/><em style="font-style:italic;color:#B8936A;">estrenar?</em>
-      </h3>
-    </div>
+    <h3 style="font-family:var(--font-display);font-size:clamp(28px,4vw,52px);font-weight:300;">¿Lista para<br/><em style="font-style:italic;color:#B8936A;">estrenar?</em></h3>
     <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-end;">
-      <a href="https://wa.me/522211893908" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);text-decoration:none;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
-        +52 221 189 3908
-      </a>
-      <a href="mailto:somoshojaurbana@gmail.com" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);text-decoration:none;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        somoshojaurbana@gmail.com
-      </a>
-      <a href="https://www.instagram.com/somoshojaurbana" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);text-decoration:none;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        @somoshojaurbana
-      </a>
-      <a href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20💚%20Quiero%20apartar%20un%20modelo.%20¿Me%20ayudas%20con%20talla%20y%20precio?" target="_blank"
-        style="display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:14px 28px;background:#25D366;color:#fff;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;text-decoration:none;">
+      <a href="https://wa.me/522211893908" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>+52 221 189 3908</a>
+      <a href="mailto:somoshojaurbana@gmail.com" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>somoshojaurbana@gmail.com</a>
+      <a href="https://www.instagram.com/somoshojaurbana" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@somoshojaurbana</a>
+      <a href="https://wa.me/522211893908?text=Hola%20Hoja%20Urbana%20💚%20Quiero%20apartar%20un%20modelo.%20¿Me%20ayudas%20con%20talla%20y%20precio?" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:6px;padding:14px 28px;background:#25D366;color:#fff;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
         Escríbeme ahora
       </a>
     </div>
   </div>
 
-  <!-- ═══════════════════ RESEÑAS ═══════════════════ -->
-
   <!-- BOTÓN FLOTANTE DE RESEÑAS -->
   <div id="reviews-fab" onclick="toggleReviews()"
-    style="position:fixed;bottom:90px;right:24px;z-index:999;
+    style="position:fixed;bottom:96px;right:24px;z-index:999;
            background:linear-gradient(135deg,#B8936A,#D4AE8A);
            color:#fff;padding:10px 18px;border-radius:999px;
            font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
            cursor:pointer;box-shadow:0 6px 24px rgba(184,147,106,0.45);
            display:flex;align-items:center;gap:8px;
            transition:transform .2s,box-shadow .2s;user-select:none;"
-    onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 10px 32px rgba(184,147,106,0.6)'"
-    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 24px rgba(184,147,106,0.45)'">
+    onmouseover="this.style.transform='scale(1.06)'"
+    onmouseout="this.style.transform='scale(1)'">
     <span style="font-size:15px;">⭐</span>
     <span>Reseñas</span>
     <span id="reviews-count-badge" style="background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:999px;font-size:10px;">0</span>
@@ -582,137 +389,77 @@ a { text-decoration: none; color: inherit; }
   <div id="reviews-drawer" style="position:fixed;top:0;right:-480px;width:min(460px,100vw);height:100vh;
        background:#111110;z-index:1000;overflow-y:auto;transition:right .35s cubic-bezier(.2,.8,.2,1);
        box-shadow:-8px 0 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;">
-
-    <!-- Header del drawer -->
     <div style="padding:28px 24px 20px;border-bottom:1px solid rgba(250,248,245,.08);flex-shrink:0;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
         <div>
           <div style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Lo que dicen nuestras clientas</div>
-          <h3 style="font-family:var(--font-display);font-size:28px;font-weight:300;color:var(--cream);margin:0;">
-            Reseñas <em style="font-style:italic;color:var(--gold-lt);">reales</em>
-          </h3>
+          <h3 style="font-family:var(--font-display);font-size:28px;font-weight:300;color:var(--cream);margin:0;">Reseñas <em style="font-style:italic;color:var(--gold-lt);">reales</em></h3>
         </div>
-        <button onclick="toggleReviews()"
-          style="background:rgba(250,248,245,.08);border:1px solid rgba(250,248,245,.12);
-                 color:var(--cream);width:36px;height:36px;border-radius:50%;
-                 font-size:16px;cursor:pointer;flex-shrink:0;">✕</button>
+        <button onclick="toggleReviews()" style="background:rgba(250,248,245,.08);border:1px solid rgba(250,248,245,.12);color:var(--cream);width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;">✕</button>
       </div>
     </div>
-
-    <!-- Botón nueva reseña -->
     <div style="padding:16px 24px;border-bottom:1px solid rgba(250,248,245,.06);flex-shrink:0;">
-      <button onclick="toggleReviewForm()"
-        style="width:100%;padding:12px;background:linear-gradient(135deg,rgba(184,147,106,0.15),rgba(184,147,106,0.05));
-               border:1px solid rgba(184,147,106,0.3);color:var(--gold);
-               border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.14em;
-               text-transform:uppercase;cursor:pointer;transition:background .2s;">
-        ✍️ Dejar mi reseña
-      </button>
-
-      <!-- Formulario nueva reseña (oculto por defecto) -->
+      <button onclick="toggleReviewForm()" style="width:100%;padding:12px;background:linear-gradient(135deg,rgba(184,147,106,0.15),rgba(184,147,106,0.05));border:1px solid rgba(184,147,106,0.3);color:var(--gold);border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;">✍️ Dejar mi reseña</button>
       <div id="review-form-wrap" style="display:none;margin-top:14px;">
         <div style="display:flex;gap:8px;margin-bottom:10px;">
-          <input id="rf-name" type="text" placeholder="Tu nombre" maxlength="40"
-            style="flex:1;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);
-                   border-radius:6px;color:var(--cream);font-size:12px;font-family:var(--font-body);outline:none;"
-            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='rgba(250,248,245,.12)'"/>
-          <select id="rf-product"
-            style="padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);
-                   border-radius:6px;color:rgba(250,248,245,.7);font-size:11px;font-family:var(--font-body);outline:none;">
-            <option value="Hoja Urbana">Hoja Urbana</option>
-            <option value="Thalia Sodi">Thalia Sodi</option>
-            <option value="Sandalias 26">Sandalias 26</option>
-            <option value="Spring 26">Spring 26</option>
-            <option value="Caballeros 25">Caballeros 25</option>
-            <option value="Urbano PV2026">Urbano PV2026</option>
-            <option value="Botas New Collection">Botas</option>
+          <input id="rf-name" type="text" placeholder="Tu nombre" maxlength="40" style="flex:1;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);border-radius:6px;color:var(--cream);font-size:12px;font-family:var(--font-body);outline:none;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='rgba(250,248,245,.12)'"/>
+          <select id="rf-product" style="padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);border-radius:6px;color:rgba(250,248,245,.7);font-size:11px;font-family:var(--font-body);outline:none;">
+            <option>Hoja Urbana</option>
+            <option>Thalia Sodi</option>
+            <option>Sandalias 26</option>
+            <option>Spring 26</option>
+            <option>Caballeros 25</option>
+            <option>Urbano PV2026</option>
+            <option>Botas New Collection</option>
           </select>
         </div>
-
-        <!-- Estrellas interactivas -->
         <div style="margin-bottom:10px;">
           <div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,245,.4);margin-bottom:6px;">Calificación</div>
           <div id="star-picker" style="display:flex;gap:4px;">
-            <span class="star-opt" data-val="1" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
-            <span class="star-opt" data-val="2" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
-            <span class="star-opt" data-val="3" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
-            <span class="star-opt" data-val="4" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
-            <span class="star-opt" data-val="5" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
+            <span class="star-opt" data-val="1" style="font-size:24px;cursor:pointer;color:#B8936A;">★</span>
+            <span class="star-opt" data-val="2" style="font-size:24px;cursor:pointer;color:#B8936A;">★</span>
+            <span class="star-opt" data-val="3" style="font-size:24px;cursor:pointer;color:#B8936A;">★</span>
+            <span class="star-opt" data-val="4" style="font-size:24px;cursor:pointer;color:#B8936A;">★</span>
+            <span class="star-opt" data-val="5" style="font-size:24px;cursor:pointer;color:#B8936A;">★</span>
           </div>
         </div>
-
-        <textarea id="rf-text" rows="3" placeholder="Cuéntanos tu experiencia... 💛" maxlength="280"
-          style="width:100%;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);
-                 border-radius:6px;color:var(--cream);font-size:12px;font-family:var(--font-body);
-                 outline:none;resize:none;box-sizing:border-box;margin-bottom:10px;"
-          onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='rgba(250,248,245,.12)'"></textarea>
-
-        <button onclick="submitReview()"
-          style="width:100%;padding:11px;background:var(--gold);color:#fff;
-                 border:none;border-radius:6px;font-size:11px;font-weight:700;
-                 letter-spacing:.14em;text-transform:uppercase;cursor:pointer;">
-          Publicar reseña ✦
-        </button>
+        <textarea id="rf-text" rows="3" placeholder="Cuéntanos tu experiencia... 💛" maxlength="280" style="width:100%;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);border-radius:6px;color:var(--cream);font-size:12px;font-family:var(--font-body);outline:none;resize:none;box-sizing:border-box;margin-bottom:10px;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='rgba(250,248,245,.12)'"></textarea>
+        <button onclick="submitReview()" style="width:100%;padding:11px;background:var(--gold);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;">Publicar reseña ✦</button>
         <div id="rf-msg" style="font-size:11px;text-align:center;margin-top:8px;min-height:16px;"></div>
       </div>
     </div>
-
-    <!-- Lista de reseñas -->
     <div id="reviews-list" style="padding:20px 24px;flex:1;">
-      <div id="reviews-loading" style="text-align:center;padding:40px 0;color:rgba(250,248,245,.3);font-size:13px;">
-        Cargando reseñas...
-      </div>
+      <div id="reviews-loading" style="text-align:center;padding:40px 0;color:rgba(250,248,245,.3);font-size:13px;">Cargando reseñas...</div>
     </div>
   </div>
+  <div id="reviews-overlay" onclick="toggleReviews()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;backdrop-filter:blur(2px);"></div>
 
-  <!-- Overlay -->
-  <div id="reviews-overlay" onclick="toggleReviews()"
-    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;backdrop-filter:blur(2px);"></div>
-
-  <!-- ═══════════════════ FORMULARIO DE CONTACTO ═══════════════════ -->
-    <!-- ═══════════════════ FORMULARIO DE CONTACTO ═══════════════════ -->
+  <!-- FORMULARIO DE CONTACTO -->
   <section style="background:var(--cream-2);padding:80px 32px;">
     <div style="max-width:640px;margin:0 auto;">
-
       <div style="text-align:center;margin-bottom:48px;">
         <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Contáctanos</div>
-        <h2 style="font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--onyx);line-height:1.15;">
-          Envíanos tus<br/><em style="font-style:italic;color:var(--gold);">comentarios</em>
-        </h2>
+        <h2 style="font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--onyx);line-height:1.15;">Envíanos tus<br/><em style="font-style:italic;color:var(--gold);">comentarios</em></h2>
         <p style="font-size:13.5px;color:var(--muted);margin-top:12px;line-height:1.7;">Tu opinión nos importa. Escríbenos y respondemos en menos de 24 horas.</p>
       </div>
-
-      <!-- FORMULARIO con Formspree -->
-      <form id="contactForm" action="https://formspree.io/f/TUCODIGO" method="POST"
-        style="display:flex;flex-direction:column;gap:16px;">
-
+      <form id="contactForm" action="https://formspree.io/f/TUCODIGO" method="POST" style="display:flex;flex-direction:column;gap:16px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
           <div>
             <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Nombre</label>
-            <input type="text" name="nombre" required placeholder="Tu nombre"
-              style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;transition:border-color .2s;"
-              onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
+            <input type="text" name="nombre" required placeholder="Tu nombre" style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
           </div>
           <div>
             <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Teléfono / WhatsApp</label>
-            <input type="text" name="telefono" placeholder="221 000 0000"
-              style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;transition:border-color .2s;"
-              onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
+            <input type="text" name="telefono" placeholder="221 000 0000" style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
           </div>
         </div>
-
         <div>
           <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Correo electrónico</label>
-          <input type="email" name="email" required placeholder="tucorreo@ejemplo.com"
-            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;transition:border-color .2s;"
-            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
+          <input type="email" name="email" required placeholder="tucorreo@ejemplo.com" style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
         </div>
-
         <div>
           <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Asunto</label>
-          <select name="asunto"
-            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;appearance:none;transition:border-color .2s;"
-            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'">
+          <select name="asunto" style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;appearance:none;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'">
             <option value="">Selecciona un tema...</option>
             <option>💬 Comentario general</option>
             <option>👠 Pregunta sobre un modelo</option>
@@ -721,49 +468,32 @@ a { text-decoration: none; color: inherit; }
             <option>🤝 Colaboración o mayoreo</option>
           </select>
         </div>
-
         <div>
           <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Mensaje</label>
-          <textarea name="mensaje" required rows="5" placeholder="Escribe tu mensaje aquí..."
-            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;resize:vertical;transition:border-color .2s;"
-            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"></textarea>
+          <textarea name="mensaje" required rows="5" placeholder="Escribe tu mensaje aquí..." style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;resize:vertical;" onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"></textarea>
         </div>
-
         <input type="hidden" name="_subject" value="💌 Nuevo mensaje — Hoja Urbana"/>
         <input type="hidden" name="_next" value="https://hoja-urbana.vercel.app"/>
-
-        <button type="submit" id="contactBtn"
-          style="width:100%;padding:16px;background:var(--onyx);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;transition:background .2s;font-family:var(--font-body);"
-          onmouseover="this.style.background='#B8936A'" onmouseout="this.style.background='var(--onyx)'">
-          Enviar mensaje ✦
-        </button>
-
-        <!-- Mensaje de éxito -->
+        <button type="submit" id="contactBtn" style="width:100%;padding:16px;background:var(--onyx);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;font-family:var(--font-body);" onmouseover="this.style.background='#B8936A'" onmouseout="this.style.background='var(--onyx)'">Enviar mensaje ✦</button>
         <div id="formSuccess" style="display:none;text-align:center;padding:20px;background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.25);border-radius:8px;">
           <div style="font-size:24px;margin-bottom:8px;">💌</div>
           <div style="font-size:14px;font-weight:600;color:#25a244;">¡Mensaje enviado!</div>
           <div style="font-size:12px;color:var(--muted);margin-top:4px;">Te respondemos en menos de 24 horas 🙌</div>
         </div>
-
       </form>
-
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer style="background:#1E1E1C;color:rgba(250,248,245,.55);text-align:center;padding:32px 20px;font-size:12px;letter-spacing:.06em;">
-    <p><strong style="color:var(--cream);font-weight:500;">© 2026 Hoja Urbana</strong> · Todos los derechos reservados ·
-      <a href="https://www.instagram.com/somoshojaurbana" target="_blank" style="color:rgba(250,248,245,.55);">@somoshojaurbana</a>
-    </p>
+    <p><strong style="color:var(--cream);font-weight:500;">© 2026 Hoja Urbana</strong> · Todos los derechos reservados · <a href="https://www.instagram.com/somoshojaurbana" target="_blank" style="color:rgba(250,248,245,.55);">@somoshojaurbana</a></p>
   </footer>
-
 </div>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════════
      TAB 2: PRICE SHOES
-     ═══════════════════════════════════ -->
+     ══════════════════════════════════════ -->
 <div class="cat-section" id="tab-price">
-
   <div class="price-hero">
     <div class="price-hero__inner">
       <p class="price-hero__eyebrow">Venta por Catálogo · Price Shoes</p>
@@ -784,23 +514,17 @@ a { text-decoration: none; color: inherit; }
     <div class="how-step"><div class="how-step__num">04</div><div class="how-step__title">¡Lo recibes!</div><div class="how-step__desc">Coordinamos entrega rápida y segura a donde estés.</div></div>
   </div>
 
-  <!-- PORTADAS DE CATÁLOGOS EN GRID -->
   <div style="background:var(--onyx);padding:48px 32px 32px;">
     <div style="max-width:1360px;margin:0 auto;">
-      <h3 style="font-family:var(--font-display);font-size:clamp(24px,3vw,42px);font-weight:300;color:var(--cream);margin-bottom:8px;">
-        Elige un <em style="font-style:italic;color:var(--gold-lt);">catálogo</em>
-      </h3>
+      <h3 style="font-family:var(--font-display);font-size:clamp(24px,3vw,42px);font-weight:300;color:var(--cream);margin-bottom:8px;">Elige un <em style="font-style:italic;color:var(--gold-lt);">catálogo</em></h3>
       <p style="font-size:12px;color:rgba(250,248,245,.4);margin-bottom:32px;letter-spacing:.1em;text-transform:uppercase;">Da clic en cualquiera para ver todos sus modelos</p>
-
       <div id="catalog-covers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;"></div>
     </div>
   </div>
 
-  <!-- ÁREA EXPANDIDA (se muestra al dar clic en una portada) -->
+  <!-- ÁREA EXPANDIDA -->
   <div id="catalog-expanded" style="display:none;background:var(--onyx);">
     <div style="max-width:1360px;margin:0 auto;padding:0 32px 64px;">
-
-      <!-- Header expandido -->
       <div style="display:flex;align-items:center;justify-content:space-between;padding:28px 0 20px;border-bottom:1px solid rgba(250,248,245,.1);margin-bottom:24px;flex-wrap:wrap;gap:12px;">
         <div>
           <div id="exp-eyebrow" style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;"></div>
@@ -808,11 +532,9 @@ a { text-decoration: none; color: inherit; }
         </div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
           <span id="exp-count" style="font-size:11px;color:rgba(250,248,245,.35);letter-spacing:.1em;text-transform:uppercase;"></span>
-          <button onclick="closeCatalog()" style="background:rgba(250,248,245,.08);border:1px solid rgba(250,248,245,.15);color:var(--cream);padding:8px 18px;border-radius:2px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(250,248,245,.15)'" onmouseout="this.style.background='rgba(250,248,245,.08)'">✕ Cerrar</button>
+          <button onclick="closeCatalog()" style="background:rgba(250,248,245,.08);border:1px solid rgba(250,248,245,.15);color:var(--cream);padding:8px 18px;border-radius:2px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;" onmouseover="this.style.background='rgba(250,248,245,.15)'" onmouseout="this.style.background='rgba(250,248,245,.08)'">✕ Cerrar</button>
         </div>
       </div>
-
-      <!-- Filtros de tipo (solo Thalia) -->
       <div id="exp-filters" style="display:none;margin-bottom:24px;">
         <div class="price-filters__inner">
           <button class="pf-btn active" data-cat="all">Todos</button>
@@ -823,30 +545,27 @@ a { text-decoration: none; color: inherit; }
           <button class="pf-btn" data-cat="tenis">Tenis 👟</button>
         </div>
       </div>
-
-      <!-- Grid productos (Thalia) -->
       <div id="exp-product-grid" class="price-grid" style="display:none;"></div>
-
-      <!-- Visor PDF (otros catálogos) -->
       <div id="exp-pdf-wrap" style="display:none;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
           <p style="font-size:13px;color:rgba(250,248,245,.5);">¿Ves algo que te gusta? Escríbenos y lo apartamos con el 10% 👇</p>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <a id="exp-pdf-download" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--gold);color:#fff;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">⬇️ Descargar PDF</a>
-            <a id="exp-pdf-wa" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#25D366;color:#fff;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg> Apartar ahora</a>
+            <a id="exp-pdf-wa" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#25D366;color:#fff;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+              Apartar ahora
+            </a>
           </div>
         </div>
         <iframe id="exp-pdf-iframe" src="" style="width:100%;height:82vh;border:none;border-radius:8px;background:#111;"></iframe>
       </div>
-
     </div>
   </div>
-
 </div>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════════
      TAB 3: ACCESORIOS
-     ═══════════════════════════════════ -->
+     ══════════════════════════════════════ -->
 <div class="cat-section" id="tab-accesorios">
   <div class="coming-section dark">
     <div class="coming-bg">Pronto</div>
@@ -854,13 +573,9 @@ a { text-decoration: none; color: inherit; }
     <h2 class="coming-section__title">Accesorios &<br/><em>Lifestyle</em></h2>
     <p class="coming-section__sub">Pipas artesanales de cristal y cerámica, diseñadas para la mujer moderna. Una colección exclusiva que llega muy pronto.</p>
     <div class="preview-grid">
-      <div class="preview-card">🪴</div>
-      <div class="preview-card">💎</div>
-      <div class="preview-card">✨</div>
-      <div class="preview-card">🌿</div>
+      <div class="preview-card">🪴</div><div class="preview-card">💎</div><div class="preview-card">✨</div><div class="preview-card">🌿</div>
     </div>
-    <div class="coming-pill dark-pill">🔔 Sé la primera en enterarte</div>
-    <br/>
+    <div class="coming-pill dark-pill">🔔 Sé la primera en enterarte</div><br/>
     <a class="coming-notify" href="https://wa.me/522211893908?text=Hola!%20Quiero%20que%20me%20avisen%20cuando%20lleguen%20los%20accesorios%20de%20Hoja%20Urbana%20🌿" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
       Avísame cuando llegue
@@ -868,9 +583,9 @@ a { text-decoration: none; color: inherit; }
   </div>
 </div>
 
-<!-- ═══════════════════════════════════
+<!-- ══════════════════════════════════════
      TAB 4: MAQUILLAJE
-     ═══════════════════════════════════ -->
+     ══════════════════════════════════════ -->
 <div class="cat-section" id="tab-maquillaje">
   <div class="coming-section light">
     <div class="coming-bg" style="color:var(--onyx)">Beauty</div>
@@ -883,8 +598,7 @@ a { text-decoration: none; color: inherit; }
       <div class="preview-card" style="background:#2E1C3D">✨</div>
       <div class="preview-card" style="background:#3D2E1C;margin-top:10px">💅</div>
     </div>
-    <div class="coming-pill light-pill">💄 Sección gestionada próximamente</div>
-    <br/>
+    <div class="coming-pill light-pill">💄 Sección gestionada próximamente</div><br/>
     <a class="coming-notify" href="https://wa.me/522211893908?text=Hola!%20Me%20interesa%20la%20sección%20de%20maquillaje%20de%20Hoja%20Urbana%20💄" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
       Quiero ser la primera
@@ -897,175 +611,153 @@ a { text-decoration: none; color: inherit; }
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
 </a>
 
-<script type="module">
-// ── TAB SWITCHING ──
-const tabs = document.querySelectorAll('.cat-tab');
-const sections = document.querySelectorAll('.cat-section');
-
-tabs.forEach(tab => {
+<script>
+// ══ TAB SWITCHING ══
+document.querySelectorAll('.cat-tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    const target = tab.dataset.tab;
-    tabs.forEach(t => t.classList.remove('active', 'active-gold'));
-    sections.forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
     tab.classList.add('active');
-    document.getElementById('tab-' + target).classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
     window.scrollTo({ top: 72, behavior: 'smooth' });
   });
 });
 
-// ── HOJA URBANA PRODUCTS ──
+// ══ HOJA URBANA PRODUCTS ══
 const WA = '522211893908';
-const PRODUCTS = [
-  { id:'1274111', name:'Bota todoterreno', color:'Beige', desc:'Versátil y cómoda para cualquier aventura.', price:'$999', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1274111_1.jpg' },
-  { id:'1149867', name:'Bota invernal ajustable', color:'Negra', desc:'Calidez y estilo en temporada fría.', price:'$335', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1149867_1.jpg' },
-  { id:'1274112', name:'Bota todoterreno', color:'Gris', desc:'El mismo poder, otro tono.', price:'$999', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1274112_1.jpg' },
-  { id:'1248742', name:'Tenis urbano cebra', color:'', desc:'Estampado único para looks atrevidos.', price:'$799', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1248742_1.jpg' },
-  { id:'1285542', name:'Sandalia tacón', color:'Negra', desc:'Elegancia que no cansa.', price:'$539', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1285542_1.jpg' },
-  { id:'1298005', name:'Tenis urbano hearts', color:'', desc:'Cómodo y llamativo. Detalle de corazones.', price:'Consultar', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1298005_1.jpg' },
-  { id:'1312332', name:'Kit sandalia tacón básicas', color:'', desc:'Dos pares, mil outfits.', price:'$869', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1312332_1.jpg' },
-  { id:'1203193', name:'Sandalia plana piedras', color:'', desc:'Brillo natural en cada paso.', price:'$579', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1203193_1.jpg' },
-  { id:'1031556', name:'Zapatilla tacón asimétrico', color:'Negra', desc:'Diseño arquitectónico para destacar.', price:'$619', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1031556_1.jpg' },
-  { id:'1169147', name:'Zapatilla con estoperoles', color:'Negra', desc:'Actitud urbana en su máxima expresión.', price:'$899', img:'https://imagenesdigitales.priceshoes.com.mx/catalogimages/1169147_1.jpg' },
-];
-
 const WA_SVG = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>`;
 
-const grid = document.getElementById('hoja-grid');
+const PRODUCTS = [
+  { id:'1274111', name:'Bota todoterreno', color:'Beige', desc:'Versátil y cómoda para cualquier aventura.', price:'$999' },
+  { id:'1149867', name:'Bota invernal ajustable', color:'Negra', desc:'Calidez y estilo en temporada fría.', price:'$335' },
+  { id:'1274112', name:'Bota todoterreno', color:'Gris', desc:'El mismo poder, otro tono.', price:'$999' },
+  { id:'1248742', name:'Tenis urbano cebra', color:'', desc:'Estampado único para looks atrevidos.', price:'$799' },
+  { id:'1285542', name:'Sandalia tacón', color:'Negra', desc:'Elegancia que no cansa.', price:'$539' },
+  { id:'1298005', name:'Tenis urbano hearts', color:'', desc:'Cómodo y llamativo. Detalle de corazones.', price:'Consultar' },
+  { id:'1312332', name:'Kit sandalia tacón básicas', color:'', desc:'Dos pares, mil outfits.', price:'$869' },
+  { id:'1203193', name:'Sandalia plana piedras', color:'', desc:'Brillo natural en cada paso.', price:'$579' },
+  { id:'1031556', name:'Zapatilla tacón asimétrico', color:'Negra', desc:'Diseño arquitectónico para destacar.', price:'$619' },
+  { id:'1169147', name:'Zapatilla con estoperoles', color:'Negra', desc:'Actitud urbana en su máxima expresión.', price:'$899' },
+];
+const PS_IMG = id => `https://imagenesdigitales.priceshoes.com.mx/catalogimages/${id}_1.jpg`;
+
+const hojaGrid = document.getElementById('hoja-grid');
 PRODUCTS.forEach(p => {
   const waMsg = encodeURIComponent(`Hola Hoja Urbana 👠 Me interesa el modelo *${p.name} ${p.color}* (ID: ${p.id}) — Precio: ${p.price}. ¿Está disponible?`);
   const card = document.createElement('div');
   card.className = 'card';
   card.innerHTML = `
     <div class="card__img">
-      <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card__placeholder>👠</div>'"/>
+      <img src="${PS_IMG(p.id)}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card__placeholder>👠</div>'"/>
       <div class="card__id">ID ${p.id}</div>
-      <div class="card__overlay">
-        <a class="card__wa" href="https://wa.me/${WA}?text=${waMsg}" target="_blank">${WA_SVG} Apartar por WhatsApp</a>
-      </div>
+      <div class="card__overlay"><a class="card__wa" href="https://wa.me/${WA}?text=${waMsg}" target="_blank">${WA_SVG} Apartar por WhatsApp</a></div>
     </div>
     <div class="card__info">
       <div class="card__name">${p.name} ${p.color}</div>
       <div class="card__desc">${p.desc}</div>
       <div class="card__price">${p.price}</div>
     </div>`;
-  grid.appendChild(card);
+  hojaGrid.appendChild(card);
 });
 
-// ── PRICE SHOES: CATALOG COVERS + ACCORDION ──
-const WA_PS = '522211893908';
-const PS_IMG = id => `https://imagenesdigitales.priceshoes.com.mx/catalogimages/${id}_1.jpg`;
-const WA_SVG2 = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>`;
-
-// ── CATÁLOGOS: definición con portada + datos ──
+// ══ PRICE SHOES CATALOGS ══
 const CATALOGS = {
-  thalia: {
-    key: 'thalia',
-    name: 'Colección Thalia Sodi 2025',
-    emoji: '✨',
-    color: '#B8936A',
-    desc: '67 modelos · Flats, Tacones, Sandalias, Botas y Tenis',
-    pdf: null,
-    coverIds: ['1257432','1255985','1188778','1116427'],
-    products: [
-      { id:'1255985', name:'Flat Diamonds', color:'Nude', cat:'flat', precio:'$675', eng:'$75', desc:'Textil malla c/pedrería · Tallas 22-27', badge:'' },
-      { id:'1257432', name:'Stiletto Pedrería', color:'Plateado', cat:'tacon', precio:'$885', eng:'$98', desc:'Sint. mica c/pedrería · 7cm · Tallas 22-27', badge:'✨ New Collection' },
-      { id:'1255908', name:'Stiletto Napa Metálica', color:'Plateado', cat:'tacon', precio:'$729', eng:'$81', desc:'Napa metálica · 9.5cm · Tallas 23-27', badge:'' },
-      { id:'1255877', name:'Slingback Glitter', color:'Plateado', cat:'tacon', precio:'$675', eng:'$75', desc:'Metálico/glitter · 9.5cm · Tallas 22-27', badge:'' },
-      { id:'1255986', name:'Slingback Charol Corrugado', color:'Negro', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol corrugado · 7.5cm · Tallas 22-27', badge:'' },
-      { id:'1255909', name:'Stiletto Lazo Clásico', color:'Negro', cat:'tacon', precio:'$729', eng:'$81', desc:'Tipo charol · 9cm · Tallas 23-27', badge:'Be Sexy' },
-      { id:'1255887', name:'Stiletto Animal Print', color:'Café/Negro', cat:'tacon', precio:'$699', eng:'$77', desc:'Tipo satín · 9cm · Tallas 23-27', badge:'Animal Print' },
-      { id:'1031556', name:'Stiletto Clásico', color:'Negro', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol · Tallas 22-27', badge:'Love Heels' },
-      { id:'1031555', name:'Stiletto Clásico', color:'Rojo', cat:'tacon', precio:'$629', eng:'$70', desc:'Tipo charol · 10.5cm · Tallas 22-27', badge:'Love Heels' },
-      { id:'1257263', name:'Stiletto Lycra', color:'Negro', cat:'tacon', precio:'$675', eng:'$75', desc:'Textil licra · 8.5cm · Tallas 23-27', badge:'' },
-      { id:'1257264', name:'Mule Charol', color:'Nude', cat:'tacon', precio:'$675', eng:'$75', desc:'Tipo charol · 9cm · Tallas 22-26', badge:'' },
-      { id:'1203196', name:'Mule Pedrería', color:'Gris', cat:'sandalia', precio:'$559', eng:'$62', desc:'Textil satín c/pedrería · 8.5cm · Tallas 23-27', badge:'' },
-      { id:'1189893', name:'Slingback Moño Pedrería', color:'Nude', cat:'sandalia', precio:'$589', eng:'$65', desc:'Sint. mica c/pedrería · 8.5cm · Tallas 22-27', badge:'Detalles con pedrería' },
-      { id:'1191711', name:'Slingback Pedrería', color:'Nude', cat:'sandalia', precio:'$575', eng:'$64', desc:'Sint. mica c/pedrería · 9cm · Tallas 22-27', badge:'' },
-      { id:'1191780', name:'Sandalia Bloque Pedrería', color:'Negro', cat:'sandalia', precio:'$405', eng:'$45', desc:'Tipo napa c/pedrería · 9cm · Tallas 23-27', badge:'Trendy Heels' },
-      { id:'1191781', name:'Sandalia Bloque Pedrería', color:'Plateado', cat:'sandalia', precio:'$629', eng:'$70', desc:'Tipo napa metalica c/pedrería · 10cm · Tallas 23-27', badge:'Trendy Heels' },
-      { id:'1187967', name:'Sandalia Moño Espejo', color:'Plateado', cat:'sandalia', precio:'$589', eng:'$65', desc:'Sint. espejo/mica · 6cm · Tallas 22-27', badge:'Be Sexy' },
-      { id:'1114988', name:'Sandalia Cuadrada Stone', color:'Nude', cat:'sandalia', precio:'$625', eng:'$69', desc:'Tipo charol/mica · 6cm · Tallas 22-26', badge:'Stone Collection' },
-      { id:'1188782', name:'Sandalia Piedras Stone', color:'Rosa palo', cat:'sandalia', precio:'$629', eng:'$70', desc:'Tipo charol c/pedrería · 6cm · Tallas 22-26', badge:'Stone Collection' },
-      { id:'1189845', name:'Mule Metálica Dorada', color:'Dorado', cat:'sandalia', precio:'$559', eng:'$62', desc:'Tipo napa metálica · 7cm · Tallas 23-27', badge:'' },
-      { id:'1188778', name:'Bota Cadenas Actitud', color:'Rojo', cat:'bota', precio:'$839', eng:'$93', desc:'Tipo charol · 11cm · Tallas 22-27', badge:'Moda con Actitud' },
-      { id:'1189891', name:'Bota Studs Transparente', color:'Negro/Humo', cat:'bota', precio:'$535', eng:'$59', desc:'Sint. mica · 9.5cm · Tallas 22-27', badge:'Moda con Actitud' },
-      { id:'1139477', name:'Bota Cristales STONES', color:'Rosa', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · 11cm · Tallas 23-27', badge:'40% Desc 🔥' },
-      { id:'1132894', name:'Bota Cristales STONES', color:'Negro', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · Tallas 22-27', badge:'40% Desc 🔥' },
-      { id:'1132895', name:'Bota Cristales STONES', color:'Plateado', cat:'bota', precio:'$745', eng:'$82', desc:'Sint. mica c/pedrería · Tallas 22-27', badge:'40% Desc 🔥' },
-      { id:'1141856', name:'Botín Estoperoles', color:'Negro', cat:'bota', precio:'$1,065', eng:'$118', desc:'Tipo ante c/estoperoles · 11cm · Tallas 22-26', badge:'30% Desc 🔥' },
-      { id:'1090105', name:'Botín Cristales Nude', color:'Nude', cat:'bota', precio:'$839', eng:'$93', desc:'Sint. mica c/pedrería · 11cm', badge:'40% Desc 🔥' },
-      { id:'1141456', name:'Botín Cristales', color:'Negro', cat:'bota', precio:'$839', eng:'$93', desc:'Sint. mica c/pedrería · 11cm · Tallas 22-27', badge:'40% Desc 🔥' },
-      { id:'1141457', name:'Botín Largo Cristales', color:'Nude', cat:'bota', precio:'$1,175', eng:'$130', desc:'Sint. mica c/pedrería · 9.5cm · Tallas 22-26', badge:'40% Desc 🔥' },
-      { id:'1224192', name:'Bota Clásica Napa', color:'Café', cat:'bota', precio:'$1,149', eng:'$127', desc:'Tipo napa · 9.5cm · Tallas 23-27', badge:'Trendy Booties' },
-      { id:'1224193', name:'Bota Clásica Napa', color:'Negro', cat:'bota', precio:'$1,149', eng:'$127', desc:'Tipo napa · 9.5cm · Tallas 23-27', badge:'Trendy Booties' },
-      { id:'1224191', name:'Bota Larga Napa', color:'Negro', cat:'bota', precio:'$1,165', eng:'$129', desc:'Tipo napa · 9cm · Tallas 23-27', badge:'Large Boots' },
-      { id:'1141789', name:'Bota Larga con Hebillas', color:'Negro', cat:'bota', precio:'$1,025', eng:'$113', desc:'Tipo napa · 11.5cm · Tallas 23-27', badge:'Large Boots' },
-      { id:'1116427', name:'Tenis Clásico Thalia', color:'Blanco', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1184894', name:'Tenis Clásico Thalia', color:'Beige', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1116426', name:'Tenis Clásico Thalia', color:'Beige/Café', cat:'tenis', precio:'$839', eng:'$93', desc:'Girly Style · Tallas 22-27', badge:'Girly Style' },
-      { id:'1248758', name:'Tenis Street Glam', color:'Beige/Rosa', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Street Glam' },
-      { id:'1248251', name:'Tenis Street Glam', color:'Gris', cat:'tenis', precio:'$559', eng:'$62', desc:'Tallas 23-27', badge:'Street Glam' },
-      { id:'1248250', name:'Tenis Animal Print', color:'Leopardo', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 23-27', badge:'⭐ ME' },
-      { id:'1248759', name:'Tenis Urban Style', color:'Verde', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Urban Style' },
-      { id:'1248761', name:'Tenis Urban Style', color:'Rosa Neón', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Urban Style' },
-      { id:'1248249', name:'Tenis Lifestyle', color:'Menta', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
-      { id:'1248248', name:'Tenis Lifestyle', color:'Cielo', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
-      { id:'1092389', name:'Tenis Street Glam', color:'Blanco/Rosa', cat:'tenis', precio:'$559', eng:'$62', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Street Glam' },
-      { id:'1248756', name:'Tenis Platform Dorado', color:'Blanco', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1248387', name:'Tenis Animal Chunky', color:'Blanco/Animal', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
-      { id:'1150355', name:'Tenis Chunky', color:'Negro/Blanco', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-26', badge:'⭐ ME' },
-      { id:'1116431', name:'Tenis Mezclilla', color:'Blanco/Mezclilla', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-28', badge:'⭐ ME' },
-      { id:'1116912', name:'Tenis THALIA Bold', color:'Blanco/Negro', cat:'tenis', precio:'$839', eng:'$93', desc:'Modelo Exclusivo · Tallas 22-27', badge:'The New Urban' },
-      { id:'1150354', name:'Tenis Listón Satín', color:'Blanco/Azul', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Sneakers Cool' },
-      { id:'1248388', name:'Tenis Listón Satín', color:'Negro', cat:'tenis', precio:'$769', eng:'$85', desc:'Modelo Exclusivo · Tallas 22-27', badge:'Sneakers Cool' },
-      { id:'1184880', name:'Tenis Shinne Shoes', color:'Blanco/Rosa', cat:'tenis', precio:'$699', eng:'$77', desc:'Brillos c/pedrería · Tallas 22-27', badge:'Shinne Shoes ✨' },
-      { id:'1184881', name:'Tenis Shinne Shoes', color:'Blanco/Gris', cat:'tenis', precio:'$629', eng:'$70', desc:'Brillos c/pedrería · Tallas 22-27', badge:'Shinne Shoes ✨' },
-      { id:'1116428', name:'Slip-On Brillos', color:'Beige', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1116429', name:'Slip-On Brillos', color:'Negro', cat:'tenis', precio:'$629', eng:'$70', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1116423', name:'Tenis Chunky Brillos', color:'Negro', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1184892', name:'Tenis Chunky', color:'Gris', cat:'tenis', precio:'$699', eng:'$77', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1248753', name:'Tenis Chunky Sport', color:'Azul', cat:'tenis', precio:'$465', eng:'$52', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1117209', name:'Tenis New Urban', color:'Blanco', cat:'tenis', precio:'$839', eng:'$93', desc:'The New Urban · Tallas 22-27', badge:'New Urban' },
-      { id:'1248332', name:'Tenis New Urban', color:'Negro', cat:'tenis', precio:'$629', eng:'$70', desc:'The New Urban · Tallas 22-27', badge:'New Urban' },
-      { id:'1184574', name:'Tenis Louis Platform', color:'Negro', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1116390', name:'Tenis Louis Platform', color:'Blanco', cat:'tenis', precio:'$909', eng:'$100', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1184575', name:'Tenis Louis Multicolor', color:'Blanco/Multicolor', cat:'tenis', precio:'$489', eng:'$54', desc:'Modelo Exclusivo · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1065034', name:'Tenis Air Sport', color:'Negro', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'⭐ ME' },
-      { id:'1116931', name:'Tenis High Top', color:'Blanco', cat:'tenis', precio:'$629', eng:'$70', desc:'Ultraligero · Tallas 22-27', badge:'⭐ ME' },
-      { id:'872135',  name:'Tenis Chunky New Trend', color:'Blanco', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'New Trend' },
-      { id:'1184879', name:'Tenis Chunky New Trend', color:'Rosa', cat:'tenis', precio:'$699', eng:'$77', desc:'Suela ligera · Tallas 22-27', badge:'New Trend' },
-      { id:'1184886', name:'Tenis Runner', color:'Plata/Verde', cat:'tenis', precio:'$1,049', eng:'$116', desc:'Antiderrapante · Tallas 22-27', badge:'Cool Sneakers' },
-      { id:'1248381', name:'Tenis Runner Premium', color:'Beige', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'Cool Sneakers' },
+  thalia: { key:'thalia', name:'Colección Thalia Sodi 2025', emoji:'✨', desc:'67 modelos · Flats, Tacones, Sandalias, Botas y Tenis', pdf:null, coverIds:['1257432','1255985','1188778','1116427'],
+    products:[
+      {id:'1255985',name:'Flat Diamonds',color:'Nude',cat:'flat',precio:'$675',eng:'$75',desc:'Textil malla c/pedrería · Tallas 22-27',badge:''},
+      {id:'1257432',name:'Stiletto Pedrería',color:'Plateado',cat:'tacon',precio:'$885',eng:'$98',desc:'Sint. mica c/pedrería · 7cm · Tallas 22-27',badge:'✨ New Collection'},
+      {id:'1255908',name:'Stiletto Napa Metálica',color:'Plateado',cat:'tacon',precio:'$729',eng:'$81',desc:'Napa metálica · 9.5cm · Tallas 23-27',badge:''},
+      {id:'1255877',name:'Slingback Glitter',color:'Plateado',cat:'tacon',precio:'$675',eng:'$75',desc:'Metálico/glitter · 9.5cm · Tallas 22-27',badge:''},
+      {id:'1255986',name:'Slingback Charol Corrugado',color:'Negro',cat:'tacon',precio:'$629',eng:'$70',desc:'Tipo charol corrugado · 7.5cm · Tallas 22-27',badge:''},
+      {id:'1255909',name:'Stiletto Lazo Clásico',color:'Negro',cat:'tacon',precio:'$729',eng:'$81',desc:'Tipo charol · 9cm · Tallas 23-27',badge:'Be Sexy'},
+      {id:'1255887',name:'Stiletto Animal Print',color:'Café/Negro',cat:'tacon',precio:'$699',eng:'$77',desc:'Tipo satín · 9cm · Tallas 23-27',badge:'Animal Print'},
+      {id:'1031556',name:'Stiletto Clásico',color:'Negro',cat:'tacon',precio:'$629',eng:'$70',desc:'Tipo charol · Tallas 22-27',badge:'Love Heels'},
+      {id:'1031555',name:'Stiletto Clásico',color:'Rojo',cat:'tacon',precio:'$629',eng:'$70',desc:'Tipo charol · 10.5cm · Tallas 22-27',badge:'Love Heels'},
+      {id:'1257263',name:'Stiletto Lycra',color:'Negro',cat:'tacon',precio:'$675',eng:'$75',desc:'Textil licra · 8.5cm · Tallas 23-27',badge:''},
+      {id:'1257264',name:'Mule Charol',color:'Nude',cat:'tacon',precio:'$675',eng:'$75',desc:'Tipo charol · 9cm · Tallas 22-26',badge:''},
+      {id:'1203196',name:'Mule Pedrería',color:'Gris',cat:'sandalia',precio:'$559',eng:'$62',desc:'Textil satín c/pedrería · 8.5cm · Tallas 23-27',badge:''},
+      {id:'1189893',name:'Slingback Moño Pedrería',color:'Nude',cat:'sandalia',precio:'$589',eng:'$65',desc:'Sint. mica c/pedrería · 8.5cm · Tallas 22-27',badge:'Detalles con pedrería'},
+      {id:'1191711',name:'Slingback Pedrería',color:'Nude',cat:'sandalia',precio:'$575',eng:'$64',desc:'Sint. mica c/pedrería · 9cm · Tallas 22-27',badge:''},
+      {id:'1191780',name:'Sandalia Bloque Pedrería',color:'Negro',cat:'sandalia',precio:'$405',eng:'$45',desc:'Tipo napa c/pedrería · 9cm · Tallas 23-27',badge:'Trendy Heels'},
+      {id:'1191781',name:'Sandalia Bloque Pedrería',color:'Plateado',cat:'sandalia',precio:'$629',eng:'$70',desc:'Tipo napa metalica c/pedrería · 10cm · Tallas 23-27',badge:'Trendy Heels'},
+      {id:'1187967',name:'Sandalia Moño Espejo',color:'Plateado',cat:'sandalia',precio:'$589',eng:'$65',desc:'Sint. espejo/mica · 6cm · Tallas 22-27',badge:'Be Sexy'},
+      {id:'1114988',name:'Sandalia Cuadrada Stone',color:'Nude',cat:'sandalia',precio:'$625',eng:'$69',desc:'Tipo charol/mica · 6cm · Tallas 22-26',badge:'Stone Collection'},
+      {id:'1188782',name:'Sandalia Piedras Stone',color:'Rosa palo',cat:'sandalia',precio:'$629',eng:'$70',desc:'Tipo charol c/pedrería · 6cm · Tallas 22-26',badge:'Stone Collection'},
+      {id:'1189845',name:'Mule Metálica Dorada',color:'Dorado',cat:'sandalia',precio:'$559',eng:'$62',desc:'Tipo napa metálica · 7cm · Tallas 23-27',badge:''},
+      {id:'1188778',name:'Bota Cadenas Actitud',color:'Rojo',cat:'bota',precio:'$839',eng:'$93',desc:'Tipo charol · 11cm · Tallas 22-27',badge:'Moda con Actitud'},
+      {id:'1189891',name:'Bota Studs Transparente',color:'Negro/Humo',cat:'bota',precio:'$535',eng:'$59',desc:'Sint. mica · 9.5cm · Tallas 22-27',badge:'Moda con Actitud'},
+      {id:'1139477',name:'Bota Cristales STONES',color:'Rosa',cat:'bota',precio:'$745',eng:'$82',desc:'Sint. mica c/pedrería · 11cm · Tallas 23-27',badge:'40% Desc 🔥'},
+      {id:'1132894',name:'Bota Cristales STONES',color:'Negro',cat:'bota',precio:'$745',eng:'$82',desc:'Sint. mica c/pedrería · Tallas 22-27',badge:'40% Desc 🔥'},
+      {id:'1132895',name:'Bota Cristales STONES',color:'Plateado',cat:'bota',precio:'$745',eng:'$82',desc:'Sint. mica c/pedrería · Tallas 22-27',badge:'40% Desc 🔥'},
+      {id:'1141856',name:'Botín Estoperoles',color:'Negro',cat:'bota',precio:'$1,065',eng:'$118',desc:'Tipo ante c/estoperoles · 11cm · Tallas 22-26',badge:'30% Desc 🔥'},
+      {id:'1090105',name:'Botín Cristales Nude',color:'Nude',cat:'bota',precio:'$839',eng:'$93',desc:'Sint. mica c/pedrería · 11cm',badge:'40% Desc 🔥'},
+      {id:'1141456',name:'Botín Cristales',color:'Negro',cat:'bota',precio:'$839',eng:'$93',desc:'Sint. mica c/pedrería · 11cm · Tallas 22-27',badge:'40% Desc 🔥'},
+      {id:'1141457',name:'Botín Largo Cristales',color:'Nude',cat:'bota',precio:'$1,175',eng:'$130',desc:'Sint. mica c/pedrería · 9.5cm · Tallas 22-26',badge:'40% Desc 🔥'},
+      {id:'1224192',name:'Bota Clásica Napa',color:'Café',cat:'bota',precio:'$1,149',eng:'$127',desc:'Tipo napa · 9.5cm · Tallas 23-27',badge:'Trendy Booties'},
+      {id:'1224193',name:'Bota Clásica Napa',color:'Negro',cat:'bota',precio:'$1,149',eng:'$127',desc:'Tipo napa · 9.5cm · Tallas 23-27',badge:'Trendy Booties'},
+      {id:'1224191',name:'Bota Larga Napa',color:'Negro',cat:'bota',precio:'$1,165',eng:'$129',desc:'Tipo napa · 9cm · Tallas 23-27',badge:'Large Boots'},
+      {id:'1141789',name:'Bota Larga con Hebillas',color:'Negro',cat:'bota',precio:'$1,025',eng:'$113',desc:'Tipo napa · 11.5cm · Tallas 23-27',badge:'Large Boots'},
+      {id:'1116427',name:'Tenis Clásico Thalia',color:'Blanco',cat:'tenis',precio:'$839',eng:'$93',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1184894',name:'Tenis Clásico Thalia',color:'Beige',cat:'tenis',precio:'$839',eng:'$93',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1116426',name:'Tenis Clásico Thalia',color:'Beige/Café',cat:'tenis',precio:'$839',eng:'$93',desc:'Girly Style · Tallas 22-27',badge:'Girly Style'},
+      {id:'1248758',name:'Tenis Street Glam',color:'Beige/Rosa',cat:'tenis',precio:'$559',eng:'$62',desc:'Modelo Exclusivo · Tallas 22-27',badge:'Street Glam'},
+      {id:'1248251',name:'Tenis Street Glam',color:'Gris',cat:'tenis',precio:'$559',eng:'$62',desc:'Tallas 23-27',badge:'Street Glam'},
+      {id:'1248250',name:'Tenis Animal Print',color:'Leopardo',cat:'tenis',precio:'$909',eng:'$100',desc:'Modelo Exclusivo · Tallas 23-27',badge:'⭐ ME'},
+      {id:'1248759',name:'Tenis Urban Style',color:'Verde',cat:'tenis',precio:'$629',eng:'$70',desc:'Modelo Exclusivo · Tallas 22-27',badge:'Urban Style'},
+      {id:'1248761',name:'Tenis Urban Style',color:'Rosa Neón',cat:'tenis',precio:'$839',eng:'$93',desc:'Modelo Exclusivo · Tallas 22-27',badge:'Urban Style'},
+      {id:'1248249',name:'Tenis Lifestyle',color:'Menta',cat:'tenis',precio:'$769',eng:'$85',desc:'Modelo Exclusivo · Tallas 22-26',badge:'⭐ ME'},
+      {id:'1248248',name:'Tenis Lifestyle',color:'Cielo',cat:'tenis',precio:'$559',eng:'$62',desc:'Modelo Exclusivo · Tallas 22-26',badge:'⭐ ME'},
+      {id:'1092389',name:'Tenis Street Glam',color:'Blanco/Rosa',cat:'tenis',precio:'$559',eng:'$62',desc:'Modelo Exclusivo · Tallas 22-27',badge:'Street Glam'},
+      {id:'1248756',name:'Tenis Platform Dorado',color:'Blanco',cat:'tenis',precio:'$769',eng:'$85',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1248387',name:'Tenis Animal Chunky',color:'Blanco/Animal',cat:'tenis',precio:'$699',eng:'$77',desc:'Modelo Exclusivo · Tallas 22-26',badge:'⭐ ME'},
+      {id:'1150355',name:'Tenis Chunky',color:'Negro/Blanco',cat:'tenis',precio:'$629',eng:'$70',desc:'Modelo Exclusivo · Tallas 22-26',badge:'⭐ ME'},
+      {id:'1116431',name:'Tenis Mezclilla',color:'Blanco/Mezclilla',cat:'tenis',precio:'$629',eng:'$70',desc:'Modelo Exclusivo · Tallas 22-28',badge:'⭐ ME'},
+      {id:'1116912',name:'Tenis THALIA Bold',color:'Blanco/Negro',cat:'tenis',precio:'$839',eng:'$93',desc:'Modelo Exclusivo · Tallas 22-27',badge:'The New Urban'},
+      {id:'1150354',name:'Tenis Listón Satín',color:'Blanco/Azul',cat:'tenis',precio:'$629',eng:'$70',desc:'Modelo Exclusivo · Tallas 22-27',badge:'Sneakers Cool'},
+      {id:'1248388',name:'Tenis Listón Satín',color:'Negro',cat:'tenis',precio:'$769',eng:'$85',desc:'Modelo Exclusivo · Tallas 22-27',badge:'Sneakers Cool'},
+      {id:'1184880',name:'Tenis Shinne Shoes',color:'Blanco/Rosa',cat:'tenis',precio:'$699',eng:'$77',desc:'Brillos c/pedrería · Tallas 22-27',badge:'Shinne Shoes ✨'},
+      {id:'1184881',name:'Tenis Shinne Shoes',color:'Blanco/Gris',cat:'tenis',precio:'$629',eng:'$70',desc:'Brillos c/pedrería · Tallas 22-27',badge:'Shinne Shoes ✨'},
+      {id:'1116428',name:'Slip-On Brillos',color:'Beige',cat:'tenis',precio:'$699',eng:'$77',desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1116429',name:'Slip-On Brillos',color:'Negro',cat:'tenis',precio:'$629',eng:'$70',desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1116423',name:'Tenis Chunky Brillos',color:'Negro',cat:'tenis',precio:'$699',eng:'$77',desc:'Modelo Exclusivo · Suela ligera · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1184892',name:'Tenis Chunky',color:'Gris',cat:'tenis',precio:'$699',eng:'$77',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1248753',name:'Tenis Chunky Sport',color:'Azul',cat:'tenis',precio:'$465',eng:'$52',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1117209',name:'Tenis New Urban',color:'Blanco',cat:'tenis',precio:'$839',eng:'$93',desc:'The New Urban · Tallas 22-27',badge:'New Urban'},
+      {id:'1248332',name:'Tenis New Urban',color:'Negro',cat:'tenis',precio:'$629',eng:'$70',desc:'The New Urban · Tallas 22-27',badge:'New Urban'},
+      {id:'1184574',name:'Tenis Louis Platform',color:'Negro',cat:'tenis',precio:'$909',eng:'$100',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1116390',name:'Tenis Louis Platform',color:'Blanco',cat:'tenis',precio:'$909',eng:'$100',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1184575',name:'Tenis Louis Multicolor',color:'Blanco/Multicolor',cat:'tenis',precio:'$489',eng:'$54',desc:'Modelo Exclusivo · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1065034',name:'Tenis Air Sport',color:'Negro',cat:'tenis',precio:'$909',eng:'$100',desc:'Memory Foam · Tallas 22-27',badge:'⭐ ME'},
+      {id:'1116931',name:'Tenis High Top',color:'Blanco',cat:'tenis',precio:'$629',eng:'$70',desc:'Ultraligero · Tallas 22-27',badge:'⭐ ME'},
+      {id:'872135',name:'Tenis Chunky New Trend',color:'Blanco',cat:'tenis',precio:'$909',eng:'$100',desc:'Memory Foam · Tallas 22-27',badge:'New Trend'},
+      {id:'1184879',name:'Tenis Chunky New Trend',color:'Rosa',cat:'tenis',precio:'$699',eng:'$77',desc:'Suela ligera · Tallas 22-27',badge:'New Trend'},
+      {id:'1184886',name:'Tenis Runner',color:'Plata/Verde',cat:'tenis',precio:'$1,049',eng:'$116',desc:'Antiderrapante · Tallas 22-27',badge:'Cool Sneakers'},
+      {id:'1248381',name:'Tenis Runner Premium',color:'Beige',cat:'tenis',precio:'$909',eng:'$100',desc:'Memory Foam · Tallas 22-27',badge:'Cool Sneakers'},
     ]
   },
-  cat2: { key:'cat2', name:'Sandalias 26', emoji:'👠', color:'#C97B84', desc:'Colección completa de sandalias primavera-verano', pdf:'https://drive.google.com/file/d/1jRxDf2dKApG6-gg48YFHCzCkDiVMLU3y/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1jRxDf2dKApG6-gg48YFHCzCkDiVMLU3y', coverIds:['1285542','1203193','1191781','1189893'], products:null },
-  cat3: { key:'cat3', name:'Spring 26 — Adidas · Puma · Reebok', emoji:'👟', color:'#4A7C59', desc:'Las marcas más grandes en un solo catálogo', pdf:'https://drive.google.com/file/d/1pa5Ftec_hsO1UgFGGZSQxes2CmsH-A03/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1pa5Ftec_hsO1UgFGGZSQxes2CmsH-A03', coverIds:['1248742','1248250','1248381','1116427'], products:null },
-  cat4: { key:'cat4', name:'Caballeros 25 — Hush Puppies', emoji:'👞', color:'#7C6A4A', desc:'Calzado masculino premium de la mejor marca', pdf:'https://drive.google.com/file/d/1pTB5KkaTJ50zFbGehztVxYwbj-GKOrWZ/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1pTB5KkaTJ50zFbGehztVxYwbj-GKOrWZ', coverIds:['1274111','1149867','1274112','1031556'], products:null },
-  cat5: { key:'cat5', name:'Urbano PV2026', emoji:'🌸', color:'#C97BAA', desc:'Lo más urbano para la temporada primavera-verano', pdf:'https://drive.google.com/file/d/1sdHIs0gkZR_e0Cuqn0Pp0yUaHmWZ3N7G/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1sdHIs0gkZR_e0Cuqn0Pp0yUaHmWZ3N7G', coverIds:['1248759','1248761','1248249','1248758'], products:null },
-  cat6: { key:'cat6', name:'Botas New Collection', emoji:'🥾', color:'#5A6E7C', desc:'La nueva colección de botas para toda ocasión', pdf:'https://drive.google.com/file/d/1bZH27izdVKAS4hnUwbPqviFH-mguiFxX/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1bZH27izdVKAS4hnUwbPqviFH-mguiFxX', coverIds:['1188778','1141856','1224192','1141789'], products:null },
+  cat2:{ key:'cat2', name:'Sandalias 26', emoji:'👠', desc:'Colección completa de sandalias primavera-verano', pdf:'https://drive.google.com/file/d/1jRxDf2dKApG6-gg48YFHCzCkDiVMLU3y/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1jRxDf2dKApG6-gg48YFHCzCkDiVMLU3y', coverIds:['1285542','1203193','1191781','1189893'], products:null },
+  cat3:{ key:'cat3', name:'Spring 26 — Adidas · Puma · Reebok', emoji:'👟', desc:'Las marcas más grandes en un solo catálogo', pdf:'https://drive.google.com/file/d/1pa5Ftec_hsO1UgFGGZSQxes2CmsH-A03/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1pa5Ftec_hsO1UgFGGZSQxes2CmsH-A03', coverIds:['1248742','1248250','1248381','1116427'], products:null },
+  cat4:{ key:'cat4', name:'Caballeros 25 — Hush Puppies', emoji:'👞', desc:'Calzado masculino premium de la mejor marca', pdf:'https://drive.google.com/file/d/1pTB5KkaTJ50zFbGehztVxYwbj-GKOrWZ/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1pTB5KkaTJ50zFbGehztVxYwbj-GKOrWZ', coverIds:['1274111','1149867','1274112','1031556'], products:null },
+  cat5:{ key:'cat5', name:'Urbano PV2026', emoji:'🌸', desc:'Lo más urbano para la temporada primavera-verano', pdf:'https://drive.google.com/file/d/1sdHIs0gkZR_e0Cuqn0Pp0yUaHmWZ3N7G/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1sdHIs0gkZR_e0Cuqn0Pp0yUaHmWZ3N7G', coverIds:['1248759','1248761','1248249','1248758'], products:null },
+  cat6:{ key:'cat6', name:'Botas New Collection', emoji:'🥾', desc:'La nueva colección de botas para toda ocasión', pdf:'https://drive.google.com/file/d/1bZH27izdVKAS4hnUwbPqviFH-mguiFxX/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1bZH27izdVKAS4hnUwbPqviFH-mguiFxX', coverIds:['1188778','1141856','1224192','1141789'], products:null },
 };
 
 let activeCatalogKey = null;
-let activeType = 'all';
 
-// ── RENDER COVER CARDS ──
-function buildCoverCard(cat) {
+// ── Render cover cards ──
+const coversGrid = document.getElementById('catalog-covers-grid');
+Object.values(CATALOGS).forEach(cat => {
   const card = document.createElement('div');
   card.className = 'cat-cover-card';
-
-  const countBadge = cat.products
+  const badge = cat.products
     ? `<span class="cat-cover-card__badge cat-cover-card__badge--gold">${cat.products.length} modelos</span>`
     : `<span class="cat-cover-card__badge cat-cover-card__badge--muted">📄 Ver PDF</span>`;
-
   card.innerHTML = `
     <div class="cat-cover-card__imgs">
       ${cat.coverIds.map(id => `<img src="${PS_IMG(id)}" loading="lazy" onerror="this.style.opacity=0"/>`).join('')}
     </div>
     <div class="cat-cover-card__body">
-      <div class="cat-cover-card__tags">
-        <span style="font-size:18px;">${cat.emoji}</span>
-        ${countBadge}
-      </div>
+      <div class="cat-cover-card__tags"><span style="font-size:18px;">${cat.emoji}</span>${badge}</div>
       <div class="cat-cover-card__name">${cat.name}</div>
       <div class="cat-cover-card__desc">${cat.desc}</div>
       <div class="cat-cover-card__cta">
@@ -1073,86 +765,61 @@ function buildCoverCard(cat) {
         <span class="cat-cover-card__arrow">→</span>
       </div>
     </div>`;
-
   card.addEventListener('click', () => openCatalog(cat.key));
-  return card;
-}
+  coversGrid.appendChild(card);
+});
 
-const coversGrid = document.getElementById('catalog-covers-grid');
-Object.values(CATALOGS).forEach(cat => coversGrid.appendChild(buildCoverCard(cat)));
-
-// ── OPEN CATALOG (accordion) ──
 function openCatalog(key) {
   activeCatalogKey = key;
-  activeType = 'all';
   const cat = CATALOGS[key];
   const expanded = document.getElementById('catalog-expanded');
-  const filters = document.getElementById('exp-filters');
-  const productGrid = document.getElementById('exp-product-grid');
-  const pdfWrap = document.getElementById('exp-pdf-wrap');
-
-  // Update header
   document.getElementById('exp-eyebrow').textContent = 'Price Shoes · ' + cat.emoji;
-  document.getElementById('exp-title').innerHTML = cat.name;
-
-  // Highlight selected cover
-  coversGrid.querySelectorAll('div[style*="border-radius: 12px"]').forEach((c,i) => {
-    const isActive = Object.keys(CATALOGS)[i] === key;
-    c.style.borderColor = isActive ? 'rgba(184,147,106,0.7)' : 'rgba(250,248,245,0.1)';
-    c.style.boxShadow = isActive ? '0 0 0 2px rgba(184,147,106,0.3)' : '';
-  });
+  document.getElementById('exp-title').textContent = cat.name;
 
   if (cat.products) {
-    // Show product grid
-    filters.style.display = 'block';
-    productGrid.style.display = 'grid';
-    pdfWrap.style.display = 'none';
+    document.getElementById('exp-filters').style.display = 'block';
+    document.getElementById('exp-product-grid').style.display = 'grid';
+    document.getElementById('exp-pdf-wrap').style.display = 'none';
     document.getElementById('exp-count').textContent = cat.products.length + ' modelos';
-    // Reset filter
     document.querySelectorAll('#exp-filters .pf-btn').forEach(b => b.classList.remove('active'));
     document.querySelector('#exp-filters .pf-btn[data-cat="all"]').classList.add('active');
     renderExpProducts(key, 'all');
   } else {
-    // Show PDF viewer
-    filters.style.display = 'none';
-    productGrid.style.display = 'none';
-    pdfWrap.style.display = 'block';
+    document.getElementById('exp-filters').style.display = 'none';
+    document.getElementById('exp-product-grid').style.display = 'none';
+    document.getElementById('exp-pdf-wrap').style.display = 'block';
     document.getElementById('exp-count').textContent = 'Catálogo PDF completo';
     document.getElementById('exp-pdf-iframe').src = cat.pdf;
-    document.getElementById('exp-pdf-download').href = cat.pdfDl || cat.pdf;
+    document.getElementById('exp-pdf-download').href = cat.pdfDl;
     const waText = encodeURIComponent(`Hola Hoja Urbana 👠 Estoy viendo el catálogo *${cat.name}* y me interesa un modelo. ¿Me puedes ayudar? Quiero apartarlo con el 10% 🙌`);
     document.getElementById('exp-pdf-wa').href = `https://wa.me/522211893908?text=${waText}`;
   }
 
   expanded.style.display = 'block';
-  setTimeout(() => expanded.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  setTimeout(() => expanded.scrollIntoView({ behavior:'smooth', block:'start' }), 80);
 }
 
 function closeCatalog() {
   document.getElementById('catalog-expanded').style.display = 'none';
   activeCatalogKey = null;
-  coversGrid.querySelectorAll('div[style*="border-radius: 12px"]').forEach(c => {
-    c.style.borderColor = 'rgba(250,248,245,0.1)';
-    c.style.boxShadow = '';
-  });
 }
+window.closeCatalog = closeCatalog;
 
 function renderExpProducts(key, type) {
   const cat = CATALOGS[key];
-  const grid = document.getElementById('exp-product-grid');
+  const pgrid = document.getElementById('exp-product-grid');
   const filtered = type === 'all' ? cat.products : cat.products.filter(p => p.cat === type);
   document.getElementById('exp-count').textContent = filtered.length + ' modelos';
-  grid.innerHTML = '';
+  pgrid.innerHTML = '';
   filtered.forEach((p, i) => {
     const waMsg = encodeURIComponent(`Hola Hoja Urbana 👠 Vi el catálogo *${cat.name}* y me interesa el modelo *${p.name} ${p.color}* (ID: ${p.id}) — Precio: ${p.precio}. ¿Está disponible? Quiero apartarlo con el 10% 🙌`);
     const card = document.createElement('div');
     card.className = 'price-card';
-    card.style.cssText = 'opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease;transition-delay:' + Math.min(i,10)*0.03 + 's';
-    const badge = p.badge ? `<div class="pc-badge">${p.badge}</div>` : '';
+    card.style.cssText = `opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease;transition-delay:${Math.min(i,10)*0.03}s`;
     card.innerHTML = `
       <div class="price-card__img">
         <img src="${PS_IMG(p.id)}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=price-coming><div class=price-coming-icon>👠</div>${p.color}</div>'"/>
-        ${badge}
+        ${p.badge ? `<div class="pc-badge">${p.badge}</div>` : ''}
       </div>
       <div class="price-card__info">
         <div class="price-card__id">ID ${p.id} · Thalia Sodi</div>
@@ -1161,217 +828,145 @@ function renderExpProducts(key, type) {
         <div class="price-card__price">${p.precio} <span style="font-size:10px;font-weight:400;color:rgba(250,248,245,.35);margin-left:6px">enganche ${p.eng}</span></div>
       </div>
       <div class="price-card__overlay">
-        <a class="price-card__btn" href="https://wa.me/${WA_PS}?text=${waMsg}" target="_blank">${WA_SVG2} Apartar ahora</a>
+        <a class="price-card__btn" href="https://wa.me/${WA}?text=${waMsg}" target="_blank">${WA_SVG} Apartar ahora</a>
       </div>`;
-    grid.appendChild(card);
+    pgrid.appendChild(card);
     setTimeout(() => { card.style.opacity='1'; card.style.transform='translateY(0)'; }, i * 28);
   });
 }
 
-// Filter buttons in expanded view
 document.querySelectorAll('#exp-filters .pf-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#exp-filters .pf-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    activeType = btn.dataset.cat;
-    if (activeCatalogKey) renderExpProducts(activeCatalogKey, activeType);
+    if (activeCatalogKey) renderExpProducts(activeCatalogKey, btn.dataset.cat);
   });
 });
 
-// Badge CSS
-const badgeStyle = document.createElement('style');
-badgeStyle.textContent = `.pc-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#fff;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;z-index:2;max-width:90px;text-align:center;line-height:1.3}`;
-document.head.appendChild(badgeStyle);
-
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; io.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.card, .price-card').forEach((el,i) => {
-  el.style.cssText += 'opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;transition-delay:' + (i%4)*0.07 + 's';
-  io.observe(el);
-});
-
-
-// ══════════════════════════════════
-// SISTEMA DE RESEÑAS CON FIREBASE
-// ══════════════════════════════════
-// INSTRUCCIONES (5 min):
-// 1. Ve a console.firebase.google.com → crea proyecto "hoja-urbana"
-// 2. Agrega una app Web → copia las credenciales
-// 3. Reemplaza los valores de firebaseConfig abajo
-// 4. En Firestore Database → crear base de datos en modo producción
-// 5. En Reglas de Firestore pega:
-//    rules_version = '2';
-//    service cloud.firestore {
-//      match /databases/{database}/documents {
-//        match /resenas/{doc} {
-//          allow read: if true;
-//          allow create: if true;
-//        }
-//      }
-//    }
-
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp }
-  from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-
+// ══ RESEÑAS ══
 const firebaseConfig = {
-  apiKey:            "TU_API_KEY",
-  authDomain:        "TU_PROYECTO.firebaseapp.com",
-  projectId:         "TU_PROYECTO",
-  storageBucket:     "TU_PROYECTO.appspot.com",
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_PROYECTO.firebaseapp.com",
+  projectId: "TU_PROYECTO",
+  storageBucket: "TU_PROYECTO.appspot.com",
   messagingSenderId: "TU_SENDER_ID",
-  appId:             "TU_APP_ID"
+  appId: "TU_APP_ID"
 };
 
-let db;
+let db = null;
 let reviewsOpen = false;
-let selectedStars = 5;
 let reviewFormOpen = false;
+let _stars = 5;
 
-try {
-  const app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-  loadReviews();
-} catch(e) {
-  // Firebase no configurado aún — muestra reseñas de ejemplo
-  loadFallbackReviews();
+function initFirebase() {
+  try {
+    if (typeof firebase === 'undefined') throw new Error('no firebase');
+    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    loadReviews();
+  } catch(e) {
+    loadFallbackReviews();
+  }
 }
+setTimeout(initFirebase, 200);
 
-// ── TOGGLE DRAWER ──
 function toggleReviews() {
   reviewsOpen = !reviewsOpen;
-  const drawer  = document.getElementById('reviews-drawer');
-  const overlay = document.getElementById('reviews-overlay');
-  drawer.style.right   = reviewsOpen ? '0' : '-480px';
-  overlay.style.display = reviewsOpen ? 'block' : 'none';
+  document.getElementById('reviews-drawer').style.right = reviewsOpen ? '0' : '-480px';
+  document.getElementById('reviews-overlay').style.display = reviewsOpen ? 'block' : 'none';
   document.body.style.overflow = reviewsOpen ? 'hidden' : '';
 }
 window.toggleReviews = toggleReviews;
 
-// ── TOGGLE FORMULARIO ──
 function toggleReviewForm() {
   reviewFormOpen = !reviewFormOpen;
   document.getElementById('review-form-wrap').style.display = reviewFormOpen ? 'block' : 'none';
 }
 window.toggleReviewForm = toggleReviewForm;
 
-// ── ESTRELLAS INTERACTIVAS ──
-let _stars = 5;
 document.querySelectorAll('.star-opt').forEach(s => {
-  s.style.color = '#B8936A';
-  s.style.opacity = '1';
   s.addEventListener('click', () => {
     _stars = parseInt(s.dataset.val);
     document.querySelectorAll('.star-opt').forEach((st, i) => {
-      st.style.opacity = i < _stars ? '1' : '0.2';
-      st.style.color   = i < _stars ? '#B8936A' : 'rgba(250,248,245,.4)';
+      st.style.opacity = i < _stars ? '1' : '0.25';
     });
   });
   s.addEventListener('mouseover', () => {
     const v = parseInt(s.dataset.val);
-    document.querySelectorAll('.star-opt').forEach((st, i) => {
-      st.style.opacity = i < v ? '1' : '0.2';
-    });
+    document.querySelectorAll('.star-opt').forEach((st, i) => { st.style.opacity = i < v ? '1' : '0.25'; });
   });
   s.addEventListener('mouseout', () => {
-    document.querySelectorAll('.star-opt').forEach((st, i) => {
-      st.style.opacity = i < _stars ? '1' : '0.2';
-    });
+    document.querySelectorAll('.star-opt').forEach((st, i) => { st.style.opacity = i < _stars ? '1' : '0.25'; });
   });
 });
 
-// ── ENVIAR RESEÑA ──
 async function submitReview() {
-  const name    = document.getElementById('rf-name').value.trim();
-  const text    = document.getElementById('rf-text').value.trim();
+  const name = document.getElementById('rf-name').value.trim();
+  const text = document.getElementById('rf-text').value.trim();
   const product = document.getElementById('rf-product').value;
-  const msg     = document.getElementById('rf-msg');
-
-  if (!name || !text) {
-    msg.style.color = '#e74c3c';
-    msg.textContent = 'Por favor llena tu nombre y comentario 💛';
-    return;
-  }
-
-  msg.style.color = 'rgba(250,248,245,.4)';
-  msg.textContent = 'Publicando...';
-
-  const review = { name, text, product, stars: _stars, fecha: serverTimestamp() };
-
+  const msg = document.getElementById('rf-msg');
+  if (!name || !text) { msg.style.color='#e74c3c'; msg.textContent='Por favor llena tu nombre y comentario 💛'; return; }
+  msg.style.color='rgba(250,248,245,.4)'; msg.textContent='Publicando...';
+  const review = { name, text, product, stars: _stars };
   try {
-    await addDoc(collection(db, 'resenas'), review);
-    document.getElementById('rf-name').value = '';
-    document.getElementById('rf-text').value = '';
-    msg.style.color = '#25D366';
-    msg.textContent = '¡Reseña publicada! Gracias 💛';
-    setTimeout(() => { msg.textContent = ''; toggleReviewForm(); }, 2000);
+    await db.collection('resenas').add({ ...review, fecha: firebase.firestore.FieldValue.serverTimestamp() });
     loadReviews();
   } catch(e) {
-    // Firebase no configurado — agrega localmente
-    addReviewCard({ name, text, product, stars: _stars, nueva: true });
-    document.getElementById('rf-name').value = '';
-    document.getElementById('rf-text').value = '';
-    msg.style.color = '#25D366';
-    msg.textContent = '¡Reseña publicada! 💛';
-    setTimeout(() => { msg.textContent = ''; toggleReviewForm(); }, 2000);
+    addReviewCard({ ...review, nueva: true });
   }
+  document.getElementById('rf-name').value = '';
+  document.getElementById('rf-text').value = '';
+  msg.style.color='#25D366'; msg.textContent='¡Reseña publicada! 💛';
+  setTimeout(() => { msg.textContent=''; toggleReviewForm(); }, 2000);
 }
 window.submitReview = submitReview;
 
-// ── CARGAR RESEÑAS DESDE FIREBASE ──
 async function loadReviews() {
+  if (!db) { loadFallbackReviews(); return; }
   try {
-    const q = query(collection(db, 'resenas'), orderBy('fecha', 'desc'));
-    const snap = await getDocs(q);
+    const snap = await db.collection('resenas').orderBy('fecha','desc').get();
     const list = document.getElementById('reviews-list');
     document.getElementById('reviews-loading').style.display = 'none';
     list.innerHTML = '';
-
     if (snap.empty) {
       list.innerHTML = '<div style="text-align:center;padding:40px 0;color:rgba(250,248,245,.3);font-size:13px;">Sé la primera en dejar una reseña 💛</div>';
     } else {
       snap.forEach(doc => addReviewCard(doc.data()));
     }
     updateBadge(snap.size);
-  } catch(e) {
-    loadFallbackReviews();
-  }
+  } catch(e) { loadFallbackReviews(); }
 }
 
-// ── RESEÑAS DE EJEMPLO (mientras se configura Firebase) ──
 function loadFallbackReviews() {
-  const fallback = [
+  const fb = [
     { name:'Valeria M.', text:'Me encantaron mis botas, llegaron súper rápido y tal como se ven en las fotos. Alfredo muy atento en todo momento 🙌', product:'Botas New Collection', stars:5 },
-    { name:'Sofía R.',   text:'Los tacones Thalia Sodi son una locura de bonitos 😍 Calidad increíble y el apartado con el 10% súper cómodo. ¡Ya quiero el siguiente par!', product:'Thalia Sodi', stars:5 },
+    { name:'Sofía R.', text:'Los tacones Thalia Sodi son una locura de bonitos 😍 Calidad increíble y el apartado con el 10% súper cómodo. ¡Ya quiero el siguiente par!', product:'Thalia Sodi', stars:5 },
     { name:'Mariana L.', text:'Primera vez que compro por aquí y ya soy clienta fija. Las sandalias son exactamente lo que buscaba. Precio justo y atención de 10 💛', product:'Sandalias 26', stars:5 },
   ];
   document.getElementById('reviews-loading').style.display = 'none';
   const list = document.getElementById('reviews-list');
   list.innerHTML = '';
-  fallback.forEach(r => addReviewCard(r));
-  updateBadge(fallback.length);
+  fb.forEach(r => addReviewCard(r));
+  updateBadge(fb.length);
 }
 
-// ── CREAR TARJETA DE RESEÑA ──
 function addReviewCard(r) {
   const list = document.getElementById('reviews-list');
   const initials = r.name ? r.name.trim()[0].toUpperCase() : '?';
   const colors = ['#B8936A','#C97BAA','#4A7C59','#7C6A4A','#5A6E7C'];
-  const color  = colors[initials.charCodeAt(0) % colors.length];
-  const stars  = '★'.repeat(r.stars || 5) + '☆'.repeat(5 - (r.stars || 5));
+  const color = colors[initials.charCodeAt(0) % colors.length];
+  const stars = '★'.repeat(r.stars||5) + '☆'.repeat(5-(r.stars||5));
   const card = document.createElement('div');
   card.style.cssText = 'background:rgba(255,255,255,0.04);border:1px solid rgba(250,248,245,0.08);border-radius:12px;padding:18px;margin-bottom:12px;animation:fadeInUp .3s ease;';
-  if (r.nueva) card.style.borderColor = 'rgba(184,147,106,0.35)';
   card.innerHTML = `
     <div style="display:flex;align-items:flex-start;gap:12px;">
       <div style="width:38px;height:38px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;">${initials}</div>
-      <div style="flex:1;min-width:0;">
+      <div style="flex:1;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;gap:8px;flex-wrap:wrap;">
           <span style="font-size:13px;font-weight:600;color:var(--cream);">${r.name}</span>
-          <span style="font-size:10px;color:rgba(250,248,245,.3);">${r.product || ''}</span>
+          <span style="font-size:10px;color:rgba(250,248,245,.3);">${r.product||''}</span>
         </div>
-        <div style="color:#B8936A;font-size:12px;margin-bottom:8px;letter-spacing:1px;">${stars}</div>
+        <div style="color:#B8936A;font-size:12px;margin-bottom:8px;">${stars}</div>
         <p style="font-size:13px;color:rgba(250,248,245,.7);line-height:1.65;margin:0;font-style:italic;">"${r.text}"</p>
       </div>
     </div>`;
@@ -1379,48 +974,37 @@ function addReviewCard(r) {
 }
 
 function updateBadge(n) {
-  const badge = document.getElementById('reviews-count-badge');
-  if (badge) badge.textContent = n;
+  const b = document.getElementById('reviews-count-badge');
+  if (b) b.textContent = n;
 }
 
-// Animación entrada
-const reviewStyle = document.createElement('style');
-reviewStyle.textContent = '@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}';
-document.head.appendChild(reviewStyle);
-
-
-// ── FORMULARIO DE CONTACTO ──
+// ══ FORMULARIO CONTACTO ══
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('contactBtn');
-    btn.textContent = 'Enviando...';
-    btn.style.background = '#B8936A';
-    btn.disabled = true;
-
-    const data = new FormData(contactForm);
+    btn.textContent = 'Enviando...'; btn.style.background='#B8936A'; btn.disabled=true;
     try {
-      const res = await fetch(contactForm.action, {
-        method: 'POST', body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        contactForm.reset();
-        document.getElementById('formSuccess').style.display = 'block';
-        btn.style.display = 'none';
-      } else {
-        btn.textContent = 'Error, intenta de nuevo';
-        btn.style.background = '#c0392b';
-        btn.disabled = false;
-      }
-    } catch {
-      btn.textContent = 'Error de conexión';
-      btn.disabled = false;
-    }
+      const res = await fetch(contactForm.action, { method:'POST', body:new FormData(contactForm), headers:{'Accept':'application/json'} });
+      if (res.ok) { contactForm.reset(); document.getElementById('formSuccess').style.display='block'; btn.style.display='none'; }
+      else { btn.textContent='Error, intenta de nuevo'; btn.style.background='#c0392b'; btn.disabled=false; }
+    } catch { btn.textContent='Error de conexión'; btn.disabled=false; }
   });
 }
 
+// ══ ANIMACIÓN ══
+const style = document.createElement('style');
+style.textContent = '@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}';
+document.head.appendChild(style);
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);} });
+}, { threshold: 0.08 });
+document.querySelectorAll('.card').forEach((el,i) => {
+  el.style.cssText += `opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;transition-delay:${(i%4)*0.07}s`;
+  io.observe(el);
+});
 </script>
 </body>
 </html>
