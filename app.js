@@ -3,16 +3,16 @@
 const WHATSAPP_NUMBER = "522211893908"; // sin +
 
 const products = [
-  { title: "Bota todoterreno (Beige)", id: "1274111", price: "$999", desc: "Para frío y calle. Suela chunky, look urbano y cómodo.", image: "img/producto_1.png" },
-  { title: "Bota invernal ajustable (Negra)", id: "1149867", price: "$335", desc: "Abriga sin perder estilo. Ajuste superior y plataforma ligera.", image: "img/producto_2.png" },
-  { title: "Bota todoterreno (Gris)", id: "1274112", price: "$999", desc: "Todoterreno real: resistente, combinable y lista para el diario.", image: "img/producto_3.png" },
-  { title: "Tenis urbano cebra", id: "1248742", price: "$799", desc: "Atrevido y juvenil. Contraste blanco/negro con toque street.", image: "img/producto_4.png" },
-  { title: "Sandalia tacón (Negra)", id: "1285542", price: "$539", desc: "Elegante y versátil. Tacón fino para salir sin sufrir.", image: "img/producto_5.png" },
-  { title: "Tenis urbano hearts", id: "1298005", price: "Precio por WhatsApp", desc: "Cómodo y llamativo. Detalle de corazones para un look cool.", image: "img/producto_6.png" },
-  { title: "Kit sandalia tacón básicas", id: "1312332", price: "$869", desc: "Dos pares, más outfits. Perfectas para oficina, cita o evento.", image: "img/producto_7.png" },
-  { title: "Sandalia plana piedras", id: "1203193", price: "$579", desc: "Brilla sin exagerar. Detalles con pedrería para elevar tu outfit.", image: "img/producto_8.png" },
-  { title: "Zapatilla tacón asimétrico (Negra)", id: "1031556", price: "$619", desc: "Premium y poderosa. Punta fina para verte y sentirte increíble.", image: "img/producto_9.png" },
-  { title: "Zapatilla con estoperoles (Negra)", id: "1169147", price: "$899", desc: "Actitud total. Estoperoles sutiles para un look más fuerte.", image: "img/producto_10.png" },
+  { title: "Bota todoterreno (Beige)", id: "1274111", price: "$999", desc: "Para frío y calle. Suela chunky, look urbano y cómodo.", image: "producto_1.png" },
+  { title: "Bota invernal ajustable (Negra)", id: "1149867", price: "$335", desc: "Abriga sin perder estilo. Ajuste superior y plataforma ligera.", image: "producto_2.png" },
+  { title: "Bota todoterreno (Gris)", id: "1274112", price: "$999", desc: "Todoterreno real: resistente, combinable y lista para el diario.", image: "producto_3.png" },
+  { title: "Tenis urbano cebra", id: "1248742", price: "$799", desc: "Atrevido y juvenil. Contraste blanco/negro con toque street.", image: "producto_4.png" },
+  { title: "Sandalia tacón (Negra)", id: "1285542", price: "$539", desc: "Elegante y versátil. Tacón fino para salir sin sufrir.", image: "producto_5.png" },
+  { title: "Tenis urbano hearts", id: "1298005", price: "Precio por WhatsApp", desc: "Cómodo y llamativo. Detalle de corazones para un look cool.", image: "producto_6.png" },
+  { title: "Kit sandalia tacón básicas", id: "1312332", price: "$869", desc: "Dos pares, más outfits. Perfectas para oficina, cita o evento.", image: "producto_7.png" },
+  { title: "Sandalia plana piedras", id: "1203193", price: "$579", desc: "Brilla sin exagerar. Detalles con pedrería para elevar tu outfit.", image: "producto_8.png" },
+  { title: "Zapatilla tacón asimétrico (Negra)", id: "1031556", price: "$619", desc: "Premium y poderosa. Punta fina para verte y sentirte increíble.", image: "producto_9.png" },
+  { title: "Zapatilla con estoperoles (Negra)", id: "1169147", price: "$899", desc: "Actitud total. Estoperoles sutiles para un look más fuerte.", image: "producto_10.png" },
 ];
 
 function buildWhatsAppLink(productId, productTitle, productPrice) {
