@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="referrer" content="no-referrer">
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Hoja Urbana — Multi-Categoría Preview</title>
@@ -108,6 +109,42 @@ a { text-decoration: none; color: inherit; }
   background: var(--muted); color: var(--white);
   padding: 2px 6px; border-radius: 999px; opacity: .7;
 }
+
+/* ── CATALOG COVER CARDS ── */
+.cat-cover-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(250,248,245,0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s, box-shadow .3s;
+  position: relative;
+}
+.cat-cover-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(184,147,106,0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(184,147,106,0.2);
+}
+.cat-cover-card__imgs {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; aspect-ratio: 1; background: #080807; overflow: hidden;
+}
+.cat-cover-card__imgs img {
+  width:100%; height:100%; object-fit:cover; aspect-ratio:1;
+  transition: transform .5s ease;
+}
+.cat-cover-card:hover .cat-cover-card__imgs img { transform: scale(1.06); }
+.cat-cover-card__body { padding: 18px 20px 20px; }
+.cat-cover-card__tags { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.cat-cover-card__badge { font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:999px; }
+.cat-cover-card__badge--gold { background: linear-gradient(135deg, #B8936A, #D4AE8A); color:#fff; }
+.cat-cover-card__badge--muted { background:rgba(250,248,245,.1); color:rgba(250,248,245,.55); border:1px solid rgba(250,248,245,.12); }
+.cat-cover-card__name { font-family:var(--font-display); font-size:20px; font-weight:400; color:var(--cream); line-height:1.2; margin-bottom:5px; }
+.cat-cover-card__desc { font-size:11px; color:rgba(250,248,245,.4); line-height:1.5; margin-bottom:16px; }
+.cat-cover-card__cta { display:flex; align-items:center; justify-content:space-between; }
+.cat-cover-card__cta-label { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+.cat-cover-card__arrow { width:32px; height:32px; border:1px solid rgba(184,147,106,0.4); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:14px; transition:background .2s, border-color .2s; }
+.cat-cover-card:hover .cat-cover-card__arrow { background:var(--gold); border-color:var(--gold); color:#fff; }
 
 /* ── WATERMARK ── */
 .watermark {
@@ -523,6 +560,196 @@ a { text-decoration: none; color: inherit; }
     </div>
   </div>
 
+  <!-- ═══════════════════ RESEÑAS ═══════════════════ -->
+
+  <!-- BOTÓN FLOTANTE DE RESEÑAS -->
+  <div id="reviews-fab" onclick="toggleReviews()"
+    style="position:fixed;bottom:90px;right:24px;z-index:999;
+           background:linear-gradient(135deg,#B8936A,#D4AE8A);
+           color:#fff;padding:10px 18px;border-radius:999px;
+           font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+           cursor:pointer;box-shadow:0 6px 24px rgba(184,147,106,0.45);
+           display:flex;align-items:center;gap:8px;
+           transition:transform .2s,box-shadow .2s;user-select:none;"
+    onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 10px 32px rgba(184,147,106,0.6)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 24px rgba(184,147,106,0.45)'">
+    <span style="font-size:15px;">⭐</span>
+    <span>Reseñas</span>
+    <span id="reviews-count-badge" style="background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:999px;font-size:10px;">0</span>
+  </div>
+
+  <!-- DRAWER DE RESEÑAS -->
+  <div id="reviews-drawer" style="position:fixed;top:0;right:-480px;width:min(460px,100vw);height:100vh;
+       background:#111110;z-index:1000;overflow-y:auto;transition:right .35s cubic-bezier(.2,.8,.2,1);
+       box-shadow:-8px 0 40px rgba(0,0,0,0.6);display:flex;flex-direction:column;">
+
+    <!-- Header del drawer -->
+    <div style="padding:28px 24px 20px;border-bottom:1px solid rgba(250,248,245,.08);flex-shrink:0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+        <div>
+          <div style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Lo que dicen nuestras clientas</div>
+          <h3 style="font-family:var(--font-display);font-size:28px;font-weight:300;color:var(--cream);margin:0;">
+            Reseñas <em style="font-style:italic;color:var(--gold-lt);">reales</em>
+          </h3>
+        </div>
+        <button onclick="toggleReviews()"
+          style="background:rgba(250,248,245,.08);border:1px solid rgba(250,248,245,.12);
+                 color:var(--cream);width:36px;height:36px;border-radius:50%;
+                 font-size:16px;cursor:pointer;flex-shrink:0;">✕</button>
+      </div>
+    </div>
+
+    <!-- Botón nueva reseña -->
+    <div style="padding:16px 24px;border-bottom:1px solid rgba(250,248,245,.06);flex-shrink:0;">
+      <button onclick="toggleReviewForm()"
+        style="width:100%;padding:12px;background:linear-gradient(135deg,rgba(184,147,106,0.15),rgba(184,147,106,0.05));
+               border:1px solid rgba(184,147,106,0.3);color:var(--gold);
+               border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.14em;
+               text-transform:uppercase;cursor:pointer;transition:background .2s;">
+        ✍️ Dejar mi reseña
+      </button>
+
+      <!-- Formulario nueva reseña (oculto por defecto) -->
+      <div id="review-form-wrap" style="display:none;margin-top:14px;">
+        <div style="display:flex;gap:8px;margin-bottom:10px;">
+          <input id="rf-name" type="text" placeholder="Tu nombre" maxlength="40"
+            style="flex:1;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);
+                   border-radius:6px;color:var(--cream);font-size:12px;font-family:var(--font-body);outline:none;"
+            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='rgba(250,248,245,.12)'"/>
+          <select id="rf-product"
+            style="padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);
+                   border-radius:6px;color:rgba(250,248,245,.7);font-size:11px;font-family:var(--font-body);outline:none;">
+            <option value="Hoja Urbana">Hoja Urbana</option>
+            <option value="Thalia Sodi">Thalia Sodi</option>
+            <option value="Sandalias 26">Sandalias 26</option>
+            <option value="Spring 26">Spring 26</option>
+            <option value="Caballeros 25">Caballeros 25</option>
+            <option value="Urbano PV2026">Urbano PV2026</option>
+            <option value="Botas New Collection">Botas</option>
+          </select>
+        </div>
+
+        <!-- Estrellas interactivas -->
+        <div style="margin-bottom:10px;">
+          <div style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,245,.4);margin-bottom:6px;">Calificación</div>
+          <div id="star-picker" style="display:flex;gap:4px;">
+            <span class="star-opt" data-val="1" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
+            <span class="star-opt" data-val="2" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
+            <span class="star-opt" data-val="3" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
+            <span class="star-opt" data-val="4" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
+            <span class="star-opt" data-val="5" style="font-size:24px;cursor:pointer;opacity:.35;transition:opacity .15s;">★</span>
+          </div>
+        </div>
+
+        <textarea id="rf-text" rows="3" placeholder="Cuéntanos tu experiencia... 💛" maxlength="280"
+          style="width:100%;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(250,248,245,.12);
+                 border-radius:6px;color:var(--cream);font-size:12px;font-family:var(--font-body);
+                 outline:none;resize:none;box-sizing:border-box;margin-bottom:10px;"
+          onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='rgba(250,248,245,.12)'"></textarea>
+
+        <button onclick="submitReview()"
+          style="width:100%;padding:11px;background:var(--gold);color:#fff;
+                 border:none;border-radius:6px;font-size:11px;font-weight:700;
+                 letter-spacing:.14em;text-transform:uppercase;cursor:pointer;">
+          Publicar reseña ✦
+        </button>
+        <div id="rf-msg" style="font-size:11px;text-align:center;margin-top:8px;min-height:16px;"></div>
+      </div>
+    </div>
+
+    <!-- Lista de reseñas -->
+    <div id="reviews-list" style="padding:20px 24px;flex:1;">
+      <div id="reviews-loading" style="text-align:center;padding:40px 0;color:rgba(250,248,245,.3);font-size:13px;">
+        Cargando reseñas...
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="reviews-overlay" onclick="toggleReviews()"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;backdrop-filter:blur(2px);"></div>
+
+  <!-- ═══════════════════ FORMULARIO DE CONTACTO ═══════════════════ -->
+    <!-- ═══════════════════ FORMULARIO DE CONTACTO ═══════════════════ -->
+  <section style="background:var(--cream-2);padding:80px 32px;">
+    <div style="max-width:640px;margin:0 auto;">
+
+      <div style="text-align:center;margin-bottom:48px;">
+        <div style="font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;">Contáctanos</div>
+        <h2 style="font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:300;color:var(--onyx);line-height:1.15;">
+          Envíanos tus<br/><em style="font-style:italic;color:var(--gold);">comentarios</em>
+        </h2>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:12px;line-height:1.7;">Tu opinión nos importa. Escríbenos y respondemos en menos de 24 horas.</p>
+      </div>
+
+      <!-- FORMULARIO con Formspree -->
+      <form id="contactForm" action="https://formspree.io/f/TUCODIGO" method="POST"
+        style="display:flex;flex-direction:column;gap:16px;">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Nombre</label>
+            <input type="text" name="nombre" required placeholder="Tu nombre"
+              style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;transition:border-color .2s;"
+              onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Teléfono / WhatsApp</label>
+            <input type="text" name="telefono" placeholder="221 000 0000"
+              style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;transition:border-color .2s;"
+              onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
+          </div>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Correo electrónico</label>
+          <input type="email" name="email" required placeholder="tucorreo@ejemplo.com"
+            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;transition:border-color .2s;"
+            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"/>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Asunto</label>
+          <select name="asunto"
+            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;appearance:none;transition:border-color .2s;"
+            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'">
+            <option value="">Selecciona un tema...</option>
+            <option>💬 Comentario general</option>
+            <option>👠 Pregunta sobre un modelo</option>
+            <option>📦 Seguimiento de pedido</option>
+            <option>⭐ Dejar una reseña</option>
+            <option>🤝 Colaboración o mayoreo</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--onyx);margin-bottom:8px;">Mensaje</label>
+          <textarea name="mensaje" required rows="5" placeholder="Escribe tu mensaje aquí..."
+            style="width:100%;padding:14px 16px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:var(--font-body);background:#fff;color:var(--onyx);outline:none;box-sizing:border-box;resize:vertical;transition:border-color .2s;"
+            onfocus="this.style.borderColor='#B8936A'" onblur="this.style.borderColor='var(--border)'"></textarea>
+        </div>
+
+        <input type="hidden" name="_subject" value="💌 Nuevo mensaje — Hoja Urbana"/>
+        <input type="hidden" name="_next" value="https://hoja-urbana.vercel.app"/>
+
+        <button type="submit" id="contactBtn"
+          style="width:100%;padding:16px;background:var(--onyx);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;transition:background .2s;font-family:var(--font-body);"
+          onmouseover="this.style.background='#B8936A'" onmouseout="this.style.background='var(--onyx)'">
+          Enviar mensaje ✦
+        </button>
+
+        <!-- Mensaje de éxito -->
+        <div id="formSuccess" style="display:none;text-align:center;padding:20px;background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.25);border-radius:8px;">
+          <div style="font-size:24px;margin-bottom:8px;">💌</div>
+          <div style="font-size:14px;font-weight:600;color:#25a244;">¡Mensaje enviado!</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;">Te respondemos en menos de 24 horas 🙌</div>
+        </div>
+
+      </form>
+
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer style="background:#1E1E1C;color:rgba(250,248,245,.55);text-align:center;padding:32px 20px;font-size:12px;letter-spacing:.06em;">
     <p><strong style="color:var(--cream);font-weight:500;">© 2026 Hoja Urbana</strong> · Todos los derechos reservados ·
@@ -670,7 +897,7 @@ a { text-decoration: none; color: inherit; }
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
 </a>
 
-<script>
+<script type="module">
 // ── TAB SWITCHING ──
 const tabs = document.querySelectorAll('.cat-tab');
 const sections = document.querySelectorAll('.cat-section');
@@ -811,11 +1038,11 @@ const CATALOGS = {
       { id:'1248381', name:'Tenis Runner Premium', color:'Beige', cat:'tenis', precio:'$909', eng:'$100', desc:'Memory Foam · Tallas 22-27', badge:'Cool Sneakers' },
     ]
   },
-  cat2: { key:'cat2', name:'Sandalias 26', emoji:'👠', color:'#C97B84', desc:'Colección completa de sandalias primavera-verano', pdf:'catalogos/sandalias.pdf', coverIds:['1285542','1203193','1191781','1189893'], products:null },
-  cat3: { key:'cat3', name:'Spring 26 — Adidas · Puma · Reebok', emoji:'👟', color:'#4A7C59', desc:'Las marcas más grandes en un solo catálogo', pdf:'catalogos/spring.pdf', coverIds:['1248742','1248250','1248381','1116427'], products:null },
-  cat4: { key:'cat4', name:'Caballeros 25 — Hush Puppies', emoji:'👞', color:'#7C6A4A', desc:'Calzado masculino premium de la mejor marca', pdf:'catalogos/caballeros.pdf', coverIds:['1274111','1149867','1274112','1031556'], products:null },
-  cat5: { key:'cat5', name:'Urbano PV2026', emoji:'🌸', color:'#C97BAA', desc:'Lo más urbano para la temporada primavera-verano', pdf:'catalogos/urbano.pdf', coverIds:['1248759','1248761','1248249','1248758'], products:null },
-  cat6: { key:'cat6', name:'Botas New Collection', emoji:'🥾', color:'#5A6E7C', desc:'La nueva colección de botas para toda ocasión', pdf:'catalogos/botas.pdf', coverIds:['1188778','1141856','1224192','1141789'], products:null },
+  cat2: { key:'cat2', name:'Sandalias 26', emoji:'👠', color:'#C97B84', desc:'Colección completa de sandalias primavera-verano', pdf:'https://drive.google.com/file/d/1jRxDf2dKApG6-gg48YFHCzCkDiVMLU3y/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1jRxDf2dKApG6-gg48YFHCzCkDiVMLU3y', coverIds:['1285542','1203193','1191781','1189893'], products:null },
+  cat3: { key:'cat3', name:'Spring 26 — Adidas · Puma · Reebok', emoji:'👟', color:'#4A7C59', desc:'Las marcas más grandes en un solo catálogo', pdf:'https://drive.google.com/file/d/1pa5Ftec_hsO1UgFGGZSQxes2CmsH-A03/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1pa5Ftec_hsO1UgFGGZSQxes2CmsH-A03', coverIds:['1248742','1248250','1248381','1116427'], products:null },
+  cat4: { key:'cat4', name:'Caballeros 25 — Hush Puppies', emoji:'👞', color:'#7C6A4A', desc:'Calzado masculino premium de la mejor marca', pdf:'https://drive.google.com/file/d/1pTB5KkaTJ50zFbGehztVxYwbj-GKOrWZ/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1pTB5KkaTJ50zFbGehztVxYwbj-GKOrWZ', coverIds:['1274111','1149867','1274112','1031556'], products:null },
+  cat5: { key:'cat5', name:'Urbano PV2026', emoji:'🌸', color:'#C97BAA', desc:'Lo más urbano para la temporada primavera-verano', pdf:'https://drive.google.com/file/d/1sdHIs0gkZR_e0Cuqn0Pp0yUaHmWZ3N7G/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1sdHIs0gkZR_e0Cuqn0Pp0yUaHmWZ3N7G', coverIds:['1248759','1248761','1248249','1248758'], products:null },
+  cat6: { key:'cat6', name:'Botas New Collection', emoji:'🥾', color:'#5A6E7C', desc:'La nueva colección de botas para toda ocasión', pdf:'https://drive.google.com/file/d/1bZH27izdVKAS4hnUwbPqviFH-mguiFxX/preview', pdfDl:'https://drive.google.com/uc?export=download&id=1bZH27izdVKAS4hnUwbPqviFH-mguiFxX', coverIds:['1188778','1141856','1224192','1141789'], products:null },
 };
 
 let activeCatalogKey = null;
@@ -824,38 +1051,26 @@ let activeType = 'all';
 // ── RENDER COVER CARDS ──
 function buildCoverCard(cat) {
   const card = document.createElement('div');
-  card.style.cssText = `
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(250,248,245,0.1);
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-    position: relative;
-  `;
-  card.onmouseover = () => { card.style.transform='translateY(-4px)'; card.style.borderColor='rgba(250,248,245,0.25)'; card.style.boxShadow='0 12px 40px rgba(0,0,0,0.4)'; };
-  card.onmouseout  = () => { card.style.transform=''; card.style.borderColor='rgba(250,248,245,0.1)'; card.style.boxShadow=''; };
+  card.className = 'cat-cover-card';
 
-  // Mini preview grid of 4 images
-  const imgGrid = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;aspect-ratio:1;background:#0a0a09;">
-      ${cat.coverIds.map(id => `<img src="${PS_IMG(id)}" style="width:100%;height:100%;object-fit:cover;aspect-ratio:1;" loading="lazy" onerror="this.style.background='#1a1a18';this.style.display='block'"/>`).join('')}
-    </div>`;
-
-  const countBadge = cat.products ? `<span style="background:var(--gold);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.08em;">${cat.products.length} modelos</span>` : `<span style="background:rgba(250,248,245,.12);color:rgba(250,248,245,.6);font-size:9px;font-weight:600;padding:2px 8px;border-radius:999px;letter-spacing:.08em;">PDF disponible</span>`;
+  const countBadge = cat.products
+    ? `<span class="cat-cover-card__badge cat-cover-card__badge--gold">${cat.products.length} modelos</span>`
+    : `<span class="cat-cover-card__badge cat-cover-card__badge--muted">📄 Ver PDF</span>`;
 
   card.innerHTML = `
-    ${imgGrid}
-    <div style="padding:16px 18px 18px;">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <div class="cat-cover-card__imgs">
+      ${cat.coverIds.map(id => `<img src="${PS_IMG(id)}" loading="lazy" onerror="this.style.opacity=0"/>`).join('')}
+    </div>
+    <div class="cat-cover-card__body">
+      <div class="cat-cover-card__tags">
         <span style="font-size:18px;">${cat.emoji}</span>
         ${countBadge}
       </div>
-      <div style="font-family:var(--font-display);font-size:19px;font-weight:400;color:var(--cream);line-height:1.2;margin-bottom:4px;">${cat.name}</div>
-      <div style="font-size:11px;color:rgba(250,248,245,.45);line-height:1.4;margin-bottom:14px;">${cat.desc}</div>
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <span style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,245,.3);">Ver colección</span>
-        <span style="color:var(--gold);font-size:18px;transition:transform .2s;">→</span>
+      <div class="cat-cover-card__name">${cat.name}</div>
+      <div class="cat-cover-card__desc">${cat.desc}</div>
+      <div class="cat-cover-card__cta">
+        <span class="cat-cover-card__cta-label">Ver colección</span>
+        <span class="cat-cover-card__arrow">→</span>
       </div>
     </div>`;
 
@@ -904,7 +1119,7 @@ function openCatalog(key) {
     pdfWrap.style.display = 'block';
     document.getElementById('exp-count').textContent = 'Catálogo PDF completo';
     document.getElementById('exp-pdf-iframe').src = cat.pdf;
-    document.getElementById('exp-pdf-download').href = cat.pdf;
+    document.getElementById('exp-pdf-download').href = cat.pdfDl || cat.pdf;
     const waText = encodeURIComponent(`Hola Hoja Urbana 👠 Estoy viendo el catálogo *${cat.name}* y me interesa un modelo. ¿Me puedes ayudar? Quiero apartarlo con el 10% 🙌`);
     document.getElementById('exp-pdf-wa').href = `https://wa.me/522211893908?text=${waText}`;
   }
@@ -975,6 +1190,237 @@ document.querySelectorAll('.card, .price-card').forEach((el,i) => {
   el.style.cssText += 'opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease;transition-delay:' + (i%4)*0.07 + 's';
   io.observe(el);
 });
+
+
+// ══════════════════════════════════
+// SISTEMA DE RESEÑAS CON FIREBASE
+// ══════════════════════════════════
+// INSTRUCCIONES (5 min):
+// 1. Ve a console.firebase.google.com → crea proyecto "hoja-urbana"
+// 2. Agrega una app Web → copia las credenciales
+// 3. Reemplaza los valores de firebaseConfig abajo
+// 4. En Firestore Database → crear base de datos en modo producción
+// 5. En Reglas de Firestore pega:
+//    rules_version = '2';
+//    service cloud.firestore {
+//      match /databases/{database}/documents {
+//        match /resenas/{doc} {
+//          allow read: if true;
+//          allow create: if true;
+//        }
+//      }
+//    }
+
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp }
+  from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey:            "TU_API_KEY",
+  authDomain:        "TU_PROYECTO.firebaseapp.com",
+  projectId:         "TU_PROYECTO",
+  storageBucket:     "TU_PROYECTO.appspot.com",
+  messagingSenderId: "TU_SENDER_ID",
+  appId:             "TU_APP_ID"
+};
+
+let db;
+let reviewsOpen = false;
+let selectedStars = 5;
+let reviewFormOpen = false;
+
+try {
+  const app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  loadReviews();
+} catch(e) {
+  // Firebase no configurado aún — muestra reseñas de ejemplo
+  loadFallbackReviews();
+}
+
+// ── TOGGLE DRAWER ──
+function toggleReviews() {
+  reviewsOpen = !reviewsOpen;
+  const drawer  = document.getElementById('reviews-drawer');
+  const overlay = document.getElementById('reviews-overlay');
+  drawer.style.right   = reviewsOpen ? '0' : '-480px';
+  overlay.style.display = reviewsOpen ? 'block' : 'none';
+  document.body.style.overflow = reviewsOpen ? 'hidden' : '';
+}
+window.toggleReviews = toggleReviews;
+
+// ── TOGGLE FORMULARIO ──
+function toggleReviewForm() {
+  reviewFormOpen = !reviewFormOpen;
+  document.getElementById('review-form-wrap').style.display = reviewFormOpen ? 'block' : 'none';
+}
+window.toggleReviewForm = toggleReviewForm;
+
+// ── ESTRELLAS INTERACTIVAS ──
+let _stars = 5;
+document.querySelectorAll('.star-opt').forEach(s => {
+  s.style.color = '#B8936A';
+  s.style.opacity = '1';
+  s.addEventListener('click', () => {
+    _stars = parseInt(s.dataset.val);
+    document.querySelectorAll('.star-opt').forEach((st, i) => {
+      st.style.opacity = i < _stars ? '1' : '0.2';
+      st.style.color   = i < _stars ? '#B8936A' : 'rgba(250,248,245,.4)';
+    });
+  });
+  s.addEventListener('mouseover', () => {
+    const v = parseInt(s.dataset.val);
+    document.querySelectorAll('.star-opt').forEach((st, i) => {
+      st.style.opacity = i < v ? '1' : '0.2';
+    });
+  });
+  s.addEventListener('mouseout', () => {
+    document.querySelectorAll('.star-opt').forEach((st, i) => {
+      st.style.opacity = i < _stars ? '1' : '0.2';
+    });
+  });
+});
+
+// ── ENVIAR RESEÑA ──
+async function submitReview() {
+  const name    = document.getElementById('rf-name').value.trim();
+  const text    = document.getElementById('rf-text').value.trim();
+  const product = document.getElementById('rf-product').value;
+  const msg     = document.getElementById('rf-msg');
+
+  if (!name || !text) {
+    msg.style.color = '#e74c3c';
+    msg.textContent = 'Por favor llena tu nombre y comentario 💛';
+    return;
+  }
+
+  msg.style.color = 'rgba(250,248,245,.4)';
+  msg.textContent = 'Publicando...';
+
+  const review = { name, text, product, stars: _stars, fecha: serverTimestamp() };
+
+  try {
+    await addDoc(collection(db, 'resenas'), review);
+    document.getElementById('rf-name').value = '';
+    document.getElementById('rf-text').value = '';
+    msg.style.color = '#25D366';
+    msg.textContent = '¡Reseña publicada! Gracias 💛';
+    setTimeout(() => { msg.textContent = ''; toggleReviewForm(); }, 2000);
+    loadReviews();
+  } catch(e) {
+    // Firebase no configurado — agrega localmente
+    addReviewCard({ name, text, product, stars: _stars, nueva: true });
+    document.getElementById('rf-name').value = '';
+    document.getElementById('rf-text').value = '';
+    msg.style.color = '#25D366';
+    msg.textContent = '¡Reseña publicada! 💛';
+    setTimeout(() => { msg.textContent = ''; toggleReviewForm(); }, 2000);
+  }
+}
+window.submitReview = submitReview;
+
+// ── CARGAR RESEÑAS DESDE FIREBASE ──
+async function loadReviews() {
+  try {
+    const q = query(collection(db, 'resenas'), orderBy('fecha', 'desc'));
+    const snap = await getDocs(q);
+    const list = document.getElementById('reviews-list');
+    document.getElementById('reviews-loading').style.display = 'none';
+    list.innerHTML = '';
+
+    if (snap.empty) {
+      list.innerHTML = '<div style="text-align:center;padding:40px 0;color:rgba(250,248,245,.3);font-size:13px;">Sé la primera en dejar una reseña 💛</div>';
+    } else {
+      snap.forEach(doc => addReviewCard(doc.data()));
+    }
+    updateBadge(snap.size);
+  } catch(e) {
+    loadFallbackReviews();
+  }
+}
+
+// ── RESEÑAS DE EJEMPLO (mientras se configura Firebase) ──
+function loadFallbackReviews() {
+  const fallback = [
+    { name:'Valeria M.', text:'Me encantaron mis botas, llegaron súper rápido y tal como se ven en las fotos. Alfredo muy atento en todo momento 🙌', product:'Botas New Collection', stars:5 },
+    { name:'Sofía R.',   text:'Los tacones Thalia Sodi son una locura de bonitos 😍 Calidad increíble y el apartado con el 10% súper cómodo. ¡Ya quiero el siguiente par!', product:'Thalia Sodi', stars:5 },
+    { name:'Mariana L.', text:'Primera vez que compro por aquí y ya soy clienta fija. Las sandalias son exactamente lo que buscaba. Precio justo y atención de 10 💛', product:'Sandalias 26', stars:5 },
+  ];
+  document.getElementById('reviews-loading').style.display = 'none';
+  const list = document.getElementById('reviews-list');
+  list.innerHTML = '';
+  fallback.forEach(r => addReviewCard(r));
+  updateBadge(fallback.length);
+}
+
+// ── CREAR TARJETA DE RESEÑA ──
+function addReviewCard(r) {
+  const list = document.getElementById('reviews-list');
+  const initials = r.name ? r.name.trim()[0].toUpperCase() : '?';
+  const colors = ['#B8936A','#C97BAA','#4A7C59','#7C6A4A','#5A6E7C'];
+  const color  = colors[initials.charCodeAt(0) % colors.length];
+  const stars  = '★'.repeat(r.stars || 5) + '☆'.repeat(5 - (r.stars || 5));
+  const card = document.createElement('div');
+  card.style.cssText = 'background:rgba(255,255,255,0.04);border:1px solid rgba(250,248,245,0.08);border-radius:12px;padding:18px;margin-bottom:12px;animation:fadeInUp .3s ease;';
+  if (r.nueva) card.style.borderColor = 'rgba(184,147,106,0.35)';
+  card.innerHTML = `
+    <div style="display:flex;align-items:flex-start;gap:12px;">
+      <div style="width:38px;height:38px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;">${initials}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:13px;font-weight:600;color:var(--cream);">${r.name}</span>
+          <span style="font-size:10px;color:rgba(250,248,245,.3);">${r.product || ''}</span>
+        </div>
+        <div style="color:#B8936A;font-size:12px;margin-bottom:8px;letter-spacing:1px;">${stars}</div>
+        <p style="font-size:13px;color:rgba(250,248,245,.7);line-height:1.65;margin:0;font-style:italic;">"${r.text}"</p>
+      </div>
+    </div>`;
+  list.prepend(card);
+}
+
+function updateBadge(n) {
+  const badge = document.getElementById('reviews-count-badge');
+  if (badge) badge.textContent = n;
+}
+
+// Animación entrada
+const reviewStyle = document.createElement('style');
+reviewStyle.textContent = '@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}';
+document.head.appendChild(reviewStyle);
+
+
+// ── FORMULARIO DE CONTACTO ──
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contactBtn');
+    btn.textContent = 'Enviando...';
+    btn.style.background = '#B8936A';
+    btn.disabled = true;
+
+    const data = new FormData(contactForm);
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST', body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        contactForm.reset();
+        document.getElementById('formSuccess').style.display = 'block';
+        btn.style.display = 'none';
+      } else {
+        btn.textContent = 'Error, intenta de nuevo';
+        btn.style.background = '#c0392b';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Error de conexión';
+      btn.disabled = false;
+    }
+  });
+}
+
 </script>
 </body>
 </html>
